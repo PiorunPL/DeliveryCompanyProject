@@ -1,0 +1,13 @@
+@host=https://localhost:7264
+
+POST {{host}}/auth/courier/register
+Content-Type: application/json
+
+{
+    "firstName": "Jakub",
+    "lastName": "Maciejewski",
+    "email": "jakubm55555@gmail.com",
+    "password": "Jakub1232!"
+}
+
+### After this triple hashtags we can create another requests

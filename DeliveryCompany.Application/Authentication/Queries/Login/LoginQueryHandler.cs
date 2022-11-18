@@ -9,11 +9,13 @@ namespace DeliveryCompany.Application.Authentication.Queries.Login;
 public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationResult>{
 
     private readonly IUserRepository _userRepository;
+    private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
     public LoginQueryHandler(
-        IUserRepository userRepository)
+        IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator)
     {
         _userRepository = userRepository;
+        _jwtTokenGenerator = jwtTokenGenerator;
     }
 
     public async Task<AuthenticationResult> Handle(LoginQuery query, CancellationToken cancellationToken)
@@ -33,7 +35,7 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationResul
         }
 
         // 3. Create JWT token
-        var token = "Token";   
+        var token = _jwtTokenGenerator.GenerateToken(user);   
 
         return new AuthenticationResult(user, token);
     }

@@ -3,17 +3,20 @@ using DeliveryCompany.Application.Common.Interfaces.Persistance;
 using MediatR;
 using DeliveryCompany.Application.Authentication.Common;
 using DeliveryCompany.Domain.User;
+using DeliveryCompany.Application.Common.Interfaces.Authentication;
 
 namespace DeliveryCompany.Application.Authentication.Commands.Register;
 
 public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthenticationResult>
 {
     private readonly IUserRepository _userRepository;
+    private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
     public RegisterCommandHandler(
-        IUserRepository userRepository)
+        IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator)
     {
         _userRepository = userRepository;
+        _jwtTokenGenerator = jwtTokenGenerator;
     }
 
     public async Task<AuthenticationResult> Handle(RegisterCommand command, CancellationToken cancellationToken)
@@ -39,7 +42,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
 
 
         //3.  Create JWT token
-        var token = "Token";  
+        var token = _jwtTokenGenerator.GenerateToken(user);  
 
         return new AuthenticationResult(
             user,
