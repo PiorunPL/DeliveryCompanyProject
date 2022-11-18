@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using DeliveryCompany.Application.Common.Interfaces.Authentication;
 using DeliveryCompany.Domain.Administrator;
+using DeliveryCompany.Domain.Common;
 using DeliveryCompany.Domain.Courier;
 using DeliveryCompany.Domain.User;
 using Microsoft.IdentityModel.Tokens;
@@ -20,6 +21,20 @@ public class JwtTokenGenerator : IJwtTokenGenerator
 
     public string GenerateToken(User user)
     {
+        return GenerateToken(user, "User");
+    }
+
+    public string GenerateToken(Courier courier)
+    {
+        return GenerateToken(courier, "Courier");
+    }
+
+    public string GenerateToken(Administrator administrator)
+    {
+        return GenerateToken(administrator, "Administrator");
+    }
+
+    private string GenerateToken(Person person, string role){
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes("super-secret-key")
@@ -29,11 +44,11 @@ public class JwtTokenGenerator : IJwtTokenGenerator
 
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
-            new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
+            new Claim(JwtRegisteredClaimNames.Sub, person.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.GivenName, person.FirstName),
+            new Claim(JwtRegisteredClaimNames.FamilyName, person.LastName),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.Role, "User")
+            new Claim(ClaimTypes.Role, role)
         };
 
         var securityToken = new JwtSecurityToken(
@@ -46,15 +61,5 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         
         return new JwtSecurityTokenHandler().WriteToken(securityToken);
         
-    }
-
-    public string GenerateToken(Courier courier)
-    {
-        throw new NotImplementedException();
-    }
-
-    public string GenerateToken(Administrator administrator)
-    {
-        throw new NotImplementedException();
     }
 }
