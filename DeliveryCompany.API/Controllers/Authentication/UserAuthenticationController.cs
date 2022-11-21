@@ -1,7 +1,7 @@
-using DeliveryCompany.Application.Authentication.Commands.Register;
+using DeliveryCompany.Application.Authentication.Commands.Register.Users;
 using DeliveryCompany.Application.Authentication.Common;
 using DeliveryCompany.Application.Authentication.Queries.Login;
-using DeliveryCompany.Contracts.Authentication;
+using DeliveryCompany.Contracts.Authentication.Users;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,19 +22,19 @@ public class UserAuthenticationController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterRequest request)
+    public async Task<IActionResult> Register(UserRegisterRequest request)
     {
-        var command = _mapper.Map<RegisterCommand>(request);
-        AuthenticationResult authResult = await _mediator.Send(command);
+        var command = _mapper.Map<UserRegisterCommand>(request);
+        UserAuthenticationResult authResult = await _mediator.Send(command);
 
-        return Ok(_mapper.Map<AuthenticationResponse>(authResult));
+        return Ok(_mapper.Map<UserAuthenticationResponse>(authResult));
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login(LoginRequest request){
-        var query = _mapper.Map<LoginQuery>(request);
-        AuthenticationResult authResult = await _mediator.Send(query);
+    public async Task<IActionResult> Login(UserLoginRequest request){
+        var query = _mapper.Map<UserLoginQuery>(request);
+        UserAuthenticationResult authResult = await _mediator.Send(query);
 
-        return Ok(_mapper.Map<AuthenticationResponse>(authResult));
+        return Ok(_mapper.Map<UserAuthenticationResponse>(authResult));
     }
 }

@@ -3,8 +3,8 @@ using MediatR;
 
 namespace DeliveryCompany.Application.Authentication.Queries.Login;
 
-public record LoginQuery( 
+public record UserLoginQuery( 
     string Email,
     string Password
-) : IRequest<AuthenticationResult>;
+) : IRequest<UserAuthenticationResult>;
 

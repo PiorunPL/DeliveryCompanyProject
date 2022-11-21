@@ -1,20 +1,24 @@
-using DeliveryCompany.Application.Authentication.Commands.Register;
+using DeliveryCompany.Application.Authentication.Commands.Register.Users;
 using DeliveryCompany.Application.Authentication.Common;
 using DeliveryCompany.Application.Authentication.Queries.Login;
-using DeliveryCompany.Contracts.Authentication;
+using DeliveryCompany.Contracts.Authentication.Users;
+using DeliveryCompany.Domain.Common.ValueObjects;
 using Mapster;
 
-namespace DeliveryCompany.Api.Common.Mapping;
+namespace DeliveryCompany.API.Common.Mapping;
 
 public class AuthenticationMappingConfig : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<RegisterRequest, RegisterCommand>();
+        config.NewConfig<UserRegisterRequest, UserRegisterCommand>();
 
-        config.NewConfig<LoginRequest, LoginQuery>();
+        config.NewConfig<UserLoginRequest, UserLoginQuery>();
 
-        config.NewConfig<AuthenticationResult, AuthenticationResponse>()
+        config.NewConfig<UserAuthenticationResult, UserAuthenticationResponse>()
             .Map(dest => dest, src => src.User);
+
+        config.NewConfig<PersonId, Guid>()
+            .Map(dest => dest, src => src.Value);
     }
 }

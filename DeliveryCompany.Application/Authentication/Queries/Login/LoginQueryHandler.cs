@@ -6,7 +6,7 @@ using DeliveryCompany.Domain.User;
 
 namespace DeliveryCompany.Application.Authentication.Queries.Login;
 
-public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationResult>{
+public class LoginQueryHandler : IRequestHandler<UserLoginQuery, UserAuthenticationResult>{
 
     private readonly IUserRepository _userRepository;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
@@ -18,7 +18,7 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationResul
         _jwtTokenGenerator = jwtTokenGenerator;
     }
 
-    public async Task<AuthenticationResult> Handle(LoginQuery query, CancellationToken cancellationToken)
+    public async Task<UserAuthenticationResult> Handle(UserLoginQuery query, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
         
@@ -37,6 +37,6 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationResul
         // 3. Create JWT token
         var token = _jwtTokenGenerator.GenerateToken(user);   
 
-        return new AuthenticationResult(user, token);
+        return new UserAuthenticationResult(user, token);
     }
 }

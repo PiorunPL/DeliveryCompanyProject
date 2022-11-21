@@ -2,7 +2,7 @@ using DeliveryCompany.Domain.User;
 
 namespace DeliveryCompany.Application.Authentication.Common;
 
-public record AuthenticationResult(
+public record UserAuthenticationResult(
     User User,
     string Token
 );

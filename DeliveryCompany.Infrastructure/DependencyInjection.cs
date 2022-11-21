@@ -43,7 +43,7 @@ public static class DependencyInjection
                 IssuerSigningKey = new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes("super-secret-key")
                 )
-            } );
+            });
 
         return services;
     }

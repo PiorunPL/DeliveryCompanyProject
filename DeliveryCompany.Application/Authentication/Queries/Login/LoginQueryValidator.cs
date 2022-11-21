@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace DeliveryCompany.Application.Authentication.Queries.Login;
 
-public class LoginQueryValidator : AbstractValidator<LoginQuery>
+public class LoginQueryValidator : AbstractValidator<UserLoginQuery>
 {
     public LoginQueryValidator(){
         RuleFor( x => x.Email).NotEmpty();
