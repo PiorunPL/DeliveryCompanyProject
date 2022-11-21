@@ -42,6 +42,6 @@ public class Courier : Person
 
     private void LogCourierCreated()
     {
-        Console.WriteLine($"Courier created: \nId: {Id}\nFirst name: {FirstName}\nLast name: {LastName}\nEmail: {Email}\nPassword: {Password}\nDateBirth: {DateBirth}\nAddress: {Address}");
+        Console.WriteLine($"Courier created: \nId: {Id.Value}\nFirst name: {FirstName}\nLast name: {LastName}\nEmail: {Email}\nPassword: {Password}\nDateBirth: {DateBirth}\nAddress: {Address}");
     }
 }

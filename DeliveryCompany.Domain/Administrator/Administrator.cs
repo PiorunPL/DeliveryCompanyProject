@@ -41,6 +41,6 @@ public class Administrator : Person
 
     private void LogAdministratorCreated()
     {
-        Console.WriteLine($"Administrator created: \nId: {Id}\nFirst name: {FirstName}\nLast name: {LastName}\nEmail: {Email}\nPassword: {Password}\nDateBirth: {DateBirth}\nAddress: {Address}");
+        Console.WriteLine($"Administrator created: \nId: {Id.Value}\nFirst name: {FirstName}\nLast name: {LastName}\nEmail: {Email}\nPassword: {Password}\nDateBirth: {DateBirth}\nAddress: {Address}");
     }
 }

@@ -32,6 +32,6 @@ public sealed class User : Person
 
     private void LogUserCreated()
     {
-        Console.WriteLine($"User created: \nUser Id: {Id}\nFirst name: {FirstName}\nLast name: {LastName}\nEmail: {Email}\nPassword: {Password}");
+        Console.WriteLine($"User created: \nUser Id: {Id.Value}\nFirst name: {FirstName}\nLast name: {LastName}\nEmail: {Email}\nPassword: {Password}");
     }
 }
