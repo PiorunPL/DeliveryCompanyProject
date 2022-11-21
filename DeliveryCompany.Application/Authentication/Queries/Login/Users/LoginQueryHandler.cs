@@ -4,14 +4,14 @@ using MediatR;
 using DeliveryCompany.Application.Authentication.Common;
 using DeliveryCompany.Domain.User;
 
-namespace DeliveryCompany.Application.Authentication.Queries.Login;
+namespace DeliveryCompany.Application.Authentication.Queries.Login.Users;
 
-public class LoginQueryHandler : IRequestHandler<UserLoginQuery, UserAuthenticationResult>{
+public class UserLoginQueryHandler : IRequestHandler<UserLoginQuery, UserAuthenticationResult>{
 
     private readonly IUserRepository _userRepository;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
-    public LoginQueryHandler(
+    public UserLoginQueryHandler(
         IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator)
     {
         _userRepository = userRepository;

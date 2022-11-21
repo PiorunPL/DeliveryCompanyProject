@@ -1,6 +1,6 @@
 using DeliveryCompany.Application.Authentication.Commands.Register.Users;
 using DeliveryCompany.Application.Authentication.Common;
-using DeliveryCompany.Application.Authentication.Queries.Login;
+using DeliveryCompany.Application.Authentication.Queries.Login.Users;
 using DeliveryCompany.Contracts.Authentication.Users;
 using DeliveryCompany.Domain.Common.ValueObjects;
 using Mapster;
