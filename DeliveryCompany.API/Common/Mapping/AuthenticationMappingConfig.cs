@@ -1,7 +1,10 @@
 using DeliveryCompany.Application.Authentication.Commands.Register.Users;
+using DeliveryCompany.Application.Authentication.Commands.Register.Workers;
 using DeliveryCompany.Application.Authentication.Common;
 using DeliveryCompany.Application.Authentication.Queries.Login.Users;
+using DeliveryCompany.Application.Authentication.Queries.Login.Workers;
 using DeliveryCompany.Contracts.Authentication.Users;
+using DeliveryCompany.Contracts.Authentication.Workers;
 using DeliveryCompany.Domain.Common.ValueObjects;
 using Mapster;
 
@@ -17,6 +20,13 @@ public class AuthenticationMappingConfig : IRegister
 
         config.NewConfig<UserAuthenticationResult, UserAuthenticationResponse>()
             .Map(dest => dest, src => src.User);
+
+        config.NewConfig<WorkerRegisterRequest, AdministratorRegisterCommand>();
+
+        config.NewConfig<WorkerLoginRequest, AdministratorLoginQuery>();
+
+        config.NewConfig<AdministratorAuthenticationResult, WorkerAuthenticationResponse>()
+            .Map(dest => dest, src => src.Administrator);
 
         config.NewConfig<PersonId, Guid>()
             .Map(dest => dest, src => src.Value);

@@ -1,6 +1,6 @@
 using DeliveryCompany.Domain.User;
 
-namespace DeliveryCompany.Application.Common.Interfaces.Persistance;
+namespace DeliveryCompany.Application.Interfaces.Persistence;
 
 public interface IUserRepository
 {

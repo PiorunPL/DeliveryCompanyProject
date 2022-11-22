@@ -1,4 +1,4 @@
-using DeliveryCompany.Application.Common.Interfaces.Persistance;
+using DeliveryCompany.Application.Interfaces.Persistence;
 using DeliveryCompany.Domain.User;
 
 namespace DeliveryCompany.Infrastructure.Persistance;

@@ -1,5 +1,5 @@
 using DeliveryCompany.Application.Common.Interfaces.Authentication;
-using DeliveryCompany.Application.Common.Interfaces.Persistance;
+using DeliveryCompany.Application.Interfaces.Persistence;
 using MediatR;
 using DeliveryCompany.Application.Authentication.Common;
 using DeliveryCompany.Domain.User;

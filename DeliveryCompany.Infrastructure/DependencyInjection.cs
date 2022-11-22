@@ -1,6 +1,6 @@
 using System.Text;
 using DeliveryCompany.Application.Common.Interfaces.Authentication;
-using DeliveryCompany.Application.Common.Interfaces.Persistance;
+using DeliveryCompany.Application.Interfaces.Persistence;
 using DeliveryCompany.Infrastructure.Authentication;
 using DeliveryCompany.Infrastructure.Persistance;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -17,7 +17,10 @@ public static class DependencyInjection
         ConfigurationManager configuration)
     {
         services.AddAuth(configuration);
+
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IAdministratorRepository, AdministratorListRepository>();
+
         return services;
     }
 
@@ -33,7 +36,8 @@ public static class DependencyInjection
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
 
         services.AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters{
+            .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters
+            {
                 ValidateIssuer = true,
                 ValidateAudience = true,
                 ValidateLifetime = true,

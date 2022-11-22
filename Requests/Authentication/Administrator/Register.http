@@ -1,0 +1,15 @@
+@host=https://localhost:7264
+
+POST {{host}}/auth/administrator/register
+Content-Type: application/json
+
+{
+    "firstName": "Jakub",
+    "lastName": "Maciejewski",
+    "email": "jakubm55555@gmail.com",
+    "password": "Jakub1232!",
+    "dateBirth": "2001-04-28",
+    "address": "Grójecka 39 Warszawa"
+}
+
+### After this triple hashtags we can create another requests

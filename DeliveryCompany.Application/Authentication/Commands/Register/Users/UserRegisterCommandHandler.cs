@@ -1,5 +1,5 @@
 // using DeliveryCompany.Application.Common.Interfaces.Authentication;
-using DeliveryCompany.Application.Common.Interfaces.Persistance;
+using DeliveryCompany.Application.Interfaces.Persistence;
 using MediatR;
 using DeliveryCompany.Application.Authentication.Common;
 using DeliveryCompany.Application.Common.Interfaces.Authentication;
@@ -41,7 +41,7 @@ public class UserRegisterCommandHandler : IRequestHandler<UserRegisterCommand, U
 
 
         //3.  Create JWT token
-        var token = _jwtTokenGenerator.GenerateToken(user);  
+        var token = _jwtTokenGenerator.GenerateToken(user);
 
         return new UserAuthenticationResult(
             user,

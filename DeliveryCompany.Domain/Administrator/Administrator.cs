@@ -21,7 +21,7 @@ public class Administrator : Person
         LogAdministratorCreated();
     }
 
-    public Administrator Create(
+    public static Administrator Create(
         string firstName,
         string lastName,
         string email,
