@@ -1,0 +1,11 @@
+@host=https://localhost:7264
+
+POST {{host}}/auth/administrator/login
+Content-Type: application/json
+
+{
+    "email": "default@default.com",
+    "password": "DeFaUlT"
+}
+
+### After this triple hashtags we can create another requests

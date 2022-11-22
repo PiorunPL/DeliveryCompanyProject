@@ -5,6 +5,7 @@ using DeliveryCompany.Contracts.Authentication.Users;
 using DeliveryCompany.Contracts.Authentication.Workers;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeliveryCompany.API.Controllers.Authentication;
@@ -22,6 +23,7 @@ public class AdministratorAuthenticationController : ControllerBase
     }
 
     [HttpPost("register")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> Register(WorkerRegisterRequest request)
     {
         var command = _mapper.Map<AdministratorRegisterCommand>(request);
