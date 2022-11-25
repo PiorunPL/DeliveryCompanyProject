@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <title>Sign in</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+        <div class="container">
+            <!-- navbar brand / title -->
+            <a class="navbar-brand" href="index.html">
+                <span class="text-secondary fw-bold">
+                    <i class="bi bi-truck text-light"></i>
+                    <span class="text-primary">Fastex</span>
+                    -
+                    <span class="text-danger">Delivery Company</span>
+                </span>
+            </a>
+            <!-- toggle button for mobile nav -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav"
+                aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- navbar links -->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item bg-primary rounded-5 mx-4 px-3">
+                        <a class="nav-link text-light" href="user-signin.html">Sign in</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="bg-black bg-gradient bg-opacity-100 p-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div
+                    class="bg-primary bg-opacity-75 bg-gradient col-4 justify-content-center align-self-center rounded-5 py-2 px-4 m-5 text-center">
+                    <h1><span class="text-light">Client</span></h1>
+                </div>
+            </div>
+
+            <div class="row justify-content-between">
+
+                <!-- Log in section -->
+                <div class="col-5 mx-3 my-5 p-5 bg-danger bg-gradient bg-opacity-50 rounded align-self-center">
+                    <h1><span class="text-white">Log In</span></h1>
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label text-light">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text text-light">We'll never share your email with anyone
+                                else.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label text-light">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <a href="index.html" class="btn btn-primary my-4">Submit</a>
+                    </form>
+                </div>
+
+                <!-- Sign up section -->
+                <div class="col-5 mx-3 my-5 p-5 bg-danger bg-gradient bg-opacity-50 rounded">
+                    <h1><span class="text-white">Sign up</span></h1>
+                    <form>
+                        <div class="mb-3">
+                            <label for="firstNameInput" class="form-label text-light">First name</label>
+                            <input type="email" class="form-control" id="firstNameInput">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastNameInput" class="form-label text-light">Last Name</label>
+                            <input type="email" class="form-control" id="lastNameInput">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label text-light">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text text-light">We'll never share your email with anyone
+                                else.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label text-light">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <a href="" class="btn btn-primary my-4">Submit</a>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+
+</body>
+
+</html>

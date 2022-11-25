@@ -1,0 +1,14 @@
+html,
+body {
+    height: 100vh;
+}
+
+/* #wrapper {
+    height: 100%;
+    overflow: auto;
+  } */
+
+.row, .col{
+    height: 100vh;
+    overflow: auto;
+}
