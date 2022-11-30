@@ -12,7 +12,7 @@ public sealed class Client : Person
         string email,
         string password) : base(personId, firstName, lastName, email, password)
     { 
-        LogUserCreated();
+        LogClientCreated();
     }
 
     public static Client Create(
@@ -30,8 +30,8 @@ public sealed class Client : Person
         );
     }
 
-    private void LogUserCreated()
+    private void LogClientCreated()
     {
-        Console.WriteLine($"User created: \n\tUser Id: {Id.Value}\n\tFirst name: {FirstName}\n\tLast name: {LastName}\n\tEmail: {Email}\n\tPassword: {Password}");
+        Console.WriteLine($"Client created: \n\tClient Id: {Id.Value}\n\tFirst name: {FirstName}\n\tLast name: {LastName}\n\tEmail: {Email}\n\tPassword: {Password}");
     }
 }
