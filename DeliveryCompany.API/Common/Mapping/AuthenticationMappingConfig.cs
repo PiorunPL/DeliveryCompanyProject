@@ -1,9 +1,9 @@
-using DeliveryCompany.Application.Authentication.Commands.Register.Users;
+using DeliveryCompany.Application.Authentication.Commands.Register.Clients;
 using DeliveryCompany.Application.Authentication.Commands.Register.Workers;
 using DeliveryCompany.Application.Authentication.Common;
-using DeliveryCompany.Application.Authentication.Queries.Login.Users;
+using DeliveryCompany.Application.Authentication.Queries.Login.Clients;
 using DeliveryCompany.Application.Authentication.Queries.Login.Workers;
-using DeliveryCompany.Contracts.Authentication.Users;
+using DeliveryCompany.Contracts.Authentication.Clients;
 using DeliveryCompany.Contracts.Authentication.Workers;
 using DeliveryCompany.Domain.Common.ValueObjects;
 using Mapster;
@@ -14,13 +14,13 @@ public class AuthenticationMappingConfig : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        // USER
-        config.NewConfig<UserRegisterRequest, UserRegisterCommand>();
+        // CLIENT
+        config.NewConfig<ClientRegisterRequest, ClientRegisterCommand>();
 
-        config.NewConfig<UserLoginRequest, UserLoginQuery>();
+        config.NewConfig<UserLoginRequest, ClientLoginQuery>();
 
-        config.NewConfig<UserAuthenticationResult, UserAuthenticationResponse>()
-            .Map(dest => dest, src => src.User);
+        config.NewConfig<ClientAuthenticationResult, ClientAuthenticationResponse>()
+            .Map(dest => dest, src => src.Client);
 
         // ADMINISTRATOR
         config.NewConfig<WorkerRegisterRequest, AdministratorRegisterCommand>();

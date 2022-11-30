@@ -1,4 +1,4 @@
-namespace DeliveryCompany.Contracts.Authentication.Users;
+namespace DeliveryCompany.Contracts.Authentication.Clients;
 
 public record UserLoginRequest(
     string Email,

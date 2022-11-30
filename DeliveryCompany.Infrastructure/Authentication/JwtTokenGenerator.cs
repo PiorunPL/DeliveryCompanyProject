@@ -5,7 +5,7 @@ using DeliveryCompany.Application.Common.Interfaces.Authentication;
 using DeliveryCompany.Domain.Administrator;
 using DeliveryCompany.Domain.Common;
 using DeliveryCompany.Domain.Courier;
-using DeliveryCompany.Domain.User;
+using DeliveryCompany.Domain.Client;
 using Microsoft.IdentityModel.Tokens;
 
 namespace DeliveryCompany.Infrastructure.Authentication;
@@ -19,9 +19,9 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         //_jwtSettings = jwtSettings;
     }
 
-    public string GenerateToken(User user)
+    public string GenerateToken(Client client)
     {
-        return GenerateToken(user, "User");
+        return GenerateToken(client, "Client");
     }
 
     public string GenerateToken(Courier courier)

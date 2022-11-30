@@ -1,10 +1,10 @@
 using FluentValidation;
 
-namespace DeliveryCompany.Application.Authentication.Commands.Register.Users;
+namespace DeliveryCompany.Application.Authentication.Commands.Register.Clients;
 
-public class UserRegisterCommandValidator : AbstractValidator<UserRegisterCommand>
+public class ClientRegisterCommandValidator : AbstractValidator<ClientRegisterCommand>
 {
-    public UserRegisterCommandValidator()
+    public ClientRegisterCommandValidator()
     {
         RuleFor(x => x.FirstName).NotEmpty();
         RuleFor(x => x.LastName).NotEmpty();

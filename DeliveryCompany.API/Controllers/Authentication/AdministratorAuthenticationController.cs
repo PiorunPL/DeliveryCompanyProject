@@ -1,7 +1,6 @@
 using DeliveryCompany.Application.Authentication.Commands.Register.Workers;
 using DeliveryCompany.Application.Authentication.Common;
 using DeliveryCompany.Application.Authentication.Queries.Login.Workers;
-using DeliveryCompany.Contracts.Authentication.Users;
 using DeliveryCompany.Contracts.Authentication.Workers;
 using MapsterMapper;
 using MediatR;

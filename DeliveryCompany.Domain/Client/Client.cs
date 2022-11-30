@@ -1,11 +1,11 @@
 using DeliveryCompany.Domain.Common;
 using DeliveryCompany.Domain.Common.ValueObjects;
 
-namespace DeliveryCompany.Domain.User;
+namespace DeliveryCompany.Domain.Client;
 
-public sealed class User : Person
+public sealed class Client : Person
 {
-    private User(
+    private Client(
         PersonId personId,
         string firstName,
         string lastName,
@@ -15,7 +15,7 @@ public sealed class User : Person
         LogUserCreated();
     }
 
-    public static User Create(
+    public static Client Create(
         string firstName,
         string lastName,
         string email,

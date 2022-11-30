@@ -1,9 +1,11 @@
 @host=https://localhost:7264
 
-POST {{host}}/auth/user/login
+POST {{host}}/auth/client/register
 Content-Type: application/json
 
 {
+    "firstName": "Jakub",
+    "lastName": "Maciejewski",
     "email": "jakubm55555@gmail.com",
     "password": "Jakub1232!"
 }
