@@ -18,8 +18,9 @@ public static class DependencyInjection
     {
         services.AddAuth(configuration);
 
-        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserRepository, UserListRepository>();
         services.AddScoped<IAdministratorRepository, AdministratorListRepository>();
+        services.AddScoped<ICourierRepository, CourierListRepository>();
 
         return services;
     }

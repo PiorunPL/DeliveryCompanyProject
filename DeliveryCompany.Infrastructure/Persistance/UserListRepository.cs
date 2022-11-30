@@ -3,7 +3,7 @@ using DeliveryCompany.Domain.User;
 
 namespace DeliveryCompany.Infrastructure.Persistance;
 
-public class UserRepository : IUserRepository
+public class UserListRepository : IUserRepository
 {
     private static readonly List<User> _users = new();
     public void Add(User user)

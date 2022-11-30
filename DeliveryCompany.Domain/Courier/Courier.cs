@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using DeliveryCompany.Domain.Common;
 using DeliveryCompany.Domain.Common.ValueObjects;
 
@@ -22,7 +21,7 @@ public class Courier : Person
         LogCourierCreated();
     }
 
-    public Courier Create(
+    public static Courier Create(
         string firstName,
         string lastName,
         string email,

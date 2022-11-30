@@ -1,13 +1,16 @@
 @host=https://localhost:7264
 
 POST {{host}}/auth/courier/register
+#Change Bearer - when testing after reboot
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjNWFlOWY1NS0zNGVlLTQzMTYtOGFlNS00MDAwODU4ZTllODAiLCJnaXZlbl9uYW1lIjoiRGVmYXVsdCIsImZhbWlseV9uYW1lIjoiRGVmYXVsdCIsImp0aSI6IjE0ZjQ1MzA0LTRjMDYtNGVhMC1hODgzLTM3MzBkNzA4NzU5ZCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmF0b3IiLCJleHAiOjE2Njk3NzI5ODQsImlzcyI6IkRlbGl2ZXJ5Q29tcGFueSIsImF1ZCI6IkRlbGl2ZXJ5Q29tcGFueSJ9.gawhQr0Mj6my08eiNh0711gYORoUM69F07VupHZ6bwk
 Content-Type: application/json
 
 {
     "firstName": "Jakub",
     "lastName": "Maciejewski",
     "email": "jakubm55555@gmail.com",
-    "password": "Jakub1232!"
+    "password": "Jakub1232!",
+    "dateBirth": "2001-04-28",
+    "address": "Grójecka 39 Warszawa"
 }
-
 ### After this triple hashtags we can create another requests
