@@ -64,7 +64,7 @@ public sealed class ClientOrder : Entity<ClientOrderId>
 
     private string setCorrectName(string name, ClientOrderId orderId)
     {
-        if (name == null || name == "")
+        if (name == null || name.Equals(""))
         {
             return orderId.Value.ToString();
         }
