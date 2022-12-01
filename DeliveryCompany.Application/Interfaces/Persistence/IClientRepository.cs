@@ -1,4 +1,4 @@
-using DeliveryCompany.Domain.Client;
+using DeliveryCompany.Domain.Clients;
 
 namespace DeliveryCompany.Application.Interfaces.Persistence;
 

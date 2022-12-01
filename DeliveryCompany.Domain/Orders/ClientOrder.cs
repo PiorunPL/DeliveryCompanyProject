@@ -1,9 +1,10 @@
 using DeliveryCompany.Domain.Common.Models;
 using DeliveryCompany.Domain.Common.ValueObjects;
-using DeliveryCompany.Domain.Order.ValueObjects;
-using DeliveryCompany.Domain.Size.ValueObjects;
+using DeliveryCompany.Domain.Orders.Enitities;
+using DeliveryCompany.Domain.Orders.ValueObjects;
+using DeliveryCompany.Domain.Sizes.ValueObjects;
 
-namespace DeliveryCompany.Domain.Order;
+namespace DeliveryCompany.Domain.Orders;
 
 public sealed class ClientOrder : Entity<ClientOrderId>
 {
@@ -15,7 +16,7 @@ public sealed class ClientOrder : Entity<ClientOrderId>
     public string Name { get; set; }
     public SizeId SizeId { get; set; }
     public ClientOrderStatus Status { get; set; }
-
+    public List<CourierOrder> CourierOrders = new List<CourierOrder>();
 
     private ClientOrder(
         ClientOrderId orderId,

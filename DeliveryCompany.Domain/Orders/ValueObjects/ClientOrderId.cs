@@ -1,16 +1,16 @@
 using DeliveryCompany.Domain.Common.Models;
 
-namespace DeliveryCompany.Domain.Order.ValueObjects;
+namespace DeliveryCompany.Domain.Orders.ValueObjects;
 
-public sealed class CourierOrderId : ValueObject
+public sealed class ClientOrderId : ValueObject
 {
     public Guid Value { get; }
 
-    private CourierOrderId(Guid value){
+    private ClientOrderId(Guid value){
         Value = value;
     }
 
-    public static CourierOrderId CreateUnique(){
+    public static ClientOrderId CreateUnique(){
         return new(Guid.NewGuid());
     }
 

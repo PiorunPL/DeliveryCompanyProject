@@ -1,7 +1,7 @@
 using DeliveryCompany.Domain.Common.Models;
-using DeliveryCompany.Domain.Size.ValueObjects;
+using DeliveryCompany.Domain.Sizes.ValueObjects;
 
-namespace DeliveryCompany.Domain.Size;
+namespace DeliveryCompany.Domain.Sizes;
 
 public sealed class Size : Entity<SizeId>
 {

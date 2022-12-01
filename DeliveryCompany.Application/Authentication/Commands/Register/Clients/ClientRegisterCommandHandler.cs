@@ -3,7 +3,7 @@ using DeliveryCompany.Application.Interfaces.Persistence;
 using MediatR;
 using DeliveryCompany.Application.Authentication.Common;
 using DeliveryCompany.Application.Common.Interfaces.Authentication;
-using DeliveryCompany.Domain.Client;
+using DeliveryCompany.Domain.Clients;
 
 namespace DeliveryCompany.Application.Authentication.Commands.Register.Clients;
 

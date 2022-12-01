@@ -1,6 +1,6 @@
 using DeliveryCompany.Domain.Common.Models;
 
-namespace DeliveryCompany.Domain.Size.ValueObjects;
+namespace DeliveryCompany.Domain.Sizes.ValueObjects;
 
 public sealed class SizeId : ValueObject
 {

@@ -1,5 +1,5 @@
 using DeliveryCompany.Application.Interfaces.Persistence;
-using DeliveryCompany.Domain.Administrator;
+using DeliveryCompany.Domain.Administrators;
 
 namespace DeliveryCompany.Infrastructure.Persistance;
 

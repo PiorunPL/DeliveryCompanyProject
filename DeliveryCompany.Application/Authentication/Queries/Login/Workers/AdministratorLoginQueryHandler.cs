@@ -1,7 +1,7 @@
 using DeliveryCompany.Application.Authentication.Common;
 using DeliveryCompany.Application.Common.Interfaces.Authentication;
 using DeliveryCompany.Application.Interfaces.Persistence;
-using DeliveryCompany.Domain.Administrator;
+using DeliveryCompany.Domain.Administrators;
 using MediatR;
 
 namespace DeliveryCompany.Application.Authentication.Queries.Login.Workers;

@@ -1,4 +1,4 @@
-using DeliveryCompany.Domain.Administrator;
+using DeliveryCompany.Domain.Administrators;
 
 namespace DeliveryCompany.Application.Authentication.Common;
 

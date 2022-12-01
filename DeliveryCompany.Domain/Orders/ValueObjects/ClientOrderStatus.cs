@@ -1,4 +1,4 @@
-namespace DeliveryCompany.Domain.Order.ValueObjects;
+namespace DeliveryCompany.Domain.Orders.ValueObjects;
 
 public enum ClientOrderStatus{
     New = 0,

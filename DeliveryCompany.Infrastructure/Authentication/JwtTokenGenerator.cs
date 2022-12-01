@@ -2,10 +2,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using DeliveryCompany.Application.Common.Interfaces.Authentication;
-using DeliveryCompany.Domain.Administrator;
+using DeliveryCompany.Domain.Administrators;
 using DeliveryCompany.Domain.Common;
-using DeliveryCompany.Domain.Courier;
-using DeliveryCompany.Domain.Client;
+using DeliveryCompany.Domain.Couriers;
+using DeliveryCompany.Domain.Clients;
 using Microsoft.IdentityModel.Tokens;
 
 namespace DeliveryCompany.Infrastructure.Authentication;

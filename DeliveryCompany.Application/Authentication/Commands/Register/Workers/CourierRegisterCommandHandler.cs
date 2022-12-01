@@ -2,7 +2,7 @@ using DeliveryCompany.Application.Authentication.Common;
 using DeliveryCompany.Application.Common.Interfaces.Authentication;
 using DeliveryCompany.Application.Interfaces.Persistence;
 
-using DeliveryCompany.Domain.Courier;
+using DeliveryCompany.Domain.Couriers;
 using MediatR;
 
 namespace DeliveryCompany.Application.Authentication.Commands.Register.Workers;

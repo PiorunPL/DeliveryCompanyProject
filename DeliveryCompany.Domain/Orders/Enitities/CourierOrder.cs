@@ -1,13 +1,12 @@
 using DeliveryCompany.Domain.Common.Models;
 using DeliveryCompany.Domain.Common.ValueObjects;
-using DeliveryCompany.Domain.Facility.ValueObjects;
-using DeliveryCompany.Domain.Order.ValueObjects;
+using DeliveryCompany.Domain.Facilities.ValueObjects;
+using DeliveryCompany.Domain.Orders.ValueObjects;
 
-namespace DeliveryCompany.Domain.Order.Enitities;
+namespace DeliveryCompany.Domain.Orders.Enitities;
 
 public sealed class CourierOrder : Entity<CourierOrderId>
 {
-    public ClientOrderId ClientOrderId { get; set; }
     public DateTime DateSent { get; set; }
     public DateTime DateDelivered { get; set; }
     public string AddressSent { get; set; }
@@ -19,7 +18,6 @@ public sealed class CourierOrder : Entity<CourierOrderId>
 
     private CourierOrder(
         CourierOrderId courierOrderId,
-        ClientOrderId clientOrderId,
         DateTime dateSent,
         DateTime dateDelivered,
         string addressSent,
@@ -30,7 +28,6 @@ public sealed class CourierOrder : Entity<CourierOrderId>
         PersonId courierId
     ) : base(courierOrderId)
     {
-        ClientOrderId = clientOrderId;
         DateSent = dateSent;
         DateDelivered = dateDelivered;
         AddressSent = addressSent;
@@ -42,7 +39,6 @@ public sealed class CourierOrder : Entity<CourierOrderId>
     }
 
     public static CourierOrder Create(
-        ClientOrderId clientOrderId,
         DateTime dateSent,
         DateTime dateDelivered,
         string addressSent,
@@ -53,7 +49,6 @@ public sealed class CourierOrder : Entity<CourierOrderId>
     {
         return new(
             CourierOrderId.CreateUnique(),
-            clientOrderId,
             dateSent,
             dateDelivered,
             addressSent,

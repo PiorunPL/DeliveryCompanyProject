@@ -1,6 +1,6 @@
-using DeliveryCompany.Domain.Administrator;
-using DeliveryCompany.Domain.Courier;
-using DeliveryCompany.Domain.Client;
+using DeliveryCompany.Domain.Administrators;
+using DeliveryCompany.Domain.Couriers;
+using DeliveryCompany.Domain.Clients;
 
 namespace DeliveryCompany.Application.Common.Interfaces.Authentication;
 

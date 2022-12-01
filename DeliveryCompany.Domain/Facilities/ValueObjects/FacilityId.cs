@@ -1,6 +1,6 @@
 using DeliveryCompany.Domain.Common.Models;
 
-namespace DeliveryCompany.Domain.Facility.ValueObjects;
+namespace DeliveryCompany.Domain.Facilities.ValueObjects;
 
 public class FacilityId : ValueObject
 {

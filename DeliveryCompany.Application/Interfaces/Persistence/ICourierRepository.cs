@@ -1,4 +1,4 @@
-using DeliveryCompany.Domain.Courier;
+using DeliveryCompany.Domain.Couriers;
 
 namespace DeliveryCompany.Application.Interfaces.Persistence;
 

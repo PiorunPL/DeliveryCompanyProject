@@ -1,13 +1,14 @@
-using System.Reflection.Metadata;
 using DeliveryCompany.Domain.Common.Models;
-using DeliveryCompany.Domain.Facility.ValueObjects;
+using DeliveryCompany.Domain.Facilities.ValueObjects;
+using DeliveryCompany.Domain.Couriers;
 
-namespace DeliveryCompany.Domain.Facility;
+namespace DeliveryCompany.Domain.Facilities;
 
 public class Facility : Entity<FacilityId>
 {
     public string Address { get; set; }
     public string Name { get; set; }
+    public List<Courier> Couriers = new List<Courier>();
 
     private Facility(
         FacilityId id,

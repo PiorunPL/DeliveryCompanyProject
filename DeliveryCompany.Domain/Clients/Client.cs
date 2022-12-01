@@ -1,7 +1,7 @@
 using DeliveryCompany.Domain.Common;
 using DeliveryCompany.Domain.Common.ValueObjects;
 
-namespace DeliveryCompany.Domain.Client;
+namespace DeliveryCompany.Domain.Clients;
 
 public sealed class Client : Person
 {

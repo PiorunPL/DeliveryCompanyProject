@@ -1,13 +1,13 @@
 using DeliveryCompany.Domain.Common;
 using DeliveryCompany.Domain.Common.ValueObjects;
 
-namespace DeliveryCompany.Domain.Courier;
+namespace DeliveryCompany.Domain.Administrators;
 
-public class Courier : Person
+public class Administrator : Person
 {
     public DateTime DateBirth { get; set; }
     public string Address { get; set; }
-    private Courier(
+    private Administrator(
         PersonId personId,
         string firstName,
         string lastName,
@@ -18,10 +18,10 @@ public class Courier : Person
     {
         DateBirth = dateBirth;
         Address = address;
-        LogCourierCreated();
+        LogAdministratorCreated();
     }
 
-    public static Courier Create(
+    public static Administrator Create(
         string firstName,
         string lastName,
         string email,
@@ -39,8 +39,8 @@ public class Courier : Person
             address);
     }
 
-    private void LogCourierCreated()
+    private void LogAdministratorCreated()
     {
-        Console.WriteLine($"Courier created: \n\tId: {Id.Value}\n\tFirst name: {FirstName}\n\tLast name: {LastName}\n\tEmail: {Email}\n\tPassword: {Password}\n\tDateBirth: {DateBirth}\n\tAddress: {Address}");
+        Console.WriteLine($"Administrator created: \n\tId: {Id.Value}\n\tFirst name: {FirstName}\n\tLast name: {LastName}\n\tEmail: {Email}\n\tPassword: {Password}\n\tDateBirth: {DateBirth}\n\tAddress: {Address}");
     }
 }
