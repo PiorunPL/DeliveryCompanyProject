@@ -9,6 +9,7 @@
 ```http
 POST <<ROUTE>>
 Content-Type: application/json
+
 {
 	"email": "jakubm55555@gmail.com",
 	"password": "Jakub1232!"
@@ -41,6 +42,7 @@ Transfer-Encoding: chunked
 ```http
 POST <<ROUTE>>
 Content-Type: application/json
+
 {
 	"firstName": "Jakub",
 	"lastName": "Maciejewski",
@@ -151,6 +153,7 @@ Transfer-Encoding: chunked
 ```http
 POST <<ROUTE>>
 Content-Type: application/json
+
 {
 	"email": "default@default.com",
 	"password": "DeFaUlT"
