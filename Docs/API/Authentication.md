@@ -25,7 +25,7 @@ Server: Kestrel
 Transfer-Encoding: chunked 
 
 { 
-	"id": "00000000-0000-0000-0000-000000000000", 
+	"id": "2ac855f2-42ff-43ba-8cbb-06427f9afa4b", 
 	"firstName": "Jakub", 
 	"lastName": "Maciejewski", 
 	"email": "jakubm55555@gmail.com", 
@@ -60,7 +60,7 @@ Server: Kestrel
 Transfer-Encoding: chunked 
 
 { 
-	"id": "00000000-0000-0000-0000-000000000000", 
+	"id": "2ac855f2-42ff-43ba-8cbb-06427f9afa4b", 
 	"firstName": "Jakub", 
 	"lastName": "Maciejewski", 
 	"email": "jakubm55555@gmail.com", 
@@ -94,7 +94,7 @@ Server: Kestrel
 Transfer-Encoding: chunked
 
 {
-	"id": "00000000-0000-0000-0000-000000000000",
+	"id": "2ac855f2-42ff-43ba-8cbb-06427f9afa4b",
 	"firstName": "Jakub",
 	"lastName": "Maciejewski",
 	"email": "jakubm55555@gmail.com",
@@ -133,7 +133,7 @@ Server: Kestrel
 Transfer-Encoding: chunked
 
 {
-	"id": "00000000-0000-0000-0000-000000000000",
+	"id": "2ac855f2-42ff-43ba-8cbb-06427f9afa4b",
 	"firstName": "Jakub",
 	"lastName": "Maciejewski",
 	"email": "jakubm55555@gmail.com",
@@ -169,7 +169,7 @@ Server: Kestrel
 Transfer-Encoding: chunked 
 
 { 
-	"id": "00000000-0000-0000-0000-000000000000", 
+	"id": "2ac855f2-42ff-43ba-8cbb-06427f9afa4b", 
 	"firstName": "Default", 
 	"lastName": "Default", 
 	"email": "default@default.com", 
@@ -209,7 +209,7 @@ Server: Kestrel
 Transfer-Encoding: chunked
 
 {
-  "id": "00000000-0000-0000-0000-000000000000",
+  "id": "2ac855f2-42ff-43ba-8cbb-06427f9afa4b",
   "firstName": "Jakub",
   "lastName": "Maciejewski",
   "email": "jakubm55555@gmail.com",

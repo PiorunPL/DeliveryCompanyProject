@@ -20,7 +20,8 @@ public class AuthenticationMappingConfig : IRegister
         config.NewConfig<UserLoginRequest, ClientLoginQuery>();
 
         config.NewConfig<ClientAuthenticationResult, ClientAuthenticationResponse>()
-            .Map(dest => dest, src => src.Client);
+            .Map(dest => dest, src => src.Client)
+            .Map(dest => dest.Id, src => src.Client.Id.Value);
 
         // ADMINISTRATOR
         config.NewConfig<WorkerRegisterRequest, AdministratorRegisterCommand>();
@@ -28,7 +29,8 @@ public class AuthenticationMappingConfig : IRegister
         config.NewConfig<WorkerLoginRequest, AdministratorLoginQuery>();
 
         config.NewConfig<AdministratorAuthenticationResult, WorkerAuthenticationResponse>()
-            .Map(dest => dest, src => src.Administrator);
+            .Map(dest => dest, src => src.Administrator)
+            .Map(dest => dest.Id, src => src.Administrator.Id.Value);
 
         // COURIER
         config.NewConfig<WorkerRegisterRequest, CourierRegisterCommand>();
@@ -36,7 +38,8 @@ public class AuthenticationMappingConfig : IRegister
         config.NewConfig<WorkerLoginRequest, CourierLoginQuery>();
 
         config.NewConfig<CourierAuthenticationResult, WorkerAuthenticationResponse>()
-            .Map(dest => dest, src => src.Courier);
+            .Map(dest => dest, src => src.Courier)
+            .Map(dest => dest.Id, src => src.Courier.Id.Value);
 
         // OTHER
 
