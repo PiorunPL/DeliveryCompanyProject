@@ -41,6 +41,14 @@ public sealed class Courier : Person
 
     private void LogCourierCreated()
     {
-        Console.WriteLine($"Courier created: \n\tId: {Id.Value}\n\tFirst name: {FirstName}\n\tLast name: {LastName}\n\tEmail: {Email}\n\tPassword: {Password}\n\tDateBirth: {DateBirth}\n\tAddress: {Address}");
+        string log = "Courier created:";
+        log += $"\n\tId: {Id.Value.ToString()}";
+        log += $"\n\tFirst name: {FirstName}";
+        log += $"\n\tLast name: {LastName}";
+        log += $"\n\tEmail: {Email}";
+        log += $"\n\tPassword: {Password}";
+        log += $"\n\tDateBirth: {DateBirth.ToString()}";
+        log += $"\n\tAddress: {Address}";
+        Console.WriteLine(log);
     }
 }

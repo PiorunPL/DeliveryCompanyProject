@@ -18,6 +18,7 @@ public class Facility : Entity<FacilityId>
     {
         Address = address;
         Name = getCorrectName(name, id);
+        LogFacilityCreated();
     }
 
     public static Facility Create(
@@ -41,5 +42,13 @@ public class Facility : Entity<FacilityId>
         {
             return name;
         }
+    }
+
+    private void LogFacilityCreated(){
+        string log = "Facility created:";
+        log += $"\n\tFacility ID: {Id.Value.ToString()}";
+        log += $"\n\tName: {Name}";
+        log += $"\n\tAddress: {Address}";
+        Console.WriteLine(log);
     }
 }

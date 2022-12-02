@@ -32,6 +32,12 @@ public sealed class Client : Person
 
     private void LogClientCreated()
     {
-        Console.WriteLine($"Client created: \n\tClient Id: {Id.Value}\n\tFirst name: {FirstName}\n\tLast name: {LastName}\n\tEmail: {Email}\n\tPassword: {Password}");
+        string log = "Client created:";
+        log += $"\n\tClient Id: {Id.Value.ToString()}";
+        log += $"\n\tFirst name: {FirstName}";
+        log += $"\n\tLast name: {LastName}";
+        log += $"\n\tEmail: {Email}";
+        log += $"\n\tPassword: {Password}";
+        Console.WriteLine(log);
     }
 }

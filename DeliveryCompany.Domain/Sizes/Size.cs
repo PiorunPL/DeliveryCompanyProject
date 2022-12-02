@@ -34,6 +34,10 @@ public sealed class Size : Entity<SizeId>
 
     private void LogSizeCreated()
     {
-        Console.WriteLine($"Size created:\n\tSize Id: {Id.Value}\n\tName: {Name}\n\tPrice: {Price}");
+        string log = "Size created:";
+        log += $"\n\tSize Id: {Id.Value.ToString()}";
+        log += $"\n\tName: {Name}";
+        log += $"\n\tPrice: {Price}";
+        Console.WriteLine(log);
     }
 }

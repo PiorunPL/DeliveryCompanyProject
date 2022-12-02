@@ -78,7 +78,17 @@ public sealed class ClientOrder : Entity<ClientOrderId>
 
     private void LogClientOrderCreated()
     {
-        Console.WriteLine($"Client order created:\n\tOrder ID: {Id}\n\tClient ID: {ClientId}\n\tDate of Send: {DateSent}\n\tDate of delivery: {DateDelivered}\n\tAddress of send: {AddressSent}\n\tAddress of delivery: {AddressDelivery}\n\tName: {Name}\n\tSize ID: {SizeId}\n\tStatus: {Status}");
+        string log = "Client order created:";
+        log += $"\n\tOrder ID: {Id.Value.ToString()}";
+        log += $"\n\tClient ID: {ClientId.Value.ToString()}";
+        log += $"\n\tDate of Send: {DateSent.ToString()}";
+        log += $"\n\tDate of delivery: {DateDelivered.ToString()}";
+        log += $"\n\tAddress of send: {AddressSent}";
+        log += $"\n\tAddress of delivery: {AddressDelivery}";
+        log += $"\n\tName: {Name}";
+        log += $"\n\tSize ID: {SizeId.Value.ToString()}";
+        log += $"\n\tStatus: {Status}, {nameof(Status)}";
+        Console.WriteLine(log);
     }
 
 }

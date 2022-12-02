@@ -59,4 +59,20 @@ public sealed class CourierOrder : Entity<CourierOrderId>
             courierId
         );
     }
+
+    private void LogCreateCourierOrder()
+    {
+        string log = "Courier order created:";
+        log += $"\n\tCourier order ID: {Id.Value.ToString()}";
+        log += $"\n\tDate of sent: {DateSent.ToString()}";
+        log += $"\n\tDate of delivery: {DateDelivered.ToString()}";
+        log += $"\n\tAddress sent: {AddressSent}";
+        log += $"\n\tAddress of delivery: {AddressDelivery}";
+        log += $"\n\tFacility ID sent from: {FacilitySentId.Value.ToString()}";
+        log += $"\n\tFacility ID to delivery: {FacilityDeliveryId.Value.ToString()}";
+        log += $"\n\tStatus of order: {Status}, {nameof(Status)}";
+        log += $"\n\tCourier ID: {CourierId.Value.ToString()}";
+
+        Console.WriteLine(log);
+    }
 }
