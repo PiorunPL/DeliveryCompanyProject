@@ -13,6 +13,15 @@ public class ClientOrderListRepository : IClientOrderRepository
         _clientOrders.Add(order);
     }
 
+    public void Update(ClientOrder order)
+    {
+        if(_clientOrders.Contains(order))
+        {
+            _clientOrders.Remove(order);
+            _clientOrders.Add(order);
+        }
+    }
+
     public List<ClientOrder> GetAllClientOrdersByClientId(PersonId id)
     {
         return _clientOrders.Where(co => co.ClientId.Equals(id)).ToList();

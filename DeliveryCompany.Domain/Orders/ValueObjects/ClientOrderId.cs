@@ -6,7 +6,7 @@ public sealed class ClientOrderId : ValueObject
 {
     public Guid Value { get; }
 
-    private ClientOrderId(Guid value){
+    public ClientOrderId(Guid value){
         Value = value;
     }
 

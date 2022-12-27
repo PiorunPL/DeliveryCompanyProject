@@ -1,16 +1,11 @@
 @host=https://localhost:7264
 
-POST {{host}}/manageclientorder/client/create
+POST {{host}}/manageclientorder/client/cancel
 #Change Bearer - when testing after reboot
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NWFlZDMyNy1mZGRjLTQ4NzAtYjY5ZS1hOTdlMzE2MGQwMTciLCJnaXZlbl9uYW1lIjoiSmFrdWIiLCJmYW1pbHlfbmFtZSI6Ik1hY2llamV3c2tpIiwianRpIjoiYmJmYjIxZGItNjBlNC00M2E2LWI4NDgtYTIwNTJmMDU3Y2YwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ2xpZW50IiwiZXhwIjoxNjcyMTg0NzY2LCJpc3MiOiJEZWxpdmVyeUNvbXBhbnkiLCJhdWQiOiJEZWxpdmVyeUNvbXBhbnkifQ.7YFZtwlLupqhxz2w6c3yc12fprTBbnxHbp8F9K9Vgxw
 Content-Type: application/json
 
 {
-    "addressSent": "1 Maja 34 Sosnowiec",
-    "addressDelivery": "Grójecka 39 Warszawa",
-    "name": "MojaPrzesylka1",
-    "sizeName": "Small",
-    "dateSent": "2022-04-28",
-    "dateDelivery": "2001-04-30"
+    "orderId": "1973bd9c-a345-46ac-a7d8-8a94c0ca52a0"
 }
 ### After this triple hashtags we can create another requests

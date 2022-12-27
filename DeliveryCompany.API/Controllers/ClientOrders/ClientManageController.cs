@@ -26,7 +26,6 @@ public class ClientManageController : ControllerBase
     {
         var clientStringId = string.Empty;
         clientStringId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        Console.WriteLine(clientStringId);
 
         if (clientStringId is null)
             return Ok("Given subject does not exist");
@@ -36,6 +35,22 @@ public class ClientManageController : ControllerBase
         var request = _mapper.Map<ClientOrderCreateRequest>((apiRequest, clientId));
         ClientOrderResult result = _manageClientOrders.CreateNewClientOrder(request);
 
+        return Ok(_mapper.Map<ClientOrderAPIClientResponse>(result));
+    }
+
+    [HttpPost("cancel")]
+    public async Task<IActionResult> CancelOrder(ClientOrderCancelApiRequest apiRequest)
+    {
+        var clientStringId = string.Empty;
+        clientStringId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (clientStringId is null)
+            return Ok("Given subject does not exist");
+
+        Guid clientId = new Guid(clientStringId);
+
+        var request = _mapper.Map<ClientOrderCancelRequest>((apiRequest, clientId));
+        ClientOrderResult result = _manageClientOrders.CancelClientOrder(request);
 
         return Ok(_mapper.Map<ClientOrderAPIClientResponse>(result));
     }
