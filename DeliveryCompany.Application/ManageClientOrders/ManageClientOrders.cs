@@ -28,7 +28,8 @@ public class ManageClientOrders : IManageClientOrders
 
     public ClientOrderResult CreateNewClientOrder(ClientOrderCreateRequest request)
     {
-        //TODO: ValidateData
+        //TODO: ValidateData 
+        // - check if User with given ID exists
         
         string name = request.Name.Equals("") ? request.ClientId.ToString() : request.Name;
 
