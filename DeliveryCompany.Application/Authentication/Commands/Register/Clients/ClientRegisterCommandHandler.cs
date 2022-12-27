@@ -4,6 +4,7 @@ using MediatR;
 using DeliveryCompany.Application.Authentication.Common;
 using DeliveryCompany.Application.Common.Interfaces.Authentication;
 using DeliveryCompany.Domain.Clients;
+using Microsoft.Extensions.Logging;
 
 namespace DeliveryCompany.Application.Authentication.Commands.Register.Clients;
 
@@ -11,12 +12,14 @@ public class ClientRegisterCommandHandler : IRequestHandler<ClientRegisterComman
 {
     private readonly IClientRepository _clientRepository;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
+    private readonly ILogger<ClientRegisterCommandHandler> _logger;
 
     public ClientRegisterCommandHandler(
-        IClientRepository clientRepository, IJwtTokenGenerator jwtTokenGenerator)
+        IClientRepository clientRepository, IJwtTokenGenerator jwtTokenGenerator, ILogger<ClientRegisterCommandHandler> logger)
     {
         _clientRepository = clientRepository;
         _jwtTokenGenerator = jwtTokenGenerator;
+        _logger = logger;
     }
 
     public async Task<ClientAuthenticationResult> Handle(ClientRegisterCommand command, CancellationToken cancellationToken)
@@ -36,6 +39,7 @@ public class ClientRegisterCommandHandler : IRequestHandler<ClientRegisterComman
             command.Email,
             command.Password
         );
+        _logger.LogInformation("TestTest");
 
         _clientRepository.Add(client);
 

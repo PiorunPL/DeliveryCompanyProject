@@ -4,5 +4,6 @@ public enum CourierOrderStatus{
     Hidden = 0,
     Free = 1,
     InProgress = 2,
-    Delivered = 3
+    Delivered = 3,
+    Cancelled = 4
 }

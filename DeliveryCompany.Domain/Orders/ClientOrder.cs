@@ -87,7 +87,7 @@ public sealed class ClientOrder : Entity<ClientOrderId>
         log += $"\n\tAddress of delivery: {AddressDelivery}";
         log += $"\n\tName: {Name}";
         log += $"\n\tSize ID: {SizeId.Value.ToString()}";
-        log += $"\n\tStatus: {Status}, {nameof(Status)}";
+        log += $"\n\tStatus: {Status}";
         Console.WriteLine(log);
     }
 

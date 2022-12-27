@@ -6,8 +6,9 @@ namespace DeliveryCompany.Domain.Sizes;
 public sealed class Size : Entity<SizeId>
 {
 
-    string Name { get; set; }
-    double Price { get; set; }
+    public string Name { get; set; }
+    public double Price { get; set; }
+    //TODO: Add maxiumum size dimensions (x,y,z)
 
     private Size(
         SizeId id,
