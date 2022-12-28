@@ -1,16 +1,7 @@
 @host=https://localhost:7264
 
-POST {{host}}/manageclientorder/client/create
+GET  {{host}}/manageclientorder/client/getall
 #Change Bearer - when testing after reboot
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NTQ0Y2FhZC1hNmY3LTQyMDItOWUxNS1mNTgwN2VlMWM2NDIiLCJnaXZlbl9uYW1lIjoiSmFrdWIiLCJmYW1pbHlfbmFtZSI6Ik1hY2llamV3c2tpIiwianRpIjoiZWFmZjA4MmYtMTM4Ni00MmVhLTgzZjUtMjJlY2NmNDM2YmI0IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ2xpZW50IiwiZXhwIjoxNjcyMjI4ODMyLCJpc3MiOiJEZWxpdmVyeUNvbXBhbnkiLCJhdWQiOiJEZWxpdmVyeUNvbXBhbnkifQ.qMw62NXaorUGTsIM_jsFxxtGjwKFhU9labr12yklBDI
-Content-Type: application/json
 
-{
-    "addressSent": "1 Maja 34 Sosnowiec",
-    "addressDelivery": "Grójecka 39 Warszawa",
-    "name": "MojaPrzesylka1",
-    "sizeName": "Small",
-    "dateSent": "2022-04-28",
-    "dateDelivery": "2001-04-30"
-}
 ### After this triple hashtags we can create another requests

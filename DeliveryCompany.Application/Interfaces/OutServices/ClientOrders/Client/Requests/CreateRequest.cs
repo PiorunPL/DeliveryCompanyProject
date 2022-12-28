@@ -1,9 +1,9 @@
 using DeliveryCompany.Domain.Common.ValueObjects;
 using DeliveryCompany.Domain.Sizes;
 
-namespace DeliveryCompany.Application.Interfaces.ClientOrders.Requests;
+namespace DeliveryCompany.Application.Interfaces.ClientOrders.Client.Requests;
 
-public record ClientOrderCreateRequest(
+public record CreateRequest(
     string AddressSent,
     string AddressDelivery,
     string Name,

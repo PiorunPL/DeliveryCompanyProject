@@ -1,8 +1,10 @@
 using System.Security.Claims;
-using DeliveryCompany.Application.Interfaces.ClientOrders;
-using DeliveryCompany.Application.Interfaces.ClientOrders.Requests;
-using DeliveryCompany.Application.Interfaces.ClientOrders.Results;
+using DeliveryCompany.Application.Interfaces.ClientOrders.Client;
+using DeliveryCompany.Application.Interfaces.ClientOrders.Client.Requests;
+using DeliveryCompany.Application.Interfaces.ClientOrders.Client.Results;
 using DeliveryCompany.Contracts.ClientOrders;
+using DeliveryCompany.Domain.Orders;
+using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +30,7 @@ public class ClientManageController : ControllerBase
     {
         Guid clientId = GetClientGuid();
 
-        var request = _mapper.Map<ClientOrderCreateRequest>((apiRequest, clientId));
+        var request = _mapper.Map<CreateRequest>((apiRequest, clientId));
         ClientOrderResult result = _manageClientOrders.CreateNewClientOrder(request);
 
         return Ok(_mapper.Map<ClientOrderAPIClientResponse>(result));
@@ -39,7 +41,7 @@ public class ClientManageController : ControllerBase
     {
         Guid clientId = GetClientGuid();
 
-        var request = _mapper.Map<ClientOrderCancelRequest>((apiRequest, clientId));
+        var request = _mapper.Map<CancelRequest>((apiRequest, clientId));
         ClientOrderResult result = _manageClientOrders.CancelClientOrder(request);
 
         return Ok(_mapper.Map<ClientOrderAPIClientResponse>(result));
@@ -50,10 +52,23 @@ public class ClientManageController : ControllerBase
     {
         Guid clientId = GetClientGuid();
 
-        var request = _mapper.Map<ClientOrderGetRequest>((apiRequest, clientId));
+        var request = _mapper.Map<GetRequest>((apiRequest, clientId));
         ClientOrderResult result = _manageClientOrders.GetOrder(request);
 
         return Ok(_mapper.Map<ClientOrderAPIClientResponse>(result));
+    }
+
+    [HttpGet("getall")]
+    public async Task<IActionResult> GetAllOrders()
+    {
+        Guid clientId = GetClientGuid();
+
+        GetAllResult result = _manageClientOrders.GetOrders(clientId);
+
+        var target = Map(result); //TODO: Good to Change Map method to Mapster Invokation
+
+        return Ok(target);
+        // return Ok(_mapper.Map<ClientGetAllApiResponse>(result));
     }
 
     private Guid GetClientGuid()
@@ -66,5 +81,22 @@ public class ClientManageController : ControllerBase
 
         return new Guid(clientStringId);
 
+    }
+
+    private ClientGetAllApiResponse Map(GetAllResult result)
+    {
+        var response = new ClientGetAllApiResponse(new List<ClientOrderDTO>());
+        
+        foreach (var item in result.Orders)
+        {
+            var dto = new ClientOrderDTO(
+                item.Id.Value,
+                item.Name,
+                item.Status.ToString()
+            );
+            response.list.Add(dto);
+        }
+
+        return response;
     }
 }

@@ -1,6 +1,6 @@
-using DeliveryCompany.Application.Interfaces.ClientOrders;
-using DeliveryCompany.Application.Interfaces.ClientOrders.Requests;
-using DeliveryCompany.Application.Interfaces.ClientOrders.Results;
+using DeliveryCompany.Application.Interfaces.ClientOrders.Client;
+using DeliveryCompany.Application.Interfaces.ClientOrders.Client.Requests;
+using DeliveryCompany.Application.Interfaces.ClientOrders.Client.Results;
 using DeliveryCompany.Application.Interfaces.Persistence;
 using DeliveryCompany.Domain.Common.ValueObjects;
 using DeliveryCompany.Domain.Orders;
@@ -21,7 +21,7 @@ public class ClientManage : IClientManage
         _logger = logger;
     }
 
-    public ClientOrderResult CancelClientOrder(ClientOrderCancelRequest request)
+    public ClientOrderResult CancelClientOrder(CancelRequest request)
     {   
         ClientOrder order = GetClientOrder(request.ClientId, request.OrderId);
 
@@ -42,7 +42,7 @@ public class ClientManage : IClientManage
         return new ClientOrderResult(order);
     }
 
-    public ClientOrderResult CreateNewClientOrder(ClientOrderCreateRequest request)
+    public ClientOrderResult CreateNewClientOrder(CreateRequest request)
     {
         //TODO: ValidateData 
         // - check if User with given ID exists
@@ -77,7 +77,7 @@ public class ClientManage : IClientManage
         return new ClientOrderResult(order);
     }
 
-    public ClientOrderResult GetOrder(ClientOrderGetRequest request)
+    public ClientOrderResult GetOrder(GetRequest request)
     {
         ClientOrder order = GetClientOrder(request.ClientId, request.OrderId);
 
@@ -87,9 +87,9 @@ public class ClientManage : IClientManage
         return new ClientOrderResult(order);
     }
 
-    public void GetOrders()
+    public GetAllResult GetOrders(Guid clientId)
     {
-        throw new NotImplementedException();
+        return new GetAllResult(_clientOrderRepository.GetAllClientOrdersByClientId(new PersonId(clientId)));
     }
 
     private ClientOrder GetClientOrder(Guid ClientId, Guid OrderId)
