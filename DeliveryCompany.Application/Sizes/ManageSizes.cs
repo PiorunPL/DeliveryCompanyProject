@@ -1,6 +1,6 @@
 using DeliveryCompany.Domain.Sizes;
 
-namespace DeliveryCompany.Application.ManageSizes;
+namespace DeliveryCompany.Application.Sizes;
 
 public static class ManageSizes{
     public static Size? GetSizeFromName(string name){

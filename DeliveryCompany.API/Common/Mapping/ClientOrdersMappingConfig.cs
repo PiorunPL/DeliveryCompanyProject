@@ -1,6 +1,6 @@
 using System.Reflection.Metadata.Ecma335;
-using DeliveryCompany.Application.Interfaces.ManageClientOrders.Requests;
-using DeliveryCompany.Application.Interfaces.ManageClientOrders.Results;
+using DeliveryCompany.Application.Interfaces.ClientOrders.Requests;
+using DeliveryCompany.Application.Interfaces.ClientOrders.Results;
 using DeliveryCompany.Contracts.ClientOrders;
 using DeliveryCompany.Domain.Common.ValueObjects;
 using Mapster;
@@ -29,6 +29,10 @@ public class ClientOrdersMappingConfig : IRegister
             .Map(dest => dest.OrderId, src => src.Item1.OrderId)
             .Map(dest => dest.ClientId, src => src.Item2);
         
+        //Get Order
+        config.NewConfig<(ClientOrderClientGetApiRequest, Guid), ClientOrderGetRequest>()
+            .Map(dest => dest.OrderId, src => src.Item1.OrderId)
+            .Map(dest => dest.ClientId, src => src.Item2);
         
     }
 }

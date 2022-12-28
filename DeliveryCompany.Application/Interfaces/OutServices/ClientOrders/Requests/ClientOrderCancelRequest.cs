@@ -1,4 +1,4 @@
-namespace DeliveryCompany.Application.Interfaces.ManageClientOrders.Requests;
+namespace DeliveryCompany.Application.Interfaces.ClientOrders.Requests;
 
 public record ClientOrderCancelRequest(
     Guid OrderId,
