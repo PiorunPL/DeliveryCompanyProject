@@ -1,3 +1,4 @@
+using System.ComponentModel.Design;
 using System.Runtime.Intrinsics.X86;
 using DeliveryCompany.Application.Interfaces.ClientOrders.Administrator;
 using DeliveryCompany.Application.Interfaces.ClientOrders.Administrator.Requests;
@@ -28,8 +29,8 @@ public class AdministratorManage : IAdministratorManage
 
         //Check if status is NEW
         // TODO: Log Status Checking
-        if(!order.Status.Equals(ClientOrderStatus.New))
-            throw new ApplicationException("Status for given Order is diffrent than New"); 
+        if (!order.Status.Equals(ClientOrderStatus.New))
+            throw new ApplicationException("Status for given Order is diffrent than New");
 
         //Change Status to accepted
         // TODO: Log Status Changing
@@ -46,26 +47,73 @@ public class AdministratorManage : IAdministratorManage
 
     public OrderResult CancelOrder(OrderRequest request)
     {
-        throw new NotImplementedException();
+        //Get Client Order
+        //TODO: Log Getting Client Order
+        ClientOrder order = Helper.GetOrder(request.OrderId, _clientOrderRepository);
+
+        //Check if status is Accepted
+        //TODO: Log Status Checking
+        if (!order.Status.Equals(ClientOrderStatus.Accepted))
+            throw new ApplicationException("Status for given Order is diffrent than Accepted");
+
+        //Change status to Canceled
+        //TODO: Log Status Changing
+        order.Status = ClientOrderStatus.Cancelled;
+
+        //Update Client Order in repository
+        // TODO: Log updating repository
+        _clientOrderRepository.Update(order);
+
+        //Return changed client order
+        return new OrderResult(order);
     }
 
     public OrderListResult GetAllActiveOrders()
     {
-        throw new NotImplementedException();
+        // TODO: Log getting Acitve ClientOrders
+        List<ClientOrder> ordersNew = _clientOrderRepository.GetAllClientOrdersWithGivenStatus(ClientOrderStatus.New);
+        List<ClientOrder> ordersAccepted = _clientOrderRepository.GetAllClientOrdersWithGivenStatus(ClientOrderStatus.Accepted);
+        List<ClientOrder> ordersInProgress = _clientOrderRepository.GetAllClientOrdersWithGivenStatus(ClientOrderStatus.InProgress);
+        List<ClientOrder> activeOrders = ordersNew
+            .Concat(ordersAccepted)
+            .Concat(ordersInProgress)
+            .ToList();
+
+        return new OrderListResult(activeOrders);
     }
 
     public OrderListResult GetAllOrders()
     {
-        throw new NotImplementedException();
+        // TODO: Log Getting client orders
+        return new OrderListResult(_clientOrderRepository.GetAllClientOrders());
     }
 
     public OrderResult GetOrder(OrderRequest request)
     {
-        throw new NotImplementedException();
+        //TODO: Log getting client Order
+        return new OrderResult(Helper.GetOrder(request.OrderId, _clientOrderRepository));
     }
 
     public OrderResult SubmitOrderRoute(OrderRequest request)
     {
-        throw new NotImplementedException();
+        //Get Client Order
+        ClientOrder order = Helper.GetOrder(request.OrderId, _clientOrderRepository);
+
+        //Check if Status is ACCEPTED
+        if (!order.Status.Equals(ClientOrderStatus.Accepted))
+            throw new ApplicationException("Status for given Order is diffrent than Accepted");
+
+        //TODO: Check if all routes from source to destination are created 
+
+        //Change Status to InProgress
+        order.Status = ClientOrderStatus.InProgress;
+
+        //TODO: Change First Courier Order status to Free
+
+        //Update Repository
+        _clientOrderRepository.Update(order);
+
+        //Return Client Order
+        return new OrderResult(order);
     }
 }

@@ -11,4 +11,5 @@ public interface IClientOrderRepository
     public ClientOrder? GetClientOrderById(ClientOrderId id);
     public List<ClientOrder> GetAllClientOrdersByClientId(PersonId id);
     public List<ClientOrder> GetAllClientOrdersWithGivenStatus(ClientOrderStatus status);
+    public List<ClientOrder> GetAllClientOrders();
 }

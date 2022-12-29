@@ -3,8 +3,6 @@ using DeliveryCompany.Application.Interfaces.ClientOrders.Client;
 using DeliveryCompany.Application.Interfaces.ClientOrders.Client.Requests;
 using DeliveryCompany.Application.Interfaces.ClientOrders.Client.Results;
 using DeliveryCompany.Contracts.ClientOrders;
-using DeliveryCompany.Domain.Orders;
-using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

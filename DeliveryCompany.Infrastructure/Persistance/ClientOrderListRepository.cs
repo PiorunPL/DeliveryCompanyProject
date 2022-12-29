@@ -36,4 +36,9 @@ public class ClientOrderListRepository : IClientOrderRepository
     {
         return _clientOrders.SingleOrDefault(co => co.Id.Equals(id));
     }
+
+    public List<ClientOrder> GetAllClientOrders()
+    {
+        return _clientOrders.ToList();
+    }
 }
