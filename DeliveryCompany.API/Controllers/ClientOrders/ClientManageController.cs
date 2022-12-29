@@ -65,7 +65,7 @@ public class ClientManageController : ControllerBase
 
         GetAllResult result = _manageClientOrders.GetOrders(clientId);
 
-        var target = Map(result); //TODO: Good to Change Map method to Mapster Invokation
+        var target = Map(result); //TODO: Good to Change Map method to Mapster Invocation
 
         return Ok(target);
         // return Ok(_mapper.Map<ClientGetAllApiResponse>(result));

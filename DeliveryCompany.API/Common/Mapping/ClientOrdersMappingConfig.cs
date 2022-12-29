@@ -14,11 +14,11 @@ public class ClientOrdersMappingConfig : IRegister
         // TypeAdapterConfig.GlobalSettings.Default.PreserveReference(true);
         //Common
         config.NewConfig<ClientOrderResult, ClientOrderAPIClientResponse>()
-            .Map(dest => dest, src => src.order)
-            .Map(dest => dest.OrderId, src => src.order.Id.Value)
-            .Map(dest => dest.ClientId, src => src.order.ClientId.Value)
-            .Map(dest => dest.SizeId, src => src.order.SizeId.Value)
-            .Map(dest => dest.Status, src => src.order.Status.ToString());
+            .Map(dest => dest, src => src.Order)
+            .Map(dest => dest.OrderId, src => src.Order.Id.Value)
+            .Map(dest => dest.ClientId, src => src.Order.ClientId.Value)
+            .Map(dest => dest.SizeId, src => src.Order.SizeId.Value)
+            .Map(dest => dest.Status, src => src.Order.Status.ToString());
 
         //Create new order
         config.NewConfig<(ClientOrderCreateApiRequest, Guid),CreateRequest>() 

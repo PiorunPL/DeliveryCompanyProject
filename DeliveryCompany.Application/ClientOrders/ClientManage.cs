@@ -8,7 +8,7 @@ using DeliveryCompany.Domain.Orders.ValueObjects;
 using DeliveryCompany.Domain.Sizes;
 using Microsoft.Extensions.Logging;
 
-namespace DeliveryCompany.Application.ManageClientOrders;
+namespace DeliveryCompany.Application.ClientOrders;
 
 public class ClientManage : IClientManage
 {
@@ -23,7 +23,7 @@ public class ClientManage : IClientManage
 
     public ClientOrderResult CancelClientOrder(CancelRequest request)
     {   
-        ClientOrder order = GetClientOrder(request.ClientId, request.OrderId);
+        ClientOrder order = Helper.ClientGetOrderWithValidation(request.ClientId, request.OrderId, _clientOrderRepository);
 
         //TODO: Log Check if order status is new
         //Check if order status is new
@@ -79,7 +79,7 @@ public class ClientManage : IClientManage
 
     public ClientOrderResult GetOrder(GetRequest request)
     {
-        ClientOrder order = GetClientOrder(request.ClientId, request.OrderId);
+        ClientOrder order = Helper.ClientGetOrderWithValidation(request.ClientId, request.OrderId, _clientOrderRepository);
 
         //TODO: Possiblity - Sending only not hidden courier orders -> Probably good thing to create method in domain Model that return list of not hidden courier orders.
 
@@ -89,25 +89,9 @@ public class ClientManage : IClientManage
 
     public GetAllResult GetOrders(Guid clientId)
     {
+        //TODO: LOG getting all client orders with given clientId
         return new GetAllResult(_clientOrderRepository.GetAllClientOrdersByClientId(new PersonId(clientId)));
     }
 
-    private ClientOrder GetClientOrder(Guid ClientId, Guid OrderId)
-    {
-        ClientOrderId orderId = new ClientOrderId(OrderId);
-        ClientOrder? order = _clientOrderRepository.GetClientOrderById(orderId);
-        
-        //TODO: Log Check Order exist
-        //Check if Order with given exist
-        if(order is null)
-            throw new ArgumentException("Order with given ID does not exist");
-
-        //TODO: Log Check If Order belongs to client
-        //Check if order is connected with given client
-        PersonId clientId = new PersonId(ClientId);
-        if(!order.ClientId.Equals(clientId))
-            throw new UnauthorizedAccessException("User with given ID have no permission to cancel that Client Order");
-
-        return order;
-    }
+    
 }
