@@ -1,5 +1,3 @@
-using System.ComponentModel.Design;
-using System.Runtime.Intrinsics.X86;
 using DeliveryCompany.Application.Interfaces.ClientOrders.Administrator;
 using DeliveryCompany.Application.Interfaces.ClientOrders.Administrator.Requests;
 using DeliveryCompany.Application.Interfaces.ClientOrders.Administrator.Results;
