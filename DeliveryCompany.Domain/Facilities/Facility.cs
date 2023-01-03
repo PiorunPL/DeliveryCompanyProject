@@ -1,17 +1,16 @@
 using DeliveryCompany.Domain.Common.Models;
 using DeliveryCompany.Domain.Facilities.ValueObjects;
-using DeliveryCompany.Domain.Couriers;
 
 namespace DeliveryCompany.Domain.Facilities;
 
 public class Facility : Entity<FacilityId>
 {
     public string Address { get; set; }
-    public string? Name { get; set; }
+    public string Name { get; set; }
     public FacilityStatus Status { get; set; }
     public List<Guid> CouriersId = new List<Guid>();
 
-    private Facility(
+    public Facility(
         FacilityId id,
         string address,
         string? name
@@ -34,7 +33,7 @@ public class Facility : Entity<FacilityId>
         );
     }
 
-    private string? GetCorrectName(string? name, FacilityId id)
+    private string GetCorrectName(string? name, FacilityId id)
     {
         if (name == null || name.Equals(""))
         {

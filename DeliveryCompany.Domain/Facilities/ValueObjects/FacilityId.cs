@@ -6,7 +6,7 @@ public class FacilityId : ValueObject
 {
     public Guid Value {get;}
 
-    private FacilityId(Guid value)
+    public FacilityId(Guid value)
     {
         Value = value;
     }

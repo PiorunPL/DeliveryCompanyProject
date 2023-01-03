@@ -7,6 +7,6 @@ public interface IFacilityRepository
     public void Add(Facility facility);
     public void Update(Facility facility);
     public Facility? GetById(Guid id);
-    public Facility? GetByCourierId(Guid id);
+    public Facility? GetByCourierId(Guid courierId);
     public List<Facility> GetFacilities();
 }
