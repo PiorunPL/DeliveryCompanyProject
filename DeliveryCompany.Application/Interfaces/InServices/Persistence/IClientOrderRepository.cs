@@ -2,7 +2,7 @@ using DeliveryCompany.Domain.Common.ValueObjects;
 using DeliveryCompany.Domain.Orders;
 using DeliveryCompany.Domain.Orders.ValueObjects;
 
-namespace DeliveryCompany.Application.Interfaces.Persistence;
+namespace DeliveryCompany.Application.Interfaces.InServices.Persistence;
 
 public interface IClientOrderRepository
 {

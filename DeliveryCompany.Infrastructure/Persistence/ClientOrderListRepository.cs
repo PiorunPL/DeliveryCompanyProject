@@ -1,9 +1,9 @@
-using DeliveryCompany.Application.Interfaces.Persistence;
+using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Domain.Common.ValueObjects;
 using DeliveryCompany.Domain.Orders;
 using DeliveryCompany.Domain.Orders.ValueObjects;
 
-namespace DeliveryCompany.Infrastructure.Persistance;
+namespace DeliveryCompany.Infrastructure.Persistence;
 
 public class ClientOrderListRepository : IClientOrderRepository
 {

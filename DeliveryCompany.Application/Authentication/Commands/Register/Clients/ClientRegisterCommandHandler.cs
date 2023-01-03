@@ -1,8 +1,9 @@
 // using DeliveryCompany.Application.Common.Interfaces.Authentication;
-using DeliveryCompany.Application.Interfaces.Persistence;
+
 using MediatR;
 using DeliveryCompany.Application.Authentication.Common;
-using DeliveryCompany.Application.Common.Interfaces.Authentication;
+using DeliveryCompany.Application.Interfaces.InServices.Authentication;
+using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Domain.Clients;
 using Microsoft.Extensions.Logging;
 

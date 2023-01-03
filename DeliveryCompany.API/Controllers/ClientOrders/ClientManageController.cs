@@ -1,7 +1,7 @@
 using System.Security.Claims;
-using DeliveryCompany.Application.Interfaces.ClientOrders.Client;
-using DeliveryCompany.Application.Interfaces.ClientOrders.Client.Requests;
-using DeliveryCompany.Application.Interfaces.ClientOrders.Client.Results;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Client;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Client.Requests;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Client.Results;
 using DeliveryCompany.Contracts.ClientOrders;
 using MapsterMapper;
 using Microsoft.AspNetCore.Authorization;

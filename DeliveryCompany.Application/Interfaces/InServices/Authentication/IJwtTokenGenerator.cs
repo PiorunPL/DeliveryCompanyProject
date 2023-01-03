@@ -1,8 +1,8 @@
 using DeliveryCompany.Domain.Administrators;
-using DeliveryCompany.Domain.Couriers;
 using DeliveryCompany.Domain.Clients;
+using DeliveryCompany.Domain.Couriers;
 
-namespace DeliveryCompany.Application.Common.Interfaces.Authentication;
+namespace DeliveryCompany.Application.Interfaces.InServices.Authentication;
 
 public interface IJwtTokenGenerator{
     string GenerateToken(Client user);

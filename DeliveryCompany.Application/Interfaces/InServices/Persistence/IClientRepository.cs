@@ -1,6 +1,6 @@
 using DeliveryCompany.Domain.Clients;
 
-namespace DeliveryCompany.Application.Interfaces.Persistence;
+namespace DeliveryCompany.Application.Interfaces.InServices.Persistence;
 
 public interface IClientRepository
 {

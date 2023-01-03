@@ -1,7 +1,6 @@
 using DeliveryCompany.Application.Authentication.Common;
-using DeliveryCompany.Application.Common.Interfaces.Authentication;
-using DeliveryCompany.Application.Interfaces.Persistence;
-using DeliveryCompany.Domain.Administrators;
+using DeliveryCompany.Application.Interfaces.InServices.Authentication;
+using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Domain.Couriers;
 using MediatR;
 

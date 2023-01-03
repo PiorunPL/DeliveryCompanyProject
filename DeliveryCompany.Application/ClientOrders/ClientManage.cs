@@ -1,7 +1,7 @@
-using DeliveryCompany.Application.Interfaces.ClientOrders.Client;
-using DeliveryCompany.Application.Interfaces.ClientOrders.Client.Requests;
-using DeliveryCompany.Application.Interfaces.ClientOrders.Client.Results;
-using DeliveryCompany.Application.Interfaces.Persistence;
+using DeliveryCompany.Application.Interfaces.InServices.Persistence;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Client;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Client.Requests;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Client.Results;
 using DeliveryCompany.Domain.Common.ValueObjects;
 using DeliveryCompany.Domain.Orders;
 using DeliveryCompany.Domain.Orders.ValueObjects;

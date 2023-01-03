@@ -1,4 +1,4 @@
-namespace DeliveryCompany.Application.Interfaces.ClientOrders.Administrator;
+namespace DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrator;
 
 public interface IAdministratorManage{
     public Results.OrderResult AcceptOrder(Requests.OrderRequest request); 

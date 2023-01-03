@@ -1,7 +1,7 @@
 using DeliveryCompany.Api.Common.Mapping;
-using DeliveryCompany.Application.Interfaces.ClientOrders.Client;
 using DeliveryCompany.Application.ClientOrders;
-using DeliveryCompany.Application.Interfaces.ClientOrders.Administrator;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrator;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Client;
 
 namespace DeliveryCompany.API;
 

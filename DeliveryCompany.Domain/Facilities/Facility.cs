@@ -7,23 +7,25 @@ namespace DeliveryCompany.Domain.Facilities;
 public class Facility : Entity<FacilityId>
 {
     public string Address { get; set; }
-    public string Name { get; set; }
-    public List<Courier> Couriers = new List<Courier>();
+    public string? Name { get; set; }
+    public FacilityStatus Status { get; set; }
+    public List<Guid> CouriersId = new List<Guid>();
 
     private Facility(
         FacilityId id,
         string address,
-        string name
+        string? name
     ) : base(id)
     {
         Address = address;
-        Name = getCorrectName(name, id);
+        Name = GetCorrectName(name, id);
+        Status = FacilityStatus.Open;
         LogFacilityCreated();
     }
 
     public static Facility Create(
         string address,
-        string name)
+        string? name)
     {
         return new(
             FacilityId.CreateUnique(),
@@ -32,7 +34,7 @@ public class Facility : Entity<FacilityId>
         );
     }
 
-    private string getCorrectName(string name, FacilityId id)
+    private string? GetCorrectName(string? name, FacilityId id)
     {
         if (name == null || name.Equals(""))
         {
@@ -49,6 +51,7 @@ public class Facility : Entity<FacilityId>
         log += $"\n\tFacility ID: {Id.Value.ToString()}";
         log += $"\n\tName: {Name}";
         log += $"\n\tAddress: {Address}";
+        log += $"\n\tStatus: {Status}";
         Console.WriteLine(log);
     }
 }

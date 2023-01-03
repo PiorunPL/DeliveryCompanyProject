@@ -1,4 +1,4 @@
-namespace DeliveryCompany.Application.Interfaces.ClientOrders.Administrator.Requests;
+namespace DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrator.Requests;
 
 public record OrderRequest(
     Guid OrderId

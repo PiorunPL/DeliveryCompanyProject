@@ -1,7 +1,7 @@
-using DeliveryCompany.Application.Common.Interfaces.Authentication;
-using DeliveryCompany.Application.Interfaces.Persistence;
 using MediatR;
 using DeliveryCompany.Application.Authentication.Common;
+using DeliveryCompany.Application.Interfaces.InServices.Authentication;
+using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Domain.Clients;
 
 namespace DeliveryCompany.Application.Authentication.Queries.Login.Clients;

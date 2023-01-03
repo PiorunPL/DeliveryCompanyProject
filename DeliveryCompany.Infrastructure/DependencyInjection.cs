@@ -1,8 +1,8 @@
 using System.Text;
-using DeliveryCompany.Application.Common.Interfaces.Authentication;
-using DeliveryCompany.Application.Interfaces.Persistence;
+using DeliveryCompany.Application.Interfaces.InServices.Authentication;
+using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Infrastructure.Authentication;
-using DeliveryCompany.Infrastructure.Persistance;
+using DeliveryCompany.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

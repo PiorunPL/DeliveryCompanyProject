@@ -1,7 +1,7 @@
-using DeliveryCompany.Application.Interfaces.Persistence;
+using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Domain.Clients;
 
-namespace DeliveryCompany.Infrastructure.Persistance;
+namespace DeliveryCompany.Infrastructure.Persistence;
 
 public class ClientListRepository : IClientRepository
 {

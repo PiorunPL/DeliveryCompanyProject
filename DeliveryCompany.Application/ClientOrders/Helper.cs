@@ -1,4 +1,4 @@
-using DeliveryCompany.Application.Interfaces.Persistence;
+using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Domain.Common.ValueObjects;
 using DeliveryCompany.Domain.Orders;
 using DeliveryCompany.Domain.Orders.ValueObjects;
@@ -6,9 +6,9 @@ using DeliveryCompany.Domain.Orders.ValueObjects;
 namespace DeliveryCompany.Application.ClientOrders;
 
 public class Helper{
-    public static ClientOrder ClientGetOrderWithValidation(Guid ClientId, Guid OrderId, IClientOrderRepository repository)
+    public static ClientOrder ClientGetOrderWithValidation(Guid ClientId, Guid orderId, IClientOrderRepository repository)
     {
-        ClientOrder order = GetOrder(OrderId, repository);
+        ClientOrder order = GetOrder(orderId, repository);
 
         //TODO: Log Check If Order belongs to client
         //Check if order is connected with given client

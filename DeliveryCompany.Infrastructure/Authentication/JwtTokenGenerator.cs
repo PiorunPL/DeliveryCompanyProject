@@ -1,7 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using DeliveryCompany.Application.Common.Interfaces.Authentication;
+using DeliveryCompany.Application.Interfaces.InServices.Authentication;
 using DeliveryCompany.Domain.Administrators;
 using DeliveryCompany.Domain.Common;
 using DeliveryCompany.Domain.Couriers;

@@ -1,7 +1,7 @@
-using DeliveryCompany.Application.Interfaces.ClientOrders.Administrator;
-using DeliveryCompany.Application.Interfaces.ClientOrders.Administrator.Requests;
-using DeliveryCompany.Application.Interfaces.ClientOrders.Administrator.Results;
-using DeliveryCompany.Application.Interfaces.Persistence;
+using DeliveryCompany.Application.Interfaces.InServices.Persistence;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrator;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrator.Requests;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrator.Results;
 using DeliveryCompany.Domain.Orders;
 using DeliveryCompany.Domain.Orders.ValueObjects;
 using Microsoft.Extensions.Logging;
@@ -27,8 +27,8 @@ public class AdministratorManage : IAdministratorManage
 
         //Check if status is NEW
         // TODO: Log Status Checking
-        if (!order.Status.Equals(ClientOrderStatus.New))
-            throw new ApplicationException("Status for given Order is diffrent than New");
+        if (order.Status != ClientOrderStatus.New)
+            throw new ApplicationException("Status for given Order is different than New");
 
         //Change Status to accepted
         // TODO: Log Status Changing
@@ -51,8 +51,8 @@ public class AdministratorManage : IAdministratorManage
 
         //Check if status is Accepted
         //TODO: Log Status Checking
-        if (!order.Status.Equals(ClientOrderStatus.Accepted))
-            throw new ApplicationException("Status for given Order is diffrent than Accepted");
+        if (order.Status != ClientOrderStatus.Accepted)
+            throw new ApplicationException("Status for given Order is different than Accepted");
 
         //Change status to Canceled
         //TODO: Log Status Changing
@@ -68,12 +68,12 @@ public class AdministratorManage : IAdministratorManage
 
     public OrderListResult GetAllActiveOrders()
     {
-        // TODO: Log getting Acitve ClientOrders
+        // TODO: Log getting Active ClientOrders
         List<ClientOrder> ordersNew = _clientOrderRepository.GetAllClientOrdersWithGivenStatus(ClientOrderStatus.New);
         List<ClientOrder> ordersAccepted = _clientOrderRepository.GetAllClientOrdersWithGivenStatus(ClientOrderStatus.Accepted);
         List<ClientOrder> ordersInProgress = _clientOrderRepository.GetAllClientOrdersWithGivenStatus(ClientOrderStatus.InProgress);
-        List<ClientOrder> activeOrders = ordersNew
-            .Concat(ordersAccepted)
+        List<ClientOrder> activeOrders = ordersAccepted
+            .Concat(ordersNew)
             .Concat(ordersInProgress)
             .ToList();
 
@@ -98,8 +98,8 @@ public class AdministratorManage : IAdministratorManage
         ClientOrder order = Helper.GetOrder(request.OrderId, _clientOrderRepository);
 
         //Check if Status is ACCEPTED
-        if (!order.Status.Equals(ClientOrderStatus.Accepted))
-            throw new ApplicationException("Status for given Order is diffrent than Accepted");
+        if (order.Status != ClientOrderStatus.Accepted)
+            throw new ApplicationException("Status for given Order is different than Accepted");
 
         //TODO: Check if all routes from source to destination are created 
 
