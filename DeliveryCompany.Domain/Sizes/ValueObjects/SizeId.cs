@@ -6,7 +6,7 @@ public sealed class SizeId : ValueObject
 {
     public Guid Value { get; }
 
-    private SizeId(Guid value)
+    public SizeId(Guid value)
     {
         Value = value;
     }

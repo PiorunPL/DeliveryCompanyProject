@@ -3,6 +3,12 @@ using DeliveryCompany.Application.Interfaces.InServices.Authentication;
 using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Infrastructure.Authentication;
 using DeliveryCompany.Infrastructure.Persistence;
+using DeliveryCompany.Infrastructure.Persistence.ClientOrders;
+using DeliveryCompany.Infrastructure.Persistence.ClientOrders.Implementations;
+using DeliveryCompany.Infrastructure.Persistence.ClientOrders.Interfaces;
+using DeliveryCompany.Infrastructure.Persistence.Facilities;
+using DeliveryCompany.Infrastructure.Persistence.Facilities.Implementation;
+using DeliveryCompany.Infrastructure.Persistence.Facilities.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,9 +25,17 @@ public static class DependencyInjection
         services.AddAuth(configuration);
 
         services.AddScoped<IClientRepository, ClientListRepository>();
-        services.AddScoped<IAdministratorRepository, AdministratorListRepository>();
         services.AddScoped<ICourierRepository, CourierListRepository>();
-        services.AddScoped<IClientOrderRepository, ClientOrderListRepository>();
+        services.AddScoped<IAdministratorRepository, AdministratorListRepository>();
+        // services.AddScoped<IClientOrderRepository, ClientOrderListRepository>();
+        
+        services.AddScoped<IFacilityRepository, FacilityRepository>();
+        services.AddScoped<IFacilities, FacilitiesList>();
+        services.AddScoped<IAssignment, AssignmentList>();
+
+        services.AddScoped<IClientOrderRepository, ClientOrderRepository>();
+        services.AddScoped<IClientOrders, ClientOrdersList>();
+        services.AddScoped<ICourierOrders, CourierOrdersList>();
 
         return services;
     }

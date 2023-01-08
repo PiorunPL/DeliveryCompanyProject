@@ -1,6 +1,6 @@
 using DeliveryCompany.Domain.Common.Models;
 using DeliveryCompany.Domain.Common.ValueObjects;
-using DeliveryCompany.Domain.Orders.Enitities;
+using DeliveryCompany.Domain.Orders.Entities;
 using DeliveryCompany.Domain.Orders.ValueObjects;
 using DeliveryCompany.Domain.Sizes.ValueObjects;
 
@@ -9,8 +9,8 @@ namespace DeliveryCompany.Domain.Orders;
 public sealed class ClientOrder : Entity<ClientOrderId>
 {
     public PersonId ClientId { get; set; }
-    public DateTime DateSent { get; set; }
-    public DateTime DateDelivered { get; set; }
+    public DateTime DateOfExpectedSent { get; set; }
+    public DateTime DateOfExpectedDelivery { get; set; }
     public string AddressSent { get; set; }
     public string AddressDelivery { get; set; }
     public string Name { get; set; }
@@ -18,11 +18,11 @@ public sealed class ClientOrder : Entity<ClientOrderId>
     public ClientOrderStatus Status { get; set; }
     public List<CourierOrder> CourierOrders = new List<CourierOrder>();
 
-    private ClientOrder(
+    public ClientOrder(
         ClientOrderId orderId,
         PersonId clientId,
-        DateTime dateSent,
-        DateTime dateDelivered,
+        DateTime dateOfExpectedSent,
+        DateTime dateOfExpectedDelivery,
         string addressSent,
         string addressDelivery,
         string name,
@@ -30,8 +30,8 @@ public sealed class ClientOrder : Entity<ClientOrderId>
         ClientOrderStatus status) : base(orderId)
     {
         ClientId = clientId;
-        DateSent = dateSent;
-        DateDelivered = dateDelivered;
+        DateOfExpectedSent = dateOfExpectedSent;
+        DateOfExpectedDelivery = dateOfExpectedDelivery;
         AddressSent = addressSent;
         AddressDelivery = addressDelivery;
         Name = setCorrectName(name, orderId);
@@ -81,8 +81,8 @@ public sealed class ClientOrder : Entity<ClientOrderId>
         string log = "Client order created:";
         log += $"\n\tOrder ID: {Id.Value.ToString()}";
         log += $"\n\tClient ID: {ClientId.Value.ToString()}";
-        log += $"\n\tDate of Send: {DateSent.ToString()}";
-        log += $"\n\tDate of delivery: {DateDelivered.ToString()}";
+        log += $"\n\tDate of Send: {DateOfExpectedSent.ToString()}";
+        log += $"\n\tDate of delivery: {DateOfExpectedDelivery.ToString()}";
         log += $"\n\tAddress of send: {AddressSent}";
         log += $"\n\tAddress of delivery: {AddressDelivery}";
         log += $"\n\tName: {Name}";
