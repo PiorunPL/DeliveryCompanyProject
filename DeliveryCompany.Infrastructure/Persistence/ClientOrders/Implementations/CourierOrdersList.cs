@@ -39,14 +39,14 @@ public class CourierOrdersList : ICourierOrders
         return courierOrders;
     }
 
-    public CourierOrder? GetByCourierOrderId(CourierOrderId courierOrderId)
+    public (CourierOrder?, ClientOrderId?) GetByCourierOrderId(CourierOrderId courierOrderId)
     {
         CourierOrderDto? dto = _courierOrdersDb.FirstOrDefault();
         if (dto is null)
-            return null;
+            return (null, null);
 
         CourierOrder order = MapFromDto(dto);
-        return order;
+        return (order, new ClientOrderId(Guid.Parse(dto.ClientOrderId)));
     }
 
     private CourierOrderDto MapToDto(CourierOrder courierOrder, ClientOrder clientOrder)

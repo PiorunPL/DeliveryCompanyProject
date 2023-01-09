@@ -2,11 +2,8 @@ namespace DeliveryCompany.Application.Interfaces.OutServices.CourierOrders.Admin
 
 public interface IAdministratorManage
 {
-    public void Create();
-    public void Cancel();
-    public void Get();
-    public void GetAll();
-    public void GetAllExceptCancelled();
-    public void GetMissing();   //Mostly Optional
-    public void GetMissingForClientOrder(); //Mostly Optional
+    public Results.OrderResult Create(Requests.CreateOrderRequest request);
+    public Results.OrderResult Cancel(Requests.OrderRequest request);
+    public Results.OrderResult Get(Requests.OrderRequest request);
+    public Results.OrderListResult GetMissingForClientOrder(Requests.ClientOrderRequest request); //Mostly Optional
 }

@@ -2,10 +2,10 @@ namespace DeliveryCompany.Application.Interfaces.OutServices.CourierOrders.Couri
 
 public interface ICourierManage
 {
-    public void GetAvailableForFacility();
-    public void GetAllByCourier();
-    public void Accept();
-    public void Resign();
-    public void PickUpPackage();
-    public void SetAsDelivered();
+    public Results.OrderListResult GetAvailableForFacility(Requests.FacilityRequest request);
+    public Results.OrderListResult GetAllByCourier(Requests.CourierRequest request);
+    public Results.OrderResult Accept(Requests.OrderRequest request);
+    public Results.OrderResult Resign(Requests.OrderRequest request);
+    public Results.OrderResult PickUpPackage(Requests.OrderRequest request);
+    public Results.OrderResult SetAsDelivered(Requests.OrderRequest request);
 }

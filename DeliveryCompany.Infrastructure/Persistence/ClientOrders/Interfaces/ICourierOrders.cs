@@ -8,5 +8,5 @@ public interface ICourierOrders
 {
     public void Update(ClientOrder clientOrder);
     public List<CourierOrder> GetByClientOrderId(ClientOrderId clientOrderId);
-    public CourierOrder? GetByCourierOrderId(CourierOrderId courierOrderId);
+    public (CourierOrder?, ClientOrderId?) GetByCourierOrderId(CourierOrderId courierOrderId);
 }

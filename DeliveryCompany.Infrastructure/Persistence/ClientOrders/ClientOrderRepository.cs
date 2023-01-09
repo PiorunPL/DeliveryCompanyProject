@@ -77,4 +77,15 @@ public class ClientOrderRepository : IClientOrderRepository
 
         return clientOrders;
     }
+
+    public ClientOrder? GetByCourierOrderId(CourierOrderId id)
+    {
+        (CourierOrder? courierOrder, ClientOrderId? clientOrderId) = _courierOrders.GetByCourierOrderId(id);
+
+        if (courierOrder is null || clientOrderId is null)
+            return null;
+        
+        ClientOrder? clientOrder = GetClientOrderById(clientOrderId);
+        return clientOrder;
+    }
 }

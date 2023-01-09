@@ -16,37 +16,40 @@ public sealed class CourierOrder : Entity<CourierOrderId>
 
     public CourierOrder(
         CourierOrderId courierOrderId,
-        DateTime? dateSent,
-        DateTime? dateDelivered,
         FacilityId? facilitySentId,
         FacilityId? facilityDeliveryId,
-        CourierOrderStatus status,
-        PersonId? courierId
+        CourierOrderStatus status
     ) : base(courierOrderId)
+    {
+        DateSent = null;
+        DateDelivered = null;
+        FacilitySentId = facilitySentId;
+        FacilityDeliveryId = facilityDeliveryId;
+        Status = status;
+        CourierId = null;
+    }
+
+    public CourierOrder(CourierOrderId courierOrderId, DateTime? dateSent, DateTime? dateDelivered,
+ FacilityId? facilitySentId, FacilityId? facilityDeliveredId, CourierOrderStatus status,
+ PersonId? courierId) : base(courierOrderId)
     {
         DateSent = dateSent;
         DateDelivered = dateDelivered;
         FacilitySentId = facilitySentId;
-        FacilityDeliveryId = facilityDeliveryId;
+        FacilityDeliveryId = facilityDeliveredId;
         Status = status;
         CourierId = courierId;
     }
 
     public static CourierOrder Create(
-        DateTime? dateSent,
-        DateTime? dateDelivered,
         FacilityId? facilitySentId,
-        FacilityId? facilityDeliveryId,
-        PersonId? courierId)
+        FacilityId? facilityDeliveryId)
     {
         return new(
             CourierOrderId.CreateUnique(),
-            dateSent,
-            dateDelivered,
             facilitySentId,
             facilityDeliveryId,
-            CourierOrderStatus.Hidden,
-            courierId
+            CourierOrderStatus.Hidden
         );
     }
 

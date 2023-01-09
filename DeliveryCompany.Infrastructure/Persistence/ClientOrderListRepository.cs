@@ -40,4 +40,9 @@ public class ClientOrderListRepository : IClientOrderRepository
     {
         return _clientOrders.ToList();
     }
+
+    public ClientOrder? GetByCourierOrderId(CourierOrderId id)
+    {
+        throw new NotImplementedException();
+    }
 }
