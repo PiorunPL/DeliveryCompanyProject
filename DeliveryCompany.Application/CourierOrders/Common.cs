@@ -24,7 +24,7 @@ public class Common
         List<CourierOrder> cancelledCourierOrders = ListCancelledCourierOrders(courierOrdersList);
 
         List<CourierOrder> sortedCourierOrders = filteredCourierOrders.ToList();
-        
+
         if (sortedCourierOrders[0].FacilitySentId is not null)
         {
             CourierOrder? fromSource = sortedCourierOrders.Find(order => order.FacilitySentId is null);
@@ -54,9 +54,9 @@ public class Common
 
             destination = order.FacilityDeliveryId;
         }
-        
+
         sortedCourierOrders.AddRange(cancelledCourierOrders);
-        
+
         return sortedCourierOrders;
     }
 
@@ -73,6 +73,45 @@ public class Common
 
     public bool CheckIfRouteIsCorrect(List<CourierOrder> courierOrders)
     {
-        throw new NotImplementedException();
+        List<CourierOrder> filteredOrders =
+            courierOrders.FindAll(order => !order.Status.Equals(CourierOrderStatus.Cancelled));
+
+        List<CourierOrder> missingBothFacilities =
+            filteredOrders.FindAll(order => order.FacilitySentId is null && order.FacilityDeliveryId is null);
+        if (missingBothFacilities.Count != 0)
+            return false;
+
+        List<CourierOrder> sources =
+            filteredOrders.FindAll(order => order.FacilitySentId is null && order.FacilityDeliveryId is not null);
+        if (sources.Count != 1)
+            return false;
+
+        List<CourierOrder> destinations =
+            filteredOrders.FindAll(order => order.FacilityDeliveryId is null && order.FacilitySentId is not null);
+        if (destinations.Count != 1)
+            return false;
+
+        CourierOrder source = sources[0];
+        CourierOrder destination = destinations[0];
+        List<CourierOrder> listOfFlow = new List<CourierOrder>();
+
+        CourierOrder node = source;
+
+        while (!node.Equals(destination))
+        {
+            listOfFlow.Add(node);
+            FacilityId? partDestination = node.FacilityDeliveryId!;
+            List<CourierOrder> foundOrders =
+                filteredOrders.FindAll(order =>
+                    partDestination == order.FacilitySentId!);
+            if (foundOrders.Count != 1)
+                return false;
+            node = foundOrders[0];
+        }
+
+        if (listOfFlow.Count != filteredOrders.Count)
+            return false;
+
+        return true;
     }
 }
