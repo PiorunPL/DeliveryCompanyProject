@@ -26,17 +26,18 @@ public class AdministratorManage : IAdministratorManage
 
         if (request.FacilitySentId == Guid.Empty && request.FacilityDeliveryId == Guid.Empty)
             throw new ArgumentException("At least one of facilities needs to be specified!");
-        
+
         CourierOrder courierOrder = CourierOrder.Create(
             new FacilityId(request.FacilitySentId),
             new FacilityId(request.FacilityDeliveryId));
-        
+
         clientOrder.CourierOrders.Add(courierOrder);
         
-        // TODO: Check if CourierOrders are connected 
-        
-        // TODO: Add sorting courier orders
-        
+        bool isValid = Common.CheckIfRouteIsCorrect(clientOrder.CourierOrders);
+
+        if (isValid)
+            clientOrder.CourierOrders = Common.SortCourierOrdersActiveFirst(clientOrder.CourierOrders);
+
         _clientOrderRepository.Update(clientOrder);
 
         return new OrderResult(courierOrder);
@@ -44,15 +45,17 @@ public class AdministratorManage : IAdministratorManage
 
     public OrderResult Cancel(OrderRequest request)
     {
-        ClientOrder? clientOrder = _clientOrderRepository.GetByCourierOrderId(new CourierOrderId(request.CourierOrderId));
+        ClientOrder? clientOrder =
+            _clientOrderRepository.GetByCourierOrderId(new CourierOrderId(request.CourierOrderId));
         if (clientOrder is null)
             throw new ArgumentException("There is no client order associated with Courier order with given ID");
 
         if (!(clientOrder.Status.Equals(ClientOrderStatus.Cancelled) ||
               clientOrder.Status.Equals(ClientOrderStatus.Delivered)))
             throw new ArgumentException("Client order has already been completed");
-        
-        CourierOrder? courierOrder = clientOrder.CourierOrders.FirstOrDefault(order => order.Id.Value.Equals(request.CourierOrderId));
+
+        CourierOrder? courierOrder =
+            clientOrder.CourierOrders.FirstOrDefault(order => order.Id.Value.Equals(request.CourierOrderId));
         if (courierOrder is null)
             throw new ArgumentException("There is no courier order with given ID");
 
@@ -62,18 +65,20 @@ public class AdministratorManage : IAdministratorManage
 
         courierOrder.Status = CourierOrderStatus.Cancelled;
         clientOrder.Status = ClientOrderStatus.Accepted; // This status requires from Administrator fixing route
-        
+
         _clientOrderRepository.Update(clientOrder);
         return new OrderResult(courierOrder);
     }
 
     public OrderResult Get(OrderRequest request)
     {
-        ClientOrder? clientOrder = _clientOrderRepository.GetByCourierOrderId(new CourierOrderId(request.CourierOrderId));
+        ClientOrder? clientOrder =
+            _clientOrderRepository.GetByCourierOrderId(new CourierOrderId(request.CourierOrderId));
         if (clientOrder is null)
             throw new ArgumentException("There is no client order associated with Courier order with given ID");
-        
-        CourierOrder? courierOrder = clientOrder.CourierOrders.FirstOrDefault(order => order.Id.Value.Equals(request.CourierOrderId));
+
+        CourierOrder? courierOrder =
+            clientOrder.CourierOrders.FirstOrDefault(order => order.Id.Value.Equals(request.CourierOrderId));
         if (courierOrder is null)
             throw new ArgumentException("There is no courier order with given ID");
 

@@ -1,10 +1,11 @@
 using DeliveryCompany.Domain.Facilities.ValueObjects;
+using DeliveryCompany.Domain.Orders;
 using DeliveryCompany.Domain.Orders.Entities;
 using DeliveryCompany.Domain.Orders.ValueObjects;
 
 namespace DeliveryCompany.Application.CourierOrders;
 
-public class Common
+public static class Common
 {
     // How it works? 
     // Divides given list into cancelled orders and other orders.
@@ -12,7 +13,7 @@ public class Common
     // Next it starts sorting other orders, beginning with empty starting facility
     // Next it follows destination with sources
     // When that step has ended, cancelled orders are added at the end of list (no specified order)
-    public List<CourierOrder> SortCourierOrdersActiveFirst(List<CourierOrder> courierOrdersList)
+    public static List<CourierOrder> SortCourierOrdersActiveFirst(List<CourierOrder> courierOrdersList)
     {
         if (courierOrdersList.Count == 0)
             return courierOrdersList;
@@ -60,18 +61,18 @@ public class Common
         return sortedCourierOrders;
     }
 
-    public List<CourierOrder> ListWithoutCancelledCourierOrders(List<CourierOrder> courierOrders)
+    public static List<CourierOrder> ListWithoutCancelledCourierOrders(List<CourierOrder> courierOrders)
     {
         List<CourierOrder> list = courierOrders.FindAll(order => order.Status != CourierOrderStatus.Cancelled);
         return list;
     }
 
-    public List<CourierOrder> ListCancelledCourierOrders(List<CourierOrder> courierOrders)
+    public static List<CourierOrder> ListCancelledCourierOrders(List<CourierOrder> courierOrders)
     {
         return courierOrders.FindAll(order => order.Status == CourierOrderStatus.Cancelled);
     }
 
-    public bool CheckIfRouteIsCorrect(List<CourierOrder> courierOrders)
+    public static bool CheckIfRouteIsCorrect(List<CourierOrder> courierOrders)
     {
         List<CourierOrder> filteredOrders =
             courierOrders.FindAll(order => !order.Status.Equals(CourierOrderStatus.Cancelled));
@@ -113,5 +114,34 @@ public class Common
             return false;
 
         return true;
+    }
+
+    public static CourierOrder? GetActiveCourierOrderByResponsibleFacility(ClientOrder clientOrder, FacilityId responsibleFacility)
+    {
+        CourierOrder? courierOrder =
+            clientOrder.CourierOrders.FirstOrDefault(order => order.Status.Equals(CourierOrderStatus.Free));
+        if (courierOrder is null)
+            return null;
+        if (courierOrder.FacilityDeliveryId is not null && courierOrder.FacilitySentId is null &&
+            courierOrder.FacilityDeliveryId.Equals(responsibleFacility))
+            return courierOrder;
+        if (courierOrder.FacilityDeliveryId is null && courierOrder.FacilitySentId is not null &&
+            courierOrder.FacilitySentId.Equals(responsibleFacility))
+            return courierOrder;
+        return null;
+    }
+
+    public static CourierOrder? GetNextCourierOrder(ClientOrder clientOrder, CourierOrder courierOrder)
+    {
+        FacilityId? nextFacilityId = courierOrder.FacilityDeliveryId;
+        if (nextFacilityId is null)
+            return null;
+
+        CourierOrder? foundOrder = clientOrder.CourierOrders.Find(order =>
+            order.FacilitySentId is not null && order.FacilitySentId.Equals(nextFacilityId));
+        if (foundOrder is null)
+            return null;
+
+        return foundOrder;
     }
 }
