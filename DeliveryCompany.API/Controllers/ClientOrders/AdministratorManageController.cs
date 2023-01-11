@@ -1,8 +1,6 @@
-using DeliveryCompany.API.Common;
 using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrators;
 using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrators.Results;
 using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrators.Requests;
-using DeliveryCompany.Contracts.ClientOrders.Clients.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +8,7 @@ namespace DeliveryCompany.API.Controllers.ClientOrders;
 
 [ApiController]
 [Authorize(Roles = "Administrator")]
-[Route("manageclientorder/administrator")]
+[Route("manageClientOrder/administrator")]
 public class AdministratorManageController : ControllerBase
 {
     private readonly IAdministratorManage _manageClientOrders;

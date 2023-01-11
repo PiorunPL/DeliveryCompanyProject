@@ -15,7 +15,7 @@ namespace DeliveryCompany.API.Controllers.ClientOrders;
 
 [ApiController]
 [Authorize(Roles = "Client")]
-[Route("manageclientorder/client")]
+[Route("manageClientOrder/client")]
 public class ClientManageController : ControllerBase
 {
     private readonly IMapper _mapper;

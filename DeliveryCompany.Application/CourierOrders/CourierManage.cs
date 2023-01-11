@@ -4,6 +4,7 @@ using DeliveryCompany.Application.Interfaces.OutServices.CourierOrders.Couriers.
 using DeliveryCompany.Application.Interfaces.OutServices.CourierOrders.Couriers.Results;
 using DeliveryCompany.Domain.Common.ValueObjects;
 using DeliveryCompany.Domain.Couriers;
+using DeliveryCompany.Domain.Facilities;
 using DeliveryCompany.Domain.Facilities.ValueObjects;
 using DeliveryCompany.Domain.Orders;
 using DeliveryCompany.Domain.Orders.Entities;
@@ -15,15 +16,27 @@ public class CourierManage : ICourierManage
 {
     private readonly IClientOrderRepository _clientOrderRepository;
     private readonly ICourierRepository _courierRepository;
+    private readonly IFacilityRepository _facilityRepository;
 
-    public CourierManage(IClientOrderRepository clientOrderRepository, ICourierRepository courierRepository)
+    public CourierManage(IClientOrderRepository clientOrderRepository, ICourierRepository courierRepository, IFacilityRepository facilityRepository)
     {
         _clientOrderRepository = clientOrderRepository;
         _courierRepository = courierRepository;
+        _facilityRepository = facilityRepository;
     }
 
-    public OrderListResult GetAvailableForFacility(FacilityRequest request)
+    public OrderListResult GetAvailableForCourier(CourierRequest request)
     {
+        Courier? courier = _courierRepository.GetCourierById(request.CourierId);
+        if (courier is null)
+            throw new ArgumentException("There is no courier with given ID");
+        
+        Facility? facility = _facilityRepository.GetByCourierId(request.CourierId);
+        if (facility is null)
+            throw new ArgumentException("Courier is not associated with any Facility");
+        if (facility.Status.Equals(FacilityStatus.Closed))
+            throw new ArgumentException("Facility associated with Courier is Closed!");
+
         List<ClientOrder> clientOrdersInProgress =
             _clientOrderRepository.GetAllClientOrdersWithGivenStatus(ClientOrderStatus.InProgress);
 
@@ -32,7 +45,7 @@ public class CourierManage : ICourierManage
         foreach (ClientOrder clientOrder in clientOrdersInProgress)
         {
             CourierOrder? foundOrder =
-                Common.GetActiveCourierOrderByResponsibleFacility(clientOrder, new FacilityId(request.FacilityId));
+                Common.GetActiveCourierOrderByResponsibleFacility(clientOrder, facility.Id);
             if (foundOrder is not null)
                 courierOrders.Add(foundOrder);
         }
