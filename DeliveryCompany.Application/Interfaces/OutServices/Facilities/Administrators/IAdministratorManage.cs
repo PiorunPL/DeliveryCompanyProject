@@ -8,6 +8,6 @@ public interface IAdministratorManage
     public Results.FacilityResult CloseFacility(Requests.FacilityRequest request);
     public Results.FacilityResult OpenFacility(Requests.FacilityRequest request);
     public Results.FacilityResult GetFacility(Requests.FacilityRequest request);
-    public Results.FacilitiesResult GetAllFacilities();
+    public Results.FacilityListResult GetAllFacilities();
 
 }

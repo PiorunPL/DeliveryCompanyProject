@@ -145,9 +145,9 @@ public class AdministratorManage : IAdministratorManage
         return new FacilityResult(facility);
     }
 
-    public FacilitiesResult GetAllFacilities()
+    public FacilityListResult GetAllFacilities()
     {
         //1. Return all facilities
-        return new FacilitiesResult(_facilityRepository.GetFacilities());
+        return new FacilityListResult(_facilityRepository.GetFacilities());
     }
 }

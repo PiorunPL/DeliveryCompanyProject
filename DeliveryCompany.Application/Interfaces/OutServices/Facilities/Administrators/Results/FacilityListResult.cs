@@ -2,5 +2,5 @@ using DeliveryCompany.Domain.Facilities;
 
 namespace DeliveryCompany.Application.Interfaces.OutServices.Facilities.Administrators.Results;
 
-public record FacilitiesResult(
+public record FacilityListResult(
     List<Facility> Facilities);
