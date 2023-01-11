@@ -23,4 +23,9 @@
     <ProjectReference Include="..\DeliveryCompany.Infrastructure\DeliveryCompany.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Mapping" />
+    <Folder Include="Controllers\CourierOrders" />
+  </ItemGroup>
+
 </Project>

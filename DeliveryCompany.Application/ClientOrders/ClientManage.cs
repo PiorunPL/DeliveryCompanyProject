@@ -1,7 +1,7 @@
 using DeliveryCompany.Application.Interfaces.InServices.Persistence;
-using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Client;
-using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Client.Requests;
-using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Client.Results;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Clients;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Clients.Requests;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Clients.Results;
 using DeliveryCompany.Domain.Common.ValueObjects;
 using DeliveryCompany.Domain.Orders;
 using DeliveryCompany.Domain.Orders.ValueObjects;
@@ -42,6 +42,11 @@ public class ClientManage : IClientManage
         return new ClientOrderResult(order);
     }
 
+    public Task<ClientOrderResult> CreateNewClientOrderAsync(CreateRequest request)
+    {
+        return Task.Run((() => CreateNewClientOrder(request)));
+    }
+    
     public ClientOrderResult CreateNewClientOrder(CreateRequest request)
     {
         //TODO: ValidateData 

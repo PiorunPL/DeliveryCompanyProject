@@ -1,8 +1,12 @@
 using System.Security.Claims;
-using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Client;
-using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Client.Requests;
-using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Client.Results;
+using DeliveryCompany.API.Common;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Clients;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Clients.Requests;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Clients.Results;
 using DeliveryCompany.Contracts.ClientOrders;
+using DeliveryCompany.Contracts.ClientOrders.Clients;
+using DeliveryCompany.Contracts.ClientOrders.Clients.Requests;
+using DeliveryCompany.Contracts.ClientOrders.Clients.Responses;
 using MapsterMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,10 +30,10 @@ public class ClientManageController : ControllerBase
     [HttpPost("create")]
     public async Task<IActionResult> CreateNewOrder(ClientOrderCreateApiRequest apiRequest)
     {
-        Guid clientId = GetClientGuid();
+        Guid clientId = CommonMethods.GetPersonsGuid(this.HttpContext);
 
         var request = _mapper.Map<CreateRequest>((apiRequest, clientId));
-        ClientOrderResult result = _manageClientOrders.CreateNewClientOrder(request);
+        ClientOrderResult result = await _manageClientOrders.CreateNewClientOrderAsync(request);
 
         return Ok(_mapper.Map<ClientOrderAPIClientResponse>(result));
     }
@@ -37,10 +41,10 @@ public class ClientManageController : ControllerBase
     [HttpPost("cancel")]
     public async Task<IActionResult> CancelOrder(ClientOrderCancelApiRequest apiRequest)
     {
-        Guid clientId = GetClientGuid();
+        Guid clientId = CommonMethods.GetPersonsGuid(this.HttpContext);
 
         var request = _mapper.Map<CancelRequest>((apiRequest, clientId));
-        ClientOrderResult result = _manageClientOrders.CancelClientOrder(request);
+        ClientOrderResult result = await Task.Run(() => _manageClientOrders.CancelClientOrder(request));
 
         return Ok(_mapper.Map<ClientOrderAPIClientResponse>(result));
     }
@@ -48,20 +52,20 @@ public class ClientManageController : ControllerBase
     [HttpPost("get")]
     public async Task<IActionResult> GetOrder(ClientOrderClientGetApiRequest apiRequest)
     {
-        Guid clientId = GetClientGuid();
+        Guid clientId = CommonMethods.GetPersonsGuid(this.HttpContext);
 
         var request = _mapper.Map<GetRequest>((apiRequest, clientId));
-        ClientOrderResult result = _manageClientOrders.GetOrder(request);
+        ClientOrderResult result = await Task.Run((() => _manageClientOrders.GetOrder(request)));
 
         return Ok(_mapper.Map<ClientOrderAPIClientResponse>(result));
     }
 
-    [HttpGet("getall")]
+    [HttpGet("get-all")]
     public async Task<IActionResult> GetAllOrders()
     {
-        Guid clientId = GetClientGuid();
+        Guid clientId = CommonMethods.GetPersonsGuid(this.HttpContext);
 
-        GetAllResult result = _manageClientOrders.GetOrders(clientId);
+        GetAllResult result = await Task.Run((() => _manageClientOrders.GetOrders(clientId)));
 
         var target = Map(result); //TODO: Good to Change Map method to Mapster Invocation
 
@@ -69,22 +73,12 @@ public class ClientManageController : ControllerBase
         // return Ok(_mapper.Map<ClientGetAllApiResponse>(result));
     }
 
-    private Guid GetClientGuid()
-    {
-        var clientStringId = string.Empty;
-        clientStringId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-        if (clientStringId is null)
-            throw new ArgumentException("Given Client ID does not exist");
-
-        return new Guid(clientStringId);
-
-    }
+    
 
     private ClientGetAllApiResponse Map(GetAllResult result)
     {
         var response = new ClientGetAllApiResponse(new List<ClientOrderDTO>());
-        
+
         foreach (var item in result.Orders)
         {
             var dto = new ClientOrderDTO(

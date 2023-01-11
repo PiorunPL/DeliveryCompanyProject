@@ -1,6 +1,6 @@
-using DeliveryCompany.Application.Interfaces.OutServices.Couriers.Administrator;
-using DeliveryCompany.Application.Interfaces.OutServices.Couriers.Administrator.Requests;
-using DeliveryCompany.Application.Interfaces.OutServices.Couriers.Administrator.Results;
+using DeliveryCompany.Application.Interfaces.OutServices.Couriers.Administrators;
+using DeliveryCompany.Application.Interfaces.OutServices.Couriers.Administrators.Requests;
+using DeliveryCompany.Application.Interfaces.OutServices.Couriers.Administrators.Results;
 
 namespace DeliveryCompany.Application.Couriers;
 

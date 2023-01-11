@@ -1,7 +1,7 @@
 using DeliveryCompany.Application.Interfaces.InServices.Persistence;
-using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrator;
-using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrator.Requests;
-using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrator.Results;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrators;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrators.Requests;
+using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Administrators.Results;
 using DeliveryCompany.Domain.Orders;
 using DeliveryCompany.Domain.Orders.ValueObjects;
 using Microsoft.Extensions.Logging;
@@ -70,8 +70,10 @@ public class AdministratorManage : IAdministratorManage
     {
         // TODO: Log getting Active ClientOrders
         List<ClientOrder> ordersNew = _clientOrderRepository.GetAllClientOrdersWithGivenStatus(ClientOrderStatus.New);
-        List<ClientOrder> ordersAccepted = _clientOrderRepository.GetAllClientOrdersWithGivenStatus(ClientOrderStatus.Accepted);
-        List<ClientOrder> ordersInProgress = _clientOrderRepository.GetAllClientOrdersWithGivenStatus(ClientOrderStatus.InProgress);
+        List<ClientOrder> ordersAccepted =
+            _clientOrderRepository.GetAllClientOrdersWithGivenStatus(ClientOrderStatus.Accepted);
+        List<ClientOrder> ordersInProgress =
+            _clientOrderRepository.GetAllClientOrdersWithGivenStatus(ClientOrderStatus.InProgress);
         List<ClientOrder> activeOrders = ordersAccepted
             .Concat(ordersNew)
             .Concat(ordersInProgress)

@@ -1,7 +1,7 @@
 using DeliveryCompany.Application.Interfaces.InServices.Persistence;
-using DeliveryCompany.Application.Interfaces.OutServices.CourierOrders.Courier;
-using DeliveryCompany.Application.Interfaces.OutServices.CourierOrders.Courier.Requests;
-using DeliveryCompany.Application.Interfaces.OutServices.CourierOrders.Courier.Results;
+using DeliveryCompany.Application.Interfaces.OutServices.CourierOrders.Couriers;
+using DeliveryCompany.Application.Interfaces.OutServices.CourierOrders.Couriers.Requests;
+using DeliveryCompany.Application.Interfaces.OutServices.CourierOrders.Couriers.Results;
 using DeliveryCompany.Domain.Common.ValueObjects;
 using DeliveryCompany.Domain.Couriers;
 using DeliveryCompany.Domain.Facilities.ValueObjects;
