@@ -11,7 +11,7 @@ public class SizeListRepository : ISizeRepository
     public void Add(Size size)
     {
         SizeDto? found = _sizesDb.Find(dto => dto.Id.Equals(size.Id.Value.ToString()));
-        if (found is not null)
+        if (found is null)
             return;
         SizeDto dto = MapToDto(size);
         _sizesDb.Add(dto);
