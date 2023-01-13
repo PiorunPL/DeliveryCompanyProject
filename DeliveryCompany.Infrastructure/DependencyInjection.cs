@@ -24,22 +24,38 @@ public static class DependencyInjection
     {
         services.AddAuth(configuration);
 
+        services.AddRepositories();
+
+        return services;
+    }
+
+    public static IServiceCollection AddRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<IFacilityRepository, FacilityRepository>();
+        services.AddScoped<IClientOrderRepository, ClientOrderRepository>();
+
+        services.ListRepositories();
+        //DataBaseRepositories();
+
+        return services;
+    }
+    public static IServiceCollection ListRepositories(this IServiceCollection services)
+    {
         services.AddScoped<IClientRepository, ClientListRepository>();
         services.AddScoped<ICourierRepository, CourierListRepository>();
         services.AddScoped<IAdministratorRepository, AdministratorListRepository>();
-        // services.AddScoped<IClientOrderRepository, ClientOrderListRepository>();
         
-        services.AddScoped<IFacilityRepository, FacilityRepository>();
+        services.AddScoped<ISizeRepository, SizeListRepository>();
+        
         services.AddScoped<IFacilities, FacilitiesList>();
         services.AddScoped<IAssignment, AssignmentList>();
-
-        services.AddScoped<IClientOrderRepository, ClientOrderRepository>();
+        
         services.AddScoped<IClientOrders, ClientOrdersList>();
         services.AddScoped<ICourierOrders, CourierOrdersList>();
 
         return services;
     }
-
+    
     public static IServiceCollection AddAuth(
         this IServiceCollection services,
         ConfigurationManager configuration

@@ -4,7 +4,7 @@ public record ClientOrderCreateApiRequest(
     string AddressSent,
     string AddressDelivery,
     string Name,
-    string SizeName,
+    Guid SizeId,
     DateTime DateSent,
     DateTime DateDelivery
     // ,Guid ClientId

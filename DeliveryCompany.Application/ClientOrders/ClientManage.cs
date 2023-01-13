@@ -13,12 +13,14 @@ namespace DeliveryCompany.Application.ClientOrders;
 public class ClientManage : IClientManage
 {
     private readonly IClientOrderRepository _clientOrderRepository;
+    private readonly ISizeRepository _sizeRepository;
     private readonly ILogger<ClientManage> _logger;
 
-    public ClientManage(IClientOrderRepository clientOrderRepository, ILogger<ClientManage> logger)
+    public ClientManage(IClientOrderRepository clientOrderRepository, ILogger<ClientManage> logger, ISizeRepository sizeRepository)
     {
         _clientOrderRepository = clientOrderRepository;
         _logger = logger;
+        _sizeRepository = sizeRepository;
     }
 
     public ClientOrderResult CancelClientOrder(CancelRequest request)
@@ -55,7 +57,7 @@ public class ClientManage : IClientManage
         string name = request.Name.Equals("") ? request.ClientId.ToString() : request.Name;
 
         //TODO: Log Getting Size
-        Size? size = Sizes.ManageSizes.GetSizeFromName(request.SizeName);
+        Size? size = _sizeRepository.GetById(request.SizeId);
 
         if(size is null){
             //TODO: Log Size invalid

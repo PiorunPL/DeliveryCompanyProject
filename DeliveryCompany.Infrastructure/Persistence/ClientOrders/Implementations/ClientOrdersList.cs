@@ -12,6 +12,9 @@ public class ClientOrdersList : IClientOrders
 
     public void Add(ClientOrder clientOrder)
     {
+        ClientOrderDto? found = _clientOrdersDb.Find(dto => dto.OrderId.Equals(clientOrder.Id.Value.ToString()));
+        if (found is not null)
+            return;
         ClientOrderDto dto = MapToDto(clientOrder);
         _clientOrdersDb.Add(dto);
     }

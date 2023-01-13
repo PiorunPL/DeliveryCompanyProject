@@ -2,7 +2,7 @@ namespace DeliveryCompany.Application.Interfaces.OutServices.Couriers.Administra
 
 public interface IAdministratorManage
 {
-    public Results.CouriersResult GetUnassignedCouriers();
-    public Results.CouriersResult GetCouriers();
+    public Results.CourierListResult GetUnassignedCouriers();
+    public Results.CourierListResult GetCouriers();
     public Results.CourierResult GetCourier(Requests.CourierRequest request);
 }

@@ -10,7 +10,7 @@ public sealed class Size : Entity<SizeId>
     public double Price { get; set; }
     //TODO: Add maxiumum size dimensions (x,y,z)
 
-    private Size(
+    public Size(
         SizeId id,
         string name,
         double price

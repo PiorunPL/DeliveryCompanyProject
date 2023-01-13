@@ -6,14 +6,14 @@ namespace DeliveryCompany.Application.Couriers;
 
 public class AdministratorManage : IAdministratorManage
 {
-    public CouriersResult GetUnassignedCouriers()
+    public CourierListResult GetUnassignedCouriers()
     {
         // 1. Get all Couriers
         // 2. Filter only unassigned
         throw new NotImplementedException();
     }
 
-    public CouriersResult GetCouriers()
+    public CourierListResult GetCouriers()
     {
         // 1. Get all Couriers
         throw new NotImplementedException();

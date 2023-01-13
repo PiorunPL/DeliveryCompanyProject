@@ -2,6 +2,7 @@ using DeliveryCompany.Domain.Sizes;
 
 namespace DeliveryCompany.Application.Sizes;
 
+//TODO: to delete
 public static class ManageSizes{
     public static Size? GetSizeFromName(string name){
         if(SizeCollection.Small.Name.Equals(name)){
