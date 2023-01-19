@@ -31,8 +31,8 @@ public static class DependencyInjection
 
     public static IServiceCollection AddRepositories(this IServiceCollection services)
     {
-        services.AddScoped<IFacilityRepository, FacilityRepository>();
-        services.AddScoped<IClientOrderRepository, ClientOrderRepository>();
+        services.AddSingleton<IFacilityRepository, FacilityRepository>();
+        services.AddSingleton<IClientOrderRepository, ClientOrderRepository>();
 
         services.ListRepositories();
         //DataBaseRepositories();
@@ -41,17 +41,17 @@ public static class DependencyInjection
     }
     public static IServiceCollection ListRepositories(this IServiceCollection services)
     {
-        services.AddScoped<IClientRepository, ClientListRepository>();
-        services.AddScoped<ICourierRepository, CourierListRepository>();
-        services.AddScoped<IAdministratorRepository, AdministratorListRepository>();
+        services.AddSingleton<IClientRepository, ClientListRepository>();
+        services.AddSingleton<ICourierRepository, CourierListRepository>();
+        services.AddSingleton<IAdministratorRepository, AdministratorListRepository>();
         
-        services.AddScoped<ISizeRepository, SizeListRepository>();
+        services.AddSingleton<ISizeRepository, SizeListRepository>();
         
-        services.AddScoped<IFacilities, FacilitiesList>();
-        services.AddScoped<IAssignment, AssignmentList>();
+        services.AddSingleton<IFacilities, FacilitiesList>();
+        services.AddSingleton<IAssignment, AssignmentList>();
         
-        services.AddScoped<IClientOrders, ClientOrdersList>();
-        services.AddScoped<ICourierOrders, CourierOrdersList>();
+        services.AddSingleton<IClientOrders, ClientOrdersList>();
+        services.AddSingleton<ICourierOrders, CourierOrdersList>();
 
         return services;
     }
