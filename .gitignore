@@ -2,3 +2,4 @@
 **/obj/**
 .fake
 **node_modules**
+.idea

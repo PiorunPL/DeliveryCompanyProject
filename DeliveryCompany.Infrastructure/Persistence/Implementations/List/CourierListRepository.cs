@@ -1,7 +1,7 @@
 using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Domain.Couriers;
 
-namespace DeliveryCompany.Infrastructure.Persistence;
+namespace DeliveryCompany.Infrastructure.Persistence.Implementations.List;
 
 public class CourierListRepository : ICourierRepository
 {

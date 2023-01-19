@@ -3,9 +3,9 @@ using DeliveryCompany.Domain.Facilities.ValueObjects;
 using DeliveryCompany.Domain.Orders;
 using DeliveryCompany.Domain.Orders.Entities;
 using DeliveryCompany.Domain.Orders.ValueObjects;
-using DeliveryCompany.Infrastructure.Persistence.ClientOrders.Interfaces;
+using DeliveryCompany.Infrastructure.Persistence.Common.ClientOrders.Interfaces;
 
-namespace DeliveryCompany.Infrastructure.Persistence.ClientOrders.Implementations;
+namespace DeliveryCompany.Infrastructure.Persistence.Implementations.List.ClientOrders;
 
 public class CourierOrdersList : ICourierOrders
 {

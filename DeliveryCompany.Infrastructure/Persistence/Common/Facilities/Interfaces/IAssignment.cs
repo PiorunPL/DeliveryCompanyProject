@@ -1,4 +1,4 @@
-namespace DeliveryCompany.Infrastructure.Persistence.Facilities.Interfaces;
+namespace DeliveryCompany.Infrastructure.Persistence.Common.Facilities.Interfaces;
 
 public interface IAssignment
 {

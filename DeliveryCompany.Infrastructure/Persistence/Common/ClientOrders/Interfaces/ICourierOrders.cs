@@ -2,7 +2,7 @@ using DeliveryCompany.Domain.Orders;
 using DeliveryCompany.Domain.Orders.Entities;
 using DeliveryCompany.Domain.Orders.ValueObjects;
 
-namespace DeliveryCompany.Infrastructure.Persistence.ClientOrders.Interfaces;
+namespace DeliveryCompany.Infrastructure.Persistence.Common.ClientOrders.Interfaces;
 
 public interface ICourierOrders
 {

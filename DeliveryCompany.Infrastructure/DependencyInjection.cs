@@ -2,13 +2,15 @@ using System.Text;
 using DeliveryCompany.Application.Interfaces.InServices.Authentication;
 using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Infrastructure.Authentication;
-using DeliveryCompany.Infrastructure.Persistence;
-using DeliveryCompany.Infrastructure.Persistence.ClientOrders;
-using DeliveryCompany.Infrastructure.Persistence.ClientOrders.Implementations;
-using DeliveryCompany.Infrastructure.Persistence.ClientOrders.Interfaces;
-using DeliveryCompany.Infrastructure.Persistence.Facilities;
-using DeliveryCompany.Infrastructure.Persistence.Facilities.Implementation;
-using DeliveryCompany.Infrastructure.Persistence.Facilities.Interfaces;
+using DeliveryCompany.Infrastructure.Context;
+using DeliveryCompany.Infrastructure.Persistence.Common.ClientOrders;
+using DeliveryCompany.Infrastructure.Persistence.Common.ClientOrders.Interfaces;
+using DeliveryCompany.Infrastructure.Persistence.Common.Facilities;
+using DeliveryCompany.Infrastructure.Persistence.Common.Facilities.Interfaces;
+using DeliveryCompany.Infrastructure.Persistence.Implementations.DbMySql;
+using DeliveryCompany.Infrastructure.Persistence.Implementations.List;
+using DeliveryCompany.Infrastructure.Persistence.Implementations.List.ClientOrders;
+using DeliveryCompany.Infrastructure.Persistence.Implementations.List.Facilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,11 +36,31 @@ public static class DependencyInjection
         services.AddSingleton<IFacilityRepository, FacilityRepository>();
         services.AddSingleton<IClientOrderRepository, ClientOrderRepository>();
 
-        services.ListRepositories();
-        //DataBaseRepositories();
+        // services.ListRepositories();
+        services.AddDataBaseRepositories();
 
         return services;
     }
+
+    public static IServiceCollection AddDataBaseRepositories(this IServiceCollection services)
+    {
+        services.AddDbContext<DeliveryDbContext>();
+        
+        services.AddScoped<IClientRepository, ClientMySqlRepository>();
+        services.AddSingleton<ICourierRepository, CourierMySqlRepository>();
+        services.AddSingleton<IAdministratorRepository, AdministratorListRepository>(); //TODO: Replace
+        
+        services.AddSingleton<ISizeRepository, SizeListRepository>(); //TODO: Replace
+        
+        services.AddSingleton<IFacilities, FacilitiesList>(); //TODO: Replace
+        services.AddSingleton<IAssignment, AssignmentList>(); //TODO: Replace
+        
+        services.AddSingleton<IClientOrders, ClientOrdersList>(); //TODO: Replace
+        services.AddSingleton<ICourierOrders, CourierOrdersList>(); //TODO: Replace
+
+        return services;
+    }
+    
     public static IServiceCollection ListRepositories(this IServiceCollection services)
     {
         services.AddSingleton<IClientRepository, ClientListRepository>();

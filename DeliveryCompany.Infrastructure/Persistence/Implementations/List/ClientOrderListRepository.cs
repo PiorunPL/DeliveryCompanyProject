@@ -3,7 +3,7 @@ using DeliveryCompany.Domain.Common.ValueObjects;
 using DeliveryCompany.Domain.Orders;
 using DeliveryCompany.Domain.Orders.ValueObjects;
 
-namespace DeliveryCompany.Infrastructure.Persistence;
+namespace DeliveryCompany.Infrastructure.Persistence.Implementations.List;
 public class ClientOrderListRepository : IClientOrderRepository
 {
     private static readonly List<ClientOrder> _clientOrders = new List<ClientOrder>();

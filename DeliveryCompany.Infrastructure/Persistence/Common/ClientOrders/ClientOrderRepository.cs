@@ -3,9 +3,9 @@ using DeliveryCompany.Domain.Common.ValueObjects;
 using DeliveryCompany.Domain.Orders;
 using DeliveryCompany.Domain.Orders.Entities;
 using DeliveryCompany.Domain.Orders.ValueObjects;
-using DeliveryCompany.Infrastructure.Persistence.ClientOrders.Interfaces;
+using DeliveryCompany.Infrastructure.Persistence.Common.ClientOrders.Interfaces;
 
-namespace DeliveryCompany.Infrastructure.Persistence.ClientOrders;
+namespace DeliveryCompany.Infrastructure.Persistence.Common.ClientOrders;
 
 public class ClientOrderRepository : IClientOrderRepository
 {

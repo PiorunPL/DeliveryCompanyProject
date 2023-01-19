@@ -5,7 +5,7 @@ namespace DeliveryCompany.Domain.Clients;
 
 public sealed class Client : Person
 {
-    private Client(
+    public Client(
         PersonId personId,
         string firstName,
         string lastName,

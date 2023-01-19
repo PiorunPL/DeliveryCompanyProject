@@ -5,9 +5,10 @@ using DeliveryCompany.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddPresentation();
-    builder.Services.AddApplication();
+    builder.Services.AddApplication(); 
     builder.Services.AddInfrastructure(builder.Configuration);
-    
+
+    // builder.Services.AddDbContext<DeliveryDbContext>(); // czemu to musi byc akurat tutaj?
     builder.Services.AddSwaggerGen(options =>
     {
         options.CustomSchemaIds(type => type.FullName);

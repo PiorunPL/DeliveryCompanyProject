@@ -1,8 +1,8 @@
 using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Domain.Facilities;
-using DeliveryCompany.Infrastructure.Persistence.Facilities.Interfaces;
+using DeliveryCompany.Infrastructure.Persistence.Common.Facilities.Interfaces;
 
-namespace DeliveryCompany.Infrastructure.Persistence.Facilities;
+namespace DeliveryCompany.Infrastructure.Persistence.Common.Facilities;
 
 public class FacilityRepository : IFacilityRepository
 {

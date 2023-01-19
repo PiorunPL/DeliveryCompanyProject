@@ -16,19 +16,19 @@ public partial class DeliveryDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Administrator> Administrators { get; set; }
+    public virtual DbSet<Administrator> Administrators { get; set; } = null!;
 
-    public virtual DbSet<Client> Clients { get; set; }
+    public virtual DbSet<Client> Clients { get; set; } = null!;
 
-    public virtual DbSet<Clientorder> Clientorders { get; set; }
+    public virtual DbSet<Clientorder> Clientorders { get; set; } = null!;
 
-    public virtual DbSet<Courier> Couriers { get; set; }
+    public virtual DbSet<Courier> Couriers { get; set; } = null!;
 
-    public virtual DbSet<Courierorder> Courierorders { get; set; }
+    public virtual DbSet<Courierorder> Courierorders { get; set; } = null!;
 
-    public virtual DbSet<Facility> Facilities { get; set; }
+    public virtual DbSet<Facility> Facilities { get; set; } = null!;
 
-    public virtual DbSet<Size> Sizes { get; set; }
+    public virtual DbSet<Size> Sizes { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.

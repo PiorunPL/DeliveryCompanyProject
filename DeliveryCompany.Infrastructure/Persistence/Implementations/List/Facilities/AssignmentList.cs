@@ -1,6 +1,6 @@
-using DeliveryCompany.Infrastructure.Persistence.Facilities.Interfaces;
+using DeliveryCompany.Infrastructure.Persistence.Common.Facilities.Interfaces;
 
-namespace DeliveryCompany.Infrastructure.Persistence.Facilities.Implementation;
+namespace DeliveryCompany.Infrastructure.Persistence.Implementations.List.Facilities;
 
 public class AssignmentList : IAssignment
 {

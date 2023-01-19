@@ -7,7 +7,8 @@ public sealed class Courier : Person
 {
     public DateTime DateBirth { get; set; }
     public string Address { get; set; }
-    private Courier(
+
+    public Courier(
         PersonId personId,
         string firstName,
         string lastName,
