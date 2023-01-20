@@ -1,0 +1,12 @@
+@host=https://localhost:7264
+
+POST {{host}}/manageSize/administrator/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZTY4MzZmNS0wODVmLTQ4MGUtOWI1Ny0wYTczYTg5MDlkOWUiLCJnaXZlbl9uYW1lIjoiRGVmYXVsdCIsImZhbWlseV9uYW1lIjoiRGVmYXVsdCIsImp0aSI6IjVlNTM5ZDY3LWRmZTgtNDE2NC04OWIwLWMzMDQ4MjgzMDJkNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmF0b3IiLCJleHAiOjE2NzM2MTYyODIsImlzcyI6IkRlbGl2ZXJ5Q29tcGFueSIsImF1ZCI6IkRlbGl2ZXJ5Q29tcGFueSJ9.XA7cF5O-RL5teO1LWmVpc80HA2U2U3SLNVD8EQ_YFeY
+
+{
+    "name": "test1",
+    "price": "23.0"
+}
+
+### After this triple hashtags we can create another requests
