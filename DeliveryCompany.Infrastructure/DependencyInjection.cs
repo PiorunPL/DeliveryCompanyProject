@@ -8,6 +8,8 @@ using DeliveryCompany.Infrastructure.Persistence.Common.ClientOrders.Interfaces;
 using DeliveryCompany.Infrastructure.Persistence.Common.Facilities;
 using DeliveryCompany.Infrastructure.Persistence.Common.Facilities.Interfaces;
 using DeliveryCompany.Infrastructure.Persistence.Implementations.DbMySql;
+using DeliveryCompany.Infrastructure.Persistence.Implementations.DbMySql.ClientOrders;
+using DeliveryCompany.Infrastructure.Persistence.Implementations.DbMySql.Facilities;
 using DeliveryCompany.Infrastructure.Persistence.Implementations.List;
 using DeliveryCompany.Infrastructure.Persistence.Implementations.List.ClientOrders;
 using DeliveryCompany.Infrastructure.Persistence.Implementations.List.Facilities;
@@ -33,8 +35,8 @@ public static class DependencyInjection
 
     public static IServiceCollection AddRepositories(this IServiceCollection services)
     {
-        services.AddSingleton<IFacilityRepository, FacilityRepository>();
-        services.AddSingleton<IClientOrderRepository, ClientOrderRepository>();
+        services.AddScoped<IFacilityRepository, FacilityRepository>();
+        services.AddScoped<IClientOrderRepository, ClientOrderRepository>();
 
         // services.ListRepositories();
         services.AddDataBaseRepositories();
@@ -47,16 +49,16 @@ public static class DependencyInjection
         services.AddDbContext<DeliveryDbContext>();
         
         services.AddScoped<IClientRepository, ClientMySqlRepository>();
-        services.AddSingleton<ICourierRepository, CourierMySqlRepository>();
-        services.AddSingleton<IAdministratorRepository, AdministratorListRepository>(); //TODO: Replace
+        services.AddScoped<ICourierRepository, CourierMySqlRepository>();
+        services.AddScoped<IAdministratorRepository, AdministratorMySqlRepository>();
         
-        services.AddSingleton<ISizeRepository, SizeListRepository>(); //TODO: Replace
+        services.AddScoped<ISizeRepository, SizeMySqlRepository>();
         
-        services.AddSingleton<IFacilities, FacilitiesList>(); //TODO: Replace
-        services.AddSingleton<IAssignment, AssignmentList>(); //TODO: Replace
+        services.AddScoped<IFacilities, FacilitiesMySql>();
+        services.AddScoped<IAssignment, AssignmentMySql>();
         
-        services.AddSingleton<IClientOrders, ClientOrdersList>(); //TODO: Replace
-        services.AddSingleton<ICourierOrders, CourierOrdersList>(); //TODO: Replace
+        services.AddScoped<IClientOrders, ClientOrderMySql>(); 
+        services.AddScoped<ICourierOrders, CourierOrderMySql>();
 
         return services;
     }

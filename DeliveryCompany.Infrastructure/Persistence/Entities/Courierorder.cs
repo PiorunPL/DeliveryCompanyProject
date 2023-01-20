@@ -17,7 +17,7 @@ public partial class Courierorder
 
     public string? Facilitydeliveryid { get; set; }
 
-    public string? Status { get; set; }
+    public string Status { get; set; } = null!;
 
     public string? Courierid { get; set; }
 

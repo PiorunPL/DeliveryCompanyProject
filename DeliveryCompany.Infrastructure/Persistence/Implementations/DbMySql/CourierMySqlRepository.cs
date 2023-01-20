@@ -77,7 +77,7 @@ public class CourierMySqlRepository : ICourierRepository
             Email = courier.Email,
             Password = courier.Password,
             Datebirth = courier.DateBirth,
-            Address = courier.Address
+            Address = courier.Address,
         };
         return dto;
     }

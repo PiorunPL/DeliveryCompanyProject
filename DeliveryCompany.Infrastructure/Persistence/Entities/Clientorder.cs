@@ -11,13 +11,13 @@ public partial class Clientorder
 
     public DateTime Datesent { get; set; }
 
-    public DateTime? Datedelivered { get; set; }
+    public DateTime Datedelivered { get; set; }
 
     public string Addresssent { get; set; } = null!;
 
     public string Addressdelivery { get; set; } = null!;
 
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
     public string Sizeid { get; set; } = null!;
 
