@@ -7,7 +7,8 @@ public class Administrator : Person
 {
     public DateTime DateBirth { get; set; }
     public string Address { get; set; }
-    private Administrator(
+
+    public Administrator(
         PersonId personId,
         string firstName,
         string lastName,
