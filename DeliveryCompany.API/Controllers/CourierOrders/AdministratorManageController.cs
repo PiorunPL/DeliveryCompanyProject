@@ -33,14 +33,14 @@ public class AdministratorManageController : ControllerBase
     }
 
     [HttpGet("get")]
-    public async Task<IActionResult> GetOrder(OrderRequest request)
+    public async Task<IActionResult> GetOrder([FromQuery]OrderRequest request)
     {
         OrderResult result = await Task.Run(() => _manageCourierOrders.Get(request));
         return Ok(result);
     }
 
     [HttpGet("get-missing")]
-    public async Task<IActionResult> GetMissingOrders(ClientOrderRequest request)
+    public async Task<IActionResult> GetMissingOrders([FromQuery]ClientOrderRequest request)
     {
         OrderListResult result = await Task.Run(() => _manageCourierOrders.GetMissingForClientOrder(request));
         return Ok(result);

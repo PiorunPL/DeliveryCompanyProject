@@ -41,7 +41,7 @@ public class AdministratorManageController : ControllerBase
     }
 
     [HttpGet("get")]
-    public async Task<IActionResult> GetOrder(OrderRequest request)
+    public async Task<IActionResult> GetOrder([FromQuery]OrderRequest request)
     {
         OrderResult result = await Task.Run(() => _manageClientOrders.GetOrder(request));
         return Ok(result);

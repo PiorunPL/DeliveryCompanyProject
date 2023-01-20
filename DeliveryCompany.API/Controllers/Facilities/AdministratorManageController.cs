@@ -54,7 +54,7 @@ public class AdministratorManageController : ControllerBase
     }
     
     [HttpGet("get")]
-    public async Task<IActionResult> GetFacility(FacilityRequest request)
+    public async Task<IActionResult> GetFacility([FromQuery]FacilityRequest request)
     {
         FacilityResult result = await Task.Run(() => _manageFacilities.GetFacility(request));
         return Ok(result);

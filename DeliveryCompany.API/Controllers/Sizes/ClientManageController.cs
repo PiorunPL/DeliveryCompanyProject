@@ -26,7 +26,7 @@ public class ClientManageController : ControllerBase
     }
 
     [HttpGet("get")]
-    public async Task<IActionResult> GetSize(SizeRequest request)
+    public async Task<IActionResult> GetSize([FromQuery]SizeRequest request)
     {
         SizeResult result = await Task.Run(() => _manageSize.GetSize(request));
         return Ok(result);

@@ -33,7 +33,7 @@ public class AdministratorManageController : ControllerBase
     }
 
     [HttpGet("get")]
-    public async Task<IActionResult> GetCourier(CourierRequest request)
+    public async Task<IActionResult> GetCourier([FromQuery]CourierRequest request)
     {
         CourierResult result = await Task.Run(() => _manageCourier.GetCourier(request));
         return Ok(result);
