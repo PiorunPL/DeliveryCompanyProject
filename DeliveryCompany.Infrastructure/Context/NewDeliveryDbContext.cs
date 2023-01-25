@@ -22,7 +22,36 @@ public class NewDeliveryDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CourierOrderDto>()
-            .HasOne(p => p.Facilitydelivery)
-            .WithMany(b => b.CourierorderFacilitydeliveries);
+            .HasOne(p => p.FacilityDelivery)
+            .WithMany(b => b.CourierOrderFacilityDeliveries)
+            .HasForeignKey(cDto => cDto.FacilityDeliveryId);
+
+        modelBuilder.Entity<AdministratorDto>()
+            .HasKey(dto => dto.AdministratorId)
+            .HasName("PRIMARY");
+
+        modelBuilder.Entity<ClientDto>()
+            .HasKey(dto => dto.ClientId)
+            .HasName("PRIMARY");
+
+        modelBuilder.Entity<ClientOrderDto>()
+            .HasKey(dto => dto.OrderId)
+            .HasName("PRIMARY");
+        
+        modelBuilder.Entity<CourierDto>()
+            .HasKey(dto => dto.CourierId)
+            .HasName("PRIMARY");
+        
+        modelBuilder.Entity<CourierOrderDto>()
+            .HasKey(dto => dto.CourierOrderId)
+            .HasName("PRIMARY");
+        
+        modelBuilder.Entity<FacilityDto>()
+            .HasKey(dto => dto.FacilityId)
+            .HasName("PRIMARY");
+        
+        modelBuilder.Entity<SizeDto>()
+            .HasKey(dto => dto.SizeId)
+            .HasName("PRIMARY");
     }
 }

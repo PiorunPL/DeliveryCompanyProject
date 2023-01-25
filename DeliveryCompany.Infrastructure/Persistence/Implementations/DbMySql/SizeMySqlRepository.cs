@@ -2,21 +2,22 @@ using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Domain.Sizes;
 using DeliveryCompany.Domain.Sizes.ValueObjects;
 using DeliveryCompany.Infrastructure.Context;
+using DeliveryCompany.Infrastructure.Persistence.Entities;
 
 namespace DeliveryCompany.Infrastructure.Persistence.Implementations.DbMySql;
 
 public class SizeMySqlRepository : ISizeRepository
 {
-    private readonly DeliveryDbContext _dbContext;
+    private readonly NewDeliveryDbContext _dbContext;
 
-    public SizeMySqlRepository(DeliveryDbContext dbContext)
+    public SizeMySqlRepository(NewDeliveryDbContext dbContext)
     {
         _dbContext = dbContext;
     }
 
     public void Add(Size size)
     {
-        Entities_BackUp.Size? dto = _dbContext.Sizes.Find(size.Id.Value.ToString());
+        SizeDto? dto = _dbContext.Sizes.Find(size.Id.Value.ToString());
         if (dto is not null)
             return;
 
@@ -33,7 +34,7 @@ public class SizeMySqlRepository : ISizeRepository
     public List<Size> GetAll()
     {
         List<Size> sizes = new List<Size>();
-        List<Entities_BackUp.Size> dtos = _dbContext.Sizes.ToList();
+        List<SizeDto> dtos = _dbContext.Sizes.ToList();
         foreach (var dto in dtos)
         {
             sizes.Add(MapFromDto(dto));
@@ -44,7 +45,7 @@ public class SizeMySqlRepository : ISizeRepository
 
     public Size? GetById(Guid id)
     {
-        Entities_BackUp.Size? foundDto = _dbContext.Sizes.SingleOrDefault(dto => dto.Sizeid.Equals(id.ToString()));
+        SizeDto? foundDto = _dbContext.Sizes.SingleOrDefault(dto => dto.SizeId.Equals(id.ToString()));
         if (foundDto is null)
             return null;
         return MapFromDto(foundDto);
@@ -52,7 +53,7 @@ public class SizeMySqlRepository : ISizeRepository
 
     public void Remove(Size size)
     {
-        Entities_BackUp.Size? dto = _dbContext.Sizes.FirstOrDefault(dto => dto.Sizeid.Equals(size.Id.Value.ToString()));
+        SizeDto? dto = _dbContext.Sizes.FirstOrDefault(dto => dto.SizeId.Equals(size.Id.Value.ToString()));
         if (dto is null)
             return;
         _dbContext.Sizes.Remove(dto);
@@ -61,28 +62,28 @@ public class SizeMySqlRepository : ISizeRepository
 
     public void RemoveById(Guid id)
     {
-        Entities_BackUp.Size? dto = _dbContext.Sizes.FirstOrDefault(dto => dto.Sizeid.Equals(id.ToString()));
+        SizeDto? dto = _dbContext.Sizes.FirstOrDefault(dto => dto.SizeId.Equals(id.ToString()));
         if(dto is null)
             return;
         _dbContext.Sizes.Remove(dto);
         _dbContext.SaveChanges();
     }
 
-    private Entities_BackUp.Size MapToDto(Size size)
+    private SizeDto MapToDto(Size size)
     {
-        Entities_BackUp.Size dto = new Entities_BackUp.Size
+        SizeDto dto = new SizeDto
         {
             Name = size.Name,
             Price = size.Price,
-            Sizeid = size.Id.Value.ToString()
+            SizeId = size.Id.Value.ToString()
         };
         return dto;
     }
 
-    private Size MapFromDto(Entities_BackUp.Size dto)
+    private Size MapFromDto(SizeDto dto)
     {
         Size size = new Size(
-            new SizeId(Guid.Parse(dto.Sizeid)),
+            new SizeId(Guid.Parse(dto.SizeId)),
             dto.Name,
             dto.Price);
         return size;

@@ -2,15 +2,16 @@ using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Domain.Clients;
 using DeliveryCompany.Domain.Common.ValueObjects;
 using DeliveryCompany.Infrastructure.Context;
+using DeliveryCompany.Infrastructure.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DeliveryCompany.Infrastructure.Persistence.Implementations.DbMySql;
 
 public class ClientMySqlRepository : IClientRepository
 {
-    private DeliveryDbContext _dbContext;
+    private NewDeliveryDbContext _dbContext;
 
-    public ClientMySqlRepository(DeliveryDbContext dbContext)
+    public ClientMySqlRepository(NewDeliveryDbContext dbContext)
     {
         _dbContext = dbContext;
     }
@@ -23,27 +24,27 @@ public class ClientMySqlRepository : IClientRepository
     
     public Client? GetClientByEmail(string email)
     {
-        Entities_BackUp.Client? dto = _dbContext.Clients.SingleOrDefault(dto => dto.Email.Equals(email));
+        ClientDto? dto = _dbContext.Clients.SingleOrDefault(dto => dto.Email.Equals(email));
         if (dto is null)
             return null;
         return MapFromDto(dto);
     }
 
-    private Entities_BackUp.Client MapToDto(Client client)
+    private ClientDto MapToDto(Client client)
     {
-        Entities_BackUp.Client dto = new Entities_BackUp.Client();
+        ClientDto dto = new ClientDto();
         dto.Email = client.Email;
-        dto.Clientid = client.Id.Value.ToString();
+        dto.ClientId = client.Id.Value.ToString();
         dto.Password = client.Password;
         dto.Firstname = client.FirstName;
         dto.Lastname = client.LastName;
         return dto;
     }
 
-    private Client MapFromDto(Entities_BackUp.Client dto)
+    private Client MapFromDto(ClientDto dto)
     {
         Client client = new Client(
-            new PersonId(Guid.Parse(dto.Clientid)),
+            new PersonId(Guid.Parse(dto.ClientId)),
             dto.Firstname,
             dto.Lastname,
             dto.Email,

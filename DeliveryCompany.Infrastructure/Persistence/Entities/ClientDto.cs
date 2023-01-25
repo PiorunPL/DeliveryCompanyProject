@@ -5,7 +5,7 @@ namespace DeliveryCompany.Infrastructure.Persistence.Entities;
 
 public partial class ClientDto
 {
-    public string Clientid { get; set; } = null!;
+    public string ClientId { get; set; } = null!;
 
     public string Firstname { get; set; } = null!;
 
@@ -18,5 +18,5 @@ public partial class ClientDto
     /// </summary>
     public string Password { get; set; } = null!;
 
-    public virtual ICollection<ClientOrderDto> Clientorders { get; } = new List<ClientOrderDto>();
+    public virtual ICollection<ClientOrderDto> ClientOrders { get; } = new List<ClientOrderDto>();
 }

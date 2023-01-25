@@ -6,15 +6,14 @@ using DeliveryCompany.Domain.Orders.ValueObjects;
 using DeliveryCompany.Infrastructure.Context;
 using DeliveryCompany.Infrastructure.Persistence.Common.ClientOrders.Interfaces;
 using DeliveryCompany.Infrastructure.Persistence.Entities;
-using DeliveryCompany.Infrastructure.Persistence.Entities_BackUp;
 
 namespace DeliveryCompany.Infrastructure.Persistence.Implementations.DbMySql.ClientOrders;
 
 public class CourierOrderMySql : ICourierOrders
 {
-    private readonly DeliveryDbContext _dbContext;
+    private readonly NewDeliveryDbContext _dbContext;
 
-    public CourierOrderMySql(DeliveryDbContext dbContext)
+    public CourierOrderMySql(NewDeliveryDbContext dbContext)
     {
         _dbContext = dbContext;
     }
@@ -32,13 +31,13 @@ public class CourierOrderMySql : ICourierOrders
 
     private void Update(CourierOrder courierOrder, ClientOrderId clientOrderId)
     {
-        _dbContext.Courierorders.Update(MapToDto(courierOrder, clientOrderId));
+        _dbContext.CourierOrders.Update(MapToDto(courierOrder, clientOrderId));
     }
 
     public List<CourierOrder> GetByClientOrderId(ClientOrderId clientOrderId)
     {
         List<CourierOrder> courierOrders = new List<CourierOrder>();
-        var dtos = _dbContext.Courierorders.Where(dto=> dto.Orderid.Equals(clientOrderId.Value.ToString())).ToList();
+        var dtos = _dbContext.CourierOrders.Where(dto=> dto.OrderId.Equals(clientOrderId.Value.ToString())).ToList();
         foreach (var dto in dtos)
         {
             courierOrders.Add(MapFromDto(dto));
@@ -49,39 +48,39 @@ public class CourierOrderMySql : ICourierOrders
 
     public (CourierOrder?, ClientOrderId?) GetByCourierOrderId(CourierOrderId courierOrderId)
     {
-        Courierorder? dto =
-            _dbContext.Courierorders.SingleOrDefault(dto => dto.Courierorderid.Equals(courierOrderId.Value.ToString()));
+        CourierOrderDto? dto =
+            _dbContext.CourierOrders.SingleOrDefault(dto => dto.CourierOrderId.Equals(courierOrderId.Value.ToString()));
         if (dto is null)
             return (null, null);
-        return (MapFromDto(dto), new ClientOrderId(Guid.Parse(dto.Orderid)));
+        return (MapFromDto(dto), new ClientOrderId(Guid.Parse(dto.OrderId)));
     }
 
-    private Courierorder MapToDto(CourierOrder courierOrder, ClientOrderId clientOrderId)
+    private CourierOrderDto MapToDto(CourierOrder courierOrder, ClientOrderId clientOrderId)
     {
-        Courierorder dto = new Courierorder
+        CourierOrderDto dto = new CourierOrderDto
         {
-            Courierid = courierOrder.CourierId?.Value.ToString(),
-            Courierorderid = courierOrder.Id.Value.ToString(),
-            Facilitydeliveryid = courierOrder.FacilityDeliveryId?.Value.ToString(),
-            Facilitysentid = courierOrder.FacilitySentId?.Value.ToString(),
-            Datedelivered = courierOrder.DateDelivered,
-            Datesent = courierOrder.DateSent,
-            Orderid = clientOrderId.Value.ToString(),
+            CourierId = courierOrder.CourierId?.Value.ToString(),
+            CourierOrderId = courierOrder.Id.Value.ToString(),
+            FacilityDeliveryId = courierOrder.FacilityDeliveryId?.Value.ToString(),
+            FacilitySentId = courierOrder.FacilitySentId?.Value.ToString(),
+            DateDelivered = courierOrder.DateDelivered,
+            DateSent = courierOrder.DateSent,
+            OrderId = clientOrderId.Value.ToString(),
             Status = courierOrder.Status.ToString()
         };
         return dto;
     }
 
-    private CourierOrder MapFromDto(Courierorder dto)
+    private CourierOrder MapFromDto(CourierOrderDto dto)
     {
         CourierOrder courierOrder = new CourierOrder(
-            new CourierOrderId(Guid.Parse(dto.Courierorderid)),
-            dto.Datesent,
-            dto.Datedelivered,
-            dto.Facilitysentid is null ? null : new FacilityId(Guid.Parse(dto.Facilitysentid)),
-            dto.Facilitydeliveryid is null ? null : new FacilityId(Guid.Parse(dto.Facilitydeliveryid)),
+            new CourierOrderId(Guid.Parse(dto.CourierOrderId)),
+            dto.DateSent,
+            dto.DateDelivered,
+            dto.FacilitySentId is null ? null : new FacilityId(Guid.Parse(dto.FacilitySentId)),
+            dto.FacilityDeliveryId is null ? null : new FacilityId(Guid.Parse(dto.FacilityDeliveryId)),
             Enum.Parse<CourierOrderStatus>(dto.Status),
-            dto.Courierid is null ? null : new PersonId(Guid.Parse(dto.Courierid))
+            dto.CourierId is null ? null : new PersonId(Guid.Parse(dto.CourierId))
         );
         return courierOrder;
     }

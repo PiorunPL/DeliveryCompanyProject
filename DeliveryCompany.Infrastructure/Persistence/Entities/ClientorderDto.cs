@@ -5,27 +5,27 @@ namespace DeliveryCompany.Infrastructure.Persistence.Entities;
 
 public partial class ClientOrderDto
 {
-    public string Orderid { get; set; } = null!;
+    public string OrderId { get; set; } = null!;
 
-    public string Clientid { get; set; } = null!;
+    public string ClientId { get; set; } = null!;
 
-    public DateTime Datesent { get; set; }
+    public DateTime DateSent { get; set; }
 
-    public DateTime Datedelivered { get; set; }
+    public DateTime DateDelivered { get; set; }
 
-    public string Addresssent { get; set; } = null!;
+    public string AddressSent { get; set; } = null!;
 
-    public string Addressdelivery { get; set; } = null!;
+    public string AddressDelivery { get; set; } = null!;
 
     public string Name { get; set; } = null!;
 
-    public string Sizeid { get; set; } = null!;
+    public string SizeId { get; set; } = null!;
 
     public string Status { get; set; } = null!;
 
     public virtual ClientDto Client { get; set; } = null!;
 
-    public virtual ICollection<CourierOrderDto> Courierorders { get; } = new List<CourierOrderDto>();
+    public virtual ICollection<CourierOrderDto> CourierOrders { get; } = new List<CourierOrderDto>();
 
     public virtual SizeDto Size { get; set; } = null!;
 }

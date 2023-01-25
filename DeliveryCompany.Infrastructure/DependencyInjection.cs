@@ -46,7 +46,7 @@ public static class DependencyInjection
 
     public static IServiceCollection AddDataBaseRepositories(this IServiceCollection services)
     {
-        services.AddDbContext<DeliveryDbContext>();
+        services.AddDbContext<NewDeliveryDbContext>();
         
         services.AddScoped<IClientRepository, ClientMySqlRepository>();
         services.AddScoped<ICourierRepository, CourierMySqlRepository>();

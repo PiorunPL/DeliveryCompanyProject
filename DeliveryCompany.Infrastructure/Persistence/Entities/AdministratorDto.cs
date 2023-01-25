@@ -5,7 +5,7 @@ namespace DeliveryCompany.Infrastructure.Persistence.Entities;
 
 public partial class AdministratorDto
 {
-    public string Administratorid { get; set; } = null!;
+    public string AdministratorId { get; set; } = null!;
 
     public string Firstname { get; set; } = null!;
 

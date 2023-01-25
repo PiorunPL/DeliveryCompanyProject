@@ -1,15 +1,14 @@
 using DeliveryCompany.Infrastructure.Context;
 using DeliveryCompany.Infrastructure.Persistence.Common.Facilities.Interfaces;
 using DeliveryCompany.Infrastructure.Persistence.Entities;
-using DeliveryCompany.Infrastructure.Persistence.Entities_BackUp;
 
 namespace DeliveryCompany.Infrastructure.Persistence.Implementations.DbMySql.Facilities;
 
 public class AssignmentMySql : IAssignment
 {
-    private readonly DeliveryDbContext _dbContext;
+    private readonly NewDeliveryDbContext _dbContext;
 
-    public AssignmentMySql(DeliveryDbContext dbContext)
+    public AssignmentMySql(NewDeliveryDbContext dbContext)
     {
         _dbContext = dbContext;
     }
@@ -17,14 +16,14 @@ public class AssignmentMySql : IAssignment
     public List<Guid> GetAllCouriersByFacilityId(Guid facilityId)
     {
         List<Guid> listOfCouriersIds = new List<Guid>();
-        List<Courier>? dtos = _dbContext.Facilities
-            .SingleOrDefault(dto => dto.Facilityid.Equals(facilityId.ToString()))
+        List<CourierDto>? dtos = _dbContext.Facilities
+            .SingleOrDefault(dto => dto.FacilityId.Equals(facilityId.ToString()))
             ?.Couriers.ToList();
         if (dtos is null)
             return listOfCouriersIds;
         foreach (var dto in dtos)
         {
-            listOfCouriersIds.Add(Guid.Parse(dto.Courierid));
+            listOfCouriersIds.Add(Guid.Parse(dto.CourierId));
         }
 
         return listOfCouriersIds;
@@ -32,16 +31,16 @@ public class AssignmentMySql : IAssignment
 
     public string? GetFacilityIdByCourierId(Guid courierId)
     {
-        Facility? facility = _dbContext.Couriers.SingleOrDefault(dto => dto.Courierid.Equals(courierId.ToString()))
+        FacilityDto? facility = _dbContext.Couriers.SingleOrDefault(dto => dto.CourierId.Equals(courierId.ToString()))
             ?.Facilities.FirstOrDefault();
         if (facility is null)
             return null;
-        return facility.Facilityid.ToString();
+        return facility.FacilityId.ToString();
     }
 
     public void UpdateAssignment(List<Guid> couriersId, Guid facilityId)
     {
-        Facility? facility = _dbContext.Facilities.SingleOrDefault(dto => dto.Facilityid.Equals(facilityId.ToString()));
+        FacilityDto? facility = _dbContext.Facilities.SingleOrDefault(dto => dto.FacilityId.Equals(facilityId.ToString()));
         if (facility is null)
             return;
         
@@ -49,7 +48,7 @@ public class AssignmentMySql : IAssignment
         
         foreach (var id in couriersId)
         {
-            Courier? courier = _dbContext.Couriers.SingleOrDefault(dto => dto.Courierid.Equals(id.ToString()));
+            CourierDto? courier = _dbContext.Couriers.SingleOrDefault(dto => dto.CourierId.Equals(id.ToString()));
             if (courier is not null)
             {
                 facility.Couriers.Add(courier);

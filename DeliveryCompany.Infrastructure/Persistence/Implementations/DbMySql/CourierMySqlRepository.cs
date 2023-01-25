@@ -2,14 +2,15 @@ using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Domain.Common.ValueObjects;
 using DeliveryCompany.Domain.Couriers;
 using DeliveryCompany.Infrastructure.Context;
+using DeliveryCompany.Infrastructure.Persistence.Entities;
 
 namespace DeliveryCompany.Infrastructure.Persistence.Implementations.DbMySql;
 
 public class CourierMySqlRepository : ICourierRepository
 {
-    private readonly DeliveryDbContext _dbContext;
+    private readonly NewDeliveryDbContext _dbContext;
 
-    public CourierMySqlRepository(DeliveryDbContext dbContext)
+    public CourierMySqlRepository(NewDeliveryDbContext dbContext)
     {
         _dbContext = dbContext;
     }
@@ -28,7 +29,7 @@ public class CourierMySqlRepository : ICourierRepository
 
     public Courier? GetCourierByEmail(string email)
     {
-        Entities_BackUp.Courier? dto = _dbContext.Couriers.SingleOrDefault(dto => dto.Email.Equals(email));
+        CourierDto? dto = _dbContext.Couriers.SingleOrDefault(dto => dto.Email.Equals(email));
         if (dto is null)
             return null;
         return MapFromDto(dto);
@@ -36,7 +37,7 @@ public class CourierMySqlRepository : ICourierRepository
 
     public Courier? GetCourierById(Guid id)
     {
-        Entities_BackUp.Courier? dto = _dbContext.Couriers.SingleOrDefault(dto => dto.Courierid.Equals(id.ToString()));
+        CourierDto? dto = _dbContext.Couriers.SingleOrDefault(dto => dto.CourierId.Equals(id.ToString()));
         if (dto is null)
             return null;
         return MapFromDto(dto);
@@ -45,8 +46,8 @@ public class CourierMySqlRepository : ICourierRepository
     public List<Courier> GetAllCouriers()
     {
         List<Courier> couriers = new List<Courier>();
-        List<Entities_BackUp.Courier> dtos = _dbContext.Couriers.ToList();
-        foreach (Entities_BackUp.Courier dto in dtos)
+        List<CourierDto> dtos = _dbContext.Couriers.ToList();
+        foreach (CourierDto dto in dtos)
         {
             couriers.Add(MapFromDto(dto));
         }
@@ -54,10 +55,10 @@ public class CourierMySqlRepository : ICourierRepository
         return couriers;
     }
 
-    private Courier MapFromDto(Entities_BackUp.Courier dto)
+    private Courier MapFromDto(CourierDto dto)
     {
         Courier courier = new Courier(
-            new PersonId(Guid.Parse(dto.Courierid)),
+            new PersonId(Guid.Parse(dto.CourierId)),
             dto.Firstname,
             dto.Lastname,
             dto.Email,
@@ -67,11 +68,11 @@ public class CourierMySqlRepository : ICourierRepository
         return courier;
     }
 
-    private Entities_BackUp.Courier MapToDto(Courier courier)
+    private CourierDto MapToDto(Courier courier)
     {
-        Entities_BackUp.Courier dto = new Entities_BackUp.Courier
+        CourierDto dto = new CourierDto
         {
-            Courierid = courier.Id.Value.ToString(),
+            CourierId = courier.Id.Value.ToString(),
             Firstname = courier.FirstName,
             Lastname = courier.LastName,
             Email = courier.Email,

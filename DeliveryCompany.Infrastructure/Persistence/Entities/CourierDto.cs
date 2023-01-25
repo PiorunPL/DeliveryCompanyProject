@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using DeliveryCompany.Infrastructure.Persistence.Entities_BackUp;
+
 
 namespace DeliveryCompany.Infrastructure.Persistence.Entities;
 
 public partial class CourierDto
 {
-    public string Courierid { get; set; } = null!;
+    public string CourierId { get; set; } = null!;
 
     public string Firstname { get; set; } = null!;
 
@@ -23,7 +23,7 @@ public partial class CourierDto
 
     public string Address { get; set; } = null!;
 
-    public virtual ICollection<CourierOrderDto> Courierorders { get; } = new List<CourierOrderDto>();
+    public virtual ICollection<CourierOrderDto> CourierOrders { get; } = new List<CourierOrderDto>();
 
     public virtual ICollection<FacilityDto> Facilities { get; } = new List<FacilityDto>();
 }
