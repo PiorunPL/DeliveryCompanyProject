@@ -61,13 +61,13 @@
 
                 <div class="justify-content-between align-self-center align-items-center">
                     <div class="">
-                        <button class=" bg-primary rounded-5 my-4 py-3 mx-4 px-5">
-                            <div class=" text-light" onclick="createNewOrder()">Create new Order</div>
+                        <button onclick="createNewOrder()" class=" bg-primary rounded-5 my-4 py-3 mx-4 px-5">
+                            <div class=" text-light">Create new Order</div>
                         </button>
                     </div>
                     <div class="">
-                        <button class=" bg-primary rounded-5 my-4 py-3 mx-4 px-5">
-                            <div class=" text-light" onclick="checkSizes()">Check available sizes</div>
+                        <button onclick="checkSizes()" class=" bg-primary rounded-5 my-4 py-3 mx-4 px-5">
+                            <div class=" text-light">Check available sizes</div>
                         </button>
                     </div>
                 </div>
@@ -79,8 +79,8 @@
             <div class="col-md-4">
                 <h2>Your Orders!</h2>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit provident, facere temporibus natus officia optio!</p>
-                <button class="align-self-center bg-primary rounded-5 my-4 py-3 mx-4 px-5">
-                    <div class=" text-light" onclick="logout()">Orders</div>
+                <button onclick="logout()" class="align-self-center bg-primary rounded-5 my-4 py-3 mx-4 px-5">
+                    <div class=" text-light">Orders</div>
                 </button>
 
             </div>
@@ -98,15 +98,15 @@
 
     function logout() {
         localStorage.clear();
-        window.location.assign("../index.html")
+        window.location.assign("../index.html");
     }
 
     function checkSizes() {
-        window.location.assign("./available-sizes.html")
+        window.location.assign("./available-sizes.html");
     }
 
     function createNewOrder() {
-
+        window.location.assign("./create-order.html");
     }
 </script>
 
