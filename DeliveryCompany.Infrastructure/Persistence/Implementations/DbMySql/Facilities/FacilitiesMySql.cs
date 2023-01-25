@@ -17,7 +17,7 @@ public class FacilitiesMySql : IFacilities
     public List<Facility> GetAllFacilities()
     {
         List<Facility> facilities = new List<Facility>();
-        List<Entities.Facility> dtos = _dbContext.Facilities.ToList();
+        List<Entities_BackUp.Facility> dtos = _dbContext.Facilities.ToList();
 
         foreach (var dto in dtos)
         {
@@ -29,7 +29,7 @@ public class FacilitiesMySql : IFacilities
 
     public Facility? GetFacilityById(Guid givenId)
     {
-        Entities.Facility? foundDto =
+        Entities_BackUp.Facility? foundDto =
             _dbContext.Facilities.SingleOrDefault(dto => dto.Facilityid.Equals(givenId.ToString()));
         if (foundDto is null)
             return null;
@@ -38,7 +38,7 @@ public class FacilitiesMySql : IFacilities
 
     public void AddFacility(Facility facility)
     {
-        Entities.Facility? foundDto =
+        Entities_BackUp.Facility? foundDto =
             _dbContext.Facilities.SingleOrDefault(dto => dto.Facilityid.Equals(facility.Id.Value.ToString()));
         if (foundDto is not null)
             return;
@@ -52,9 +52,9 @@ public class FacilitiesMySql : IFacilities
         _dbContext.SaveChanges();
     }
 
-    private Entities.Facility MapToDto(Facility facility)
+    private Entities_BackUp.Facility MapToDto(Facility facility)
     {
-        Entities.Facility dto = new Entities.Facility
+        Entities_BackUp.Facility dto = new Entities_BackUp.Facility
         {
             Facilityid = facility.Id.Value.ToString(),
             Address = facility.Address,
@@ -63,7 +63,7 @@ public class FacilitiesMySql : IFacilities
         return dto;
     }
 
-    private Facility MapFromDto(Entities.Facility dto)
+    private Facility MapFromDto(Entities_BackUp.Facility dto)
     {
         Facility facility = new Facility(
             new FacilityId(Guid.Parse(dto.Facilityid)),

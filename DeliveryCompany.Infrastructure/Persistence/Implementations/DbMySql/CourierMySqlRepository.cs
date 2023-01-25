@@ -28,7 +28,7 @@ public class CourierMySqlRepository : ICourierRepository
 
     public Courier? GetCourierByEmail(string email)
     {
-        Entities.Courier? dto = _dbContext.Couriers.SingleOrDefault(dto => dto.Email.Equals(email));
+        Entities_BackUp.Courier? dto = _dbContext.Couriers.SingleOrDefault(dto => dto.Email.Equals(email));
         if (dto is null)
             return null;
         return MapFromDto(dto);
@@ -36,7 +36,7 @@ public class CourierMySqlRepository : ICourierRepository
 
     public Courier? GetCourierById(Guid id)
     {
-        Entities.Courier? dto = _dbContext.Couriers.SingleOrDefault(dto => dto.Courierid.Equals(id.ToString()));
+        Entities_BackUp.Courier? dto = _dbContext.Couriers.SingleOrDefault(dto => dto.Courierid.Equals(id.ToString()));
         if (dto is null)
             return null;
         return MapFromDto(dto);
@@ -45,8 +45,8 @@ public class CourierMySqlRepository : ICourierRepository
     public List<Courier> GetAllCouriers()
     {
         List<Courier> couriers = new List<Courier>();
-        List<Entities.Courier> dtos = _dbContext.Couriers.ToList();
-        foreach (Entities.Courier dto in dtos)
+        List<Entities_BackUp.Courier> dtos = _dbContext.Couriers.ToList();
+        foreach (Entities_BackUp.Courier dto in dtos)
         {
             couriers.Add(MapFromDto(dto));
         }
@@ -54,7 +54,7 @@ public class CourierMySqlRepository : ICourierRepository
         return couriers;
     }
 
-    private Courier MapFromDto(Entities.Courier dto)
+    private Courier MapFromDto(Entities_BackUp.Courier dto)
     {
         Courier courier = new Courier(
             new PersonId(Guid.Parse(dto.Courierid)),
@@ -67,9 +67,9 @@ public class CourierMySqlRepository : ICourierRepository
         return courier;
     }
 
-    private Entities.Courier MapToDto(Courier courier)
+    private Entities_BackUp.Courier MapToDto(Courier courier)
     {
-        Entities.Courier dto = new Entities.Courier
+        Entities_BackUp.Courier dto = new Entities_BackUp.Courier
         {
             Courierid = courier.Id.Value.ToString(),
             Firstname = courier.FirstName,

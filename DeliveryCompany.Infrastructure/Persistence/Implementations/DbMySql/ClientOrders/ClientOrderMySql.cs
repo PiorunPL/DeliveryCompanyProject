@@ -5,6 +5,8 @@ using DeliveryCompany.Domain.Sizes.ValueObjects;
 using DeliveryCompany.Infrastructure.Context;
 using DeliveryCompany.Infrastructure.Persistence.Common.ClientOrders.Interfaces;
 using DeliveryCompany.Infrastructure.Persistence.Entities;
+using DeliveryCompany.Infrastructure.Persistence.Entities_BackUp;
+using Microsoft.EntityFrameworkCore;
 
 namespace DeliveryCompany.Infrastructure.Persistence.Implementations.DbMySql.ClientOrders;
 
@@ -19,7 +21,7 @@ public class ClientOrderMySql : IClientOrders
 
     public void Add(ClientOrder clientOrder)
     {
-        Entities.Clientorder? dto =
+        Clientorder? dto =
             _dbContext.Clientorders.SingleOrDefault(dto => dto.Orderid.Equals(clientOrder.Id.Value.ToString()));
         if (dto is not null)
             return;
@@ -29,7 +31,7 @@ public class ClientOrderMySql : IClientOrders
 
     public void Update(ClientOrder clientOrder)
     {
-        Entities.Clientorder? dto =
+        Clientorder? dto =
             _dbContext.Clientorders.SingleOrDefault(dto => dto.Orderid.Equals(clientOrder.Id.Value.ToString()));
         if (dto is null)
         {
@@ -37,7 +39,7 @@ public class ClientOrderMySql : IClientOrders
             _dbContext.SaveChanges();
             return;
         }
-        
+
         dto.Name = clientOrder.Name;
         dto.Addressdelivery = clientOrder.AddressDelivery;
         dto.Addresssent = clientOrder.AddressSent;
@@ -53,8 +55,9 @@ public class ClientOrderMySql : IClientOrders
     public List<ClientOrder> GetByClientId(PersonId clientId)
     {
         List<ClientOrder> orders = new List<ClientOrder>();
-        Entities.Client? client =
-            _dbContext.Clients.SingleOrDefault(dto => dto.Clientid.Equals(clientId.Value.ToString()));
+        Client? client =
+            _dbContext.Clients.Include(client => client.Clientorders)
+                .SingleOrDefault(dto => dto.Clientid.Equals(clientId.Value.ToString()));
         if (client is null)
             return orders; //TODO: Przemyśleć czy nie exception
 
@@ -68,7 +71,7 @@ public class ClientOrderMySql : IClientOrders
 
     public ClientOrder? GetByOrderId(ClientOrderId orderId)
     {
-        Entities.Clientorder? dto =
+        Clientorder? dto =
             _dbContext.Clientorders.SingleOrDefault(dto => dto.Orderid.Equals(orderId.Value.ToString()));
         if (dto is null)
             return null;
@@ -78,7 +81,8 @@ public class ClientOrderMySql : IClientOrders
     public List<ClientOrder> GetByStatus(ClientOrderStatus status)
     {
         List<ClientOrder> clientOrders = new List<ClientOrder>();
-        List<Entities.Clientorder> dtos = _dbContext.Clientorders.Where(dto => dto.Status.Equals(status.ToString())).ToList();
+        List<Clientorder> dtos = _dbContext.Clientorders.Where(dto => dto.Status.Equals(status.ToString()))
+            .ToList();
         foreach (var dto in dtos)
         {
             clientOrders.Add(MapFromDto(dto));
@@ -90,7 +94,7 @@ public class ClientOrderMySql : IClientOrders
     public List<ClientOrder> GetAll()
     {
         List<ClientOrder> clientOrders = new List<ClientOrder>();
-        List<Entities.Clientorder> dtos = _dbContext.Clientorders.ToList();
+        List<Clientorder> dtos = _dbContext.Clientorders.ToList();
         foreach (var dto in dtos)
         {
             clientOrders.Add(MapFromDto(dto));
@@ -99,9 +103,9 @@ public class ClientOrderMySql : IClientOrders
         return clientOrders;
     }
 
-    private Entities.Clientorder MapToDto(ClientOrder clientOrder)
+    private Clientorder MapToDto(ClientOrder clientOrder)
     {
-        Entities.Clientorder dto = new Clientorder
+        Clientorder dto = new Clientorder
         {
             Orderid = clientOrder.Id.Value.ToString(),
             Addressdelivery = clientOrder.AddressDelivery,
@@ -112,12 +116,11 @@ public class ClientOrderMySql : IClientOrders
             Sizeid = clientOrder.SizeId.Value.ToString(),
             Name = clientOrder.Name,
             Status = clientOrder.Status.ToString()
-                
         };
         return dto;
     }
 
-    private ClientOrder MapFromDto(Entities.Clientorder dto)
+    private ClientOrder MapFromDto(Clientorder dto)
     {
         ClientOrder clientOrder = new ClientOrder(
             new ClientOrderId(Guid.Parse(dto.Orderid)),
@@ -131,5 +134,4 @@ public class ClientOrderMySql : IClientOrders
             Enum.Parse<ClientOrderStatus>(dto.Status));
         return clientOrder;
     }
-    
 }

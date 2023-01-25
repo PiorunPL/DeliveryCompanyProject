@@ -1,10 +1,10 @@
 namespace DeliveryCompany.Contracts.ClientOrders.Clients.Responses;
 
 public record ClientGetAllApiResponse(
-    List<ClientOrderDTO> list
+    List<ClientOrderDto> list
 );
 
-public record ClientOrderDTO(
+public record ClientOrderDto(
     Guid OrderId,
     string Name,
     string Status

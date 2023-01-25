@@ -16,7 +16,7 @@ public class SizeMySqlRepository : ISizeRepository
 
     public void Add(Size size)
     {
-        Entities.Size? dto = _dbContext.Sizes.Find(size.Id.Value.ToString());
+        Entities_BackUp.Size? dto = _dbContext.Sizes.Find(size.Id.Value.ToString());
         if (dto is not null)
             return;
 
@@ -33,7 +33,7 @@ public class SizeMySqlRepository : ISizeRepository
     public List<Size> GetAll()
     {
         List<Size> sizes = new List<Size>();
-        List<Entities.Size> dtos = _dbContext.Sizes.ToList();
+        List<Entities_BackUp.Size> dtos = _dbContext.Sizes.ToList();
         foreach (var dto in dtos)
         {
             sizes.Add(MapFromDto(dto));
@@ -44,7 +44,7 @@ public class SizeMySqlRepository : ISizeRepository
 
     public Size? GetById(Guid id)
     {
-        Entities.Size? foundDto = _dbContext.Sizes.SingleOrDefault(dto => dto.Sizeid.Equals(id.ToString()));
+        Entities_BackUp.Size? foundDto = _dbContext.Sizes.SingleOrDefault(dto => dto.Sizeid.Equals(id.ToString()));
         if (foundDto is null)
             return null;
         return MapFromDto(foundDto);
@@ -52,7 +52,7 @@ public class SizeMySqlRepository : ISizeRepository
 
     public void Remove(Size size)
     {
-        Entities.Size? dto = _dbContext.Sizes.FirstOrDefault(dto => dto.Sizeid.Equals(size.Id.Value.ToString()));
+        Entities_BackUp.Size? dto = _dbContext.Sizes.FirstOrDefault(dto => dto.Sizeid.Equals(size.Id.Value.ToString()));
         if (dto is null)
             return;
         _dbContext.Sizes.Remove(dto);
@@ -61,16 +61,16 @@ public class SizeMySqlRepository : ISizeRepository
 
     public void RemoveById(Guid id)
     {
-        Entities.Size? dto = _dbContext.Sizes.FirstOrDefault(dto => dto.Sizeid.Equals(id.ToString()));
+        Entities_BackUp.Size? dto = _dbContext.Sizes.FirstOrDefault(dto => dto.Sizeid.Equals(id.ToString()));
         if(dto is null)
             return;
         _dbContext.Sizes.Remove(dto);
         _dbContext.SaveChanges();
     }
 
-    private Entities.Size MapToDto(Size size)
+    private Entities_BackUp.Size MapToDto(Size size)
     {
-        Entities.Size dto = new Entities.Size
+        Entities_BackUp.Size dto = new Entities_BackUp.Size
         {
             Name = size.Name,
             Price = size.Price,
@@ -79,7 +79,7 @@ public class SizeMySqlRepository : ISizeRepository
         return dto;
     }
 
-    private Size MapFromDto(Entities.Size dto)
+    private Size MapFromDto(Entities_BackUp.Size dto)
     {
         Size size = new Size(
             new SizeId(Guid.Parse(dto.Sizeid)),

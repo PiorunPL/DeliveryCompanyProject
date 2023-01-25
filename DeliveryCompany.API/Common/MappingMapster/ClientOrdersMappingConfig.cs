@@ -41,7 +41,7 @@ public class ClientOrdersMappingConfig : IRegister
             .Map(dest => dest.list, src => src.Orders);
             // .PreserveReference(true);
 
-        config.NewConfig<ClientOrder, ClientOrderDTO>()
+        config.NewConfig<ClientOrder, ClientOrderDto>()
             .Map(dest => dest.OrderId, src => src.Id)
             .Map(dest => dest.Status, src => src.Status.ToString());
         

@@ -6,6 +6,7 @@ using DeliveryCompany.Domain.Orders.ValueObjects;
 using DeliveryCompany.Infrastructure.Context;
 using DeliveryCompany.Infrastructure.Persistence.Common.ClientOrders.Interfaces;
 using DeliveryCompany.Infrastructure.Persistence.Entities;
+using DeliveryCompany.Infrastructure.Persistence.Entities_BackUp;
 
 namespace DeliveryCompany.Infrastructure.Persistence.Implementations.DbMySql.ClientOrders;
 
@@ -48,16 +49,16 @@ public class CourierOrderMySql : ICourierOrders
 
     public (CourierOrder?, ClientOrderId?) GetByCourierOrderId(CourierOrderId courierOrderId)
     {
-        Entities.Courierorder? dto =
+        Courierorder? dto =
             _dbContext.Courierorders.SingleOrDefault(dto => dto.Courierorderid.Equals(courierOrderId.Value.ToString()));
         if (dto is null)
             return (null, null);
         return (MapFromDto(dto), new ClientOrderId(Guid.Parse(dto.Orderid)));
     }
 
-    private Entities.Courierorder MapToDto(CourierOrder courierOrder, ClientOrderId clientOrderId)
+    private Courierorder MapToDto(CourierOrder courierOrder, ClientOrderId clientOrderId)
     {
-        Entities.Courierorder dto = new Courierorder
+        Courierorder dto = new Courierorder
         {
             Courierid = courierOrder.CourierId?.Value.ToString(),
             Courierorderid = courierOrder.Id.Value.ToString(),
@@ -71,7 +72,7 @@ public class CourierOrderMySql : ICourierOrders
         return dto;
     }
 
-    private CourierOrder MapFromDto(Entities.Courierorder dto)
+    private CourierOrder MapFromDto(Courierorder dto)
     {
         CourierOrder courierOrder = new CourierOrder(
             new CourierOrderId(Guid.Parse(dto.Courierorderid)),

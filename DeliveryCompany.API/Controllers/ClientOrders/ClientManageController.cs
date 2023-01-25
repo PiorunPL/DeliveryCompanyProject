@@ -77,11 +77,11 @@ public class ClientManageController : ControllerBase
 
     private ClientGetAllApiResponse Map(GetAllResult result)
     {
-        var response = new ClientGetAllApiResponse(new List<ClientOrderDTO>());
+        var response = new ClientGetAllApiResponse(new List<ClientOrderDto>());
 
         foreach (var item in result.Orders)
         {
-            var dto = new ClientOrderDTO(
+            var dto = new ClientOrderDto(
                 item.Id.Value,
                 item.Name,
                 item.Status.ToString()

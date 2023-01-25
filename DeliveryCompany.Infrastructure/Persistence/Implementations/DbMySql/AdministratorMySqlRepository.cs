@@ -28,7 +28,7 @@ public class AdministratorMySqlRepository : IAdministratorRepository
 
     public Administrator? GetAdministratorByEmail(string email)
     {
-        Entities.Administrator? dto = _dbContext.Administrators.SingleOrDefault(dto => dto.Email.Equals(email));
+        Entities_BackUp.Administrator? dto = _dbContext.Administrators.SingleOrDefault(dto => dto.Email.Equals(email));
         if (dto is null)
             return null;
         return MapFromDto(dto);
@@ -37,8 +37,8 @@ public class AdministratorMySqlRepository : IAdministratorRepository
     public List<Administrator> GetAllAdministrators()
     {
         List<Administrator> administrators = new List<Administrator>();
-        List<Entities.Administrator> dtos = _dbContext.Administrators.ToList();
-        foreach (Entities.Administrator dto in dtos)
+        List<Entities_BackUp.Administrator> dtos = _dbContext.Administrators.ToList();
+        foreach (Entities_BackUp.Administrator dto in dtos)
         {
             administrators.Add(MapFromDto(dto));
         }
@@ -46,9 +46,9 @@ public class AdministratorMySqlRepository : IAdministratorRepository
         return administrators;
     }
 
-    private Entities.Administrator MapToDto(Administrator administrator)
+    private Entities_BackUp.Administrator MapToDto(Administrator administrator)
     {
-        Entities.Administrator dto = new Entities.Administrator
+        Entities_BackUp.Administrator dto = new Entities_BackUp.Administrator
         {
             Datebirth = administrator.DateBirth,
             Firstname = administrator.FirstName,
@@ -61,7 +61,7 @@ public class AdministratorMySqlRepository : IAdministratorRepository
         return dto;
     }
 
-    private Administrator MapFromDto(Entities.Administrator dto)
+    private Administrator MapFromDto(Entities_BackUp.Administrator dto)
     {
         Administrator administrator = new Administrator(
             new PersonId(Guid.Parse(dto.Administratorid)),
