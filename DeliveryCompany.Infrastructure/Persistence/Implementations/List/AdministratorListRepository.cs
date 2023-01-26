@@ -11,6 +11,7 @@ public class AdministratorListRepository : IAdministratorRepository
             "Default",
             "default@default.com",
             "DeFaUlT",
+            "ekcidulm",
             DateTime.UtcNow,
             "DefaultAddress"
         )

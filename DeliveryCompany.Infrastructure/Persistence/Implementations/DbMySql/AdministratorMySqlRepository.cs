@@ -55,7 +55,8 @@ public class AdministratorMySqlRepository : IAdministratorRepository
             Firstname = administrator.FirstName,
             Address = administrator.Address,
             Lastname = administrator.LastName,
-            Password = administrator.Password,
+            Password = administrator.PasswordHash,
+            Salt = administrator.Salt,
             AdministratorId = administrator.Id.Value.ToString(),
             Email = administrator.Email
         };
@@ -70,6 +71,7 @@ public class AdministratorMySqlRepository : IAdministratorRepository
             dto.Lastname,
             dto.Email,
             dto.Password,
+            dto.Salt,
             dto.Datebirth,
             dto.Address);
         return administrator;

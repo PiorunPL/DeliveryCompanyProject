@@ -10,7 +10,8 @@ public sealed class Client : Person
         string firstName,
         string lastName,
         string email,
-        string password) : base(personId, firstName, lastName, email, password)
+        string passwordHash,
+        string salt) : base(personId, firstName, lastName, email, passwordHash, salt)
     { 
         LogClientCreated();
     }
@@ -19,14 +20,16 @@ public sealed class Client : Person
         string firstName,
         string lastName,
         string email,
-        string password)
+        string password,
+        string salt)
     {
         return new(
             PersonId.CreateUnique(),
             firstName,
             lastName,
             email,
-            password
+            password, 
+            salt
         );
     }
 
@@ -37,7 +40,6 @@ public sealed class Client : Person
         log += $"\n\tFirst name: {FirstName}";
         log += $"\n\tLast name: {LastName}";
         log += $"\n\tEmail: {Email}";
-        log += $"\n\tPassword: {Password}";
         Console.WriteLine(log);
     }
 }

@@ -1,3 +1,4 @@
+using System.Security.Policy;
 using System.Text;
 using DeliveryCompany.Application.Interfaces.InServices.Authentication;
 using DeliveryCompany.Application.Interfaces.InServices.Persistence;
@@ -27,7 +28,8 @@ public static class DependencyInjection
         ConfigurationManager configuration)
     {
         services.AddAuth(configuration);
-
+        services.AddSingleton<IHasher, Hasher>();
+        
         services.AddRepositories();
 
         return services;

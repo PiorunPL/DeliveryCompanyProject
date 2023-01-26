@@ -63,6 +63,7 @@ public class CourierMySqlRepository : ICourierRepository
             dto.Lastname,
             dto.Email,
             dto.Password,
+            dto.Salt,
             dto.Datebirth,
             dto.Address);
         return courier;
@@ -76,7 +77,8 @@ public class CourierMySqlRepository : ICourierRepository
             Firstname = courier.FirstName,
             Lastname = courier.LastName,
             Email = courier.Email,
-            Password = courier.Password,
+            Password = courier.PasswordHash,
+            Salt = courier.Salt,
             Datebirth = courier.DateBirth,
             Address = courier.Address,
         };

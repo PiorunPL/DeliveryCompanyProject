@@ -18,5 +18,7 @@ public partial class ClientDto
     /// </summary>
     public string Password { get; set; } = null!;
 
+    public string Salt { get; set; } = null!;
+
     public virtual ICollection<ClientOrderDto> ClientOrders { get; } = new List<ClientOrderDto>();
 }

@@ -14,33 +14,39 @@ public class ClientRegisterCommandHandler : IRequestHandler<ClientRegisterComman
     private readonly IClientRepository _clientRepository;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly ILogger<ClientRegisterCommandHandler> _logger;
+    private readonly IHasher _hasher;
 
     public ClientRegisterCommandHandler(
-        IClientRepository clientRepository, IJwtTokenGenerator jwtTokenGenerator, ILogger<ClientRegisterCommandHandler> logger)
+        IClientRepository clientRepository, IJwtTokenGenerator jwtTokenGenerator, ILogger<ClientRegisterCommandHandler> logger, IHasher hasher)
     {
         _clientRepository = clientRepository;
         _jwtTokenGenerator = jwtTokenGenerator;
         _logger = logger;
+        _hasher = hasher;
     }
 
     public async Task<ClientAuthenticationResult> Handle(ClientRegisterCommand command, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
 
-        // 1. Validate the user doesn't exist
         if (_clientRepository.GetClientByEmail(command.Email) is not null)
-        {
             throw new ArgumentException("User with given email is already registered!");
-        }
+        
+        //TODO: Validation email, Validation firstName, Validation lastName
+        
+        
+        //TODO: VERIFY PASSWORD: Entropy and dictionaryAttack
+        
+        
+        var hasherResponse = _hasher.HashPassword(command.Password);
 
-        // 2. Create user (generate Unique ID) & Persist to DB
         var client = Client.Create(
             command.FirstName,
             command.LastName,
             command.Email,
-            command.Password
+            hasherResponse.hash,
+            hasherResponse.salt
         );
-        _logger.LogInformation("TestTest");
 
         _clientRepository.Add(client);
 
@@ -52,4 +58,9 @@ public class ClientRegisterCommandHandler : IRequestHandler<ClientRegisterComman
             client,
             token);
     }
+
+    // private bool validateData(string email, string firstName, string lastName)
+    // {
+    //     
+    // }
 }

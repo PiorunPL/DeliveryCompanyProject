@@ -13,9 +13,10 @@ public sealed class Courier : Person
         string firstName,
         string lastName,
         string email,
-        string password,
+        string passwordHash,
+        string salt,
         DateTime dateBirth,
-        string address) : base(personId, firstName, lastName, email, password)
+        string address) : base(personId, firstName, lastName, email, passwordHash, salt)
     {
         DateBirth = dateBirth;
         Address = address;
@@ -27,6 +28,7 @@ public sealed class Courier : Person
         string lastName,
         string email,
         string password,
+        string salt,
         DateTime dateBirth,
         string address)
     {
@@ -36,6 +38,7 @@ public sealed class Courier : Person
             lastName,
             email,
             password,
+            salt,
             dateBirth,
             address);
     }
@@ -47,7 +50,7 @@ public sealed class Courier : Person
         log += $"\n\tFirst name: {FirstName}";
         log += $"\n\tLast name: {LastName}";
         log += $"\n\tEmail: {Email}";
-        log += $"\n\tPassword: {Password}";
+        log += $"\n\tPassword: {PasswordHash}";
         log += $"\n\tDateBirth: {DateBirth.ToString()}";
         log += $"\n\tAddress: {Address}";
         Console.WriteLine(log);

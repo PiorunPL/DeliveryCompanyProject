@@ -35,7 +35,8 @@ public class ClientMySqlRepository : IClientRepository
         ClientDto dto = new ClientDto();
         dto.Email = client.Email;
         dto.ClientId = client.Id.Value.ToString();
-        dto.Password = client.Password;
+        dto.Password = client.PasswordHash;
+        dto.Salt = client.Salt;
         dto.Firstname = client.FirstName;
         dto.Lastname = client.LastName;
         return dto;
@@ -48,7 +49,8 @@ public class ClientMySqlRepository : IClientRepository
             dto.Firstname,
             dto.Lastname,
             dto.Email,
-            dto.Password);
+            dto.Password,
+            dto.Salt);
 
         return client;
     }

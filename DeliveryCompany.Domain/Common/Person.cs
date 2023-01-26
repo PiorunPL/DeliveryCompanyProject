@@ -8,19 +8,22 @@ public abstract class Person : Entity<PersonId>
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
     public string Email { get; set; } = null!;
-    public string Password { get; set; } = null!;
+    public string PasswordHash { get; set; } = null!;
+    public string Salt { get; set; } = null!;
 
     protected Person(
         PersonId personId,
         string firstName,
         string lastName,
         string email,
-        string password) : base(personId)
+        string passwordHash,
+        string salt) : base(personId)
     {
         FirstName = firstName;
         LastName = lastName;
         Email = email;
-        Password = password;
+        PasswordHash = passwordHash;
+        Salt = salt;
     }
 
     

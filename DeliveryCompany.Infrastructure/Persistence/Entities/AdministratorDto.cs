@@ -17,6 +17,8 @@ public partial class AdministratorDto
     /// Saved as hash
     /// </summary>
     public string Password { get; set; } = null!;
+    
+    public string Salt { get; set; } = null!;
 
     public DateTime Datebirth { get; set; }
 

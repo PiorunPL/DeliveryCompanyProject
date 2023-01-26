@@ -10,10 +10,12 @@ public class CourierRegisterCommandHandler : IRequestHandler<CourierRegisterComm
 {
     private readonly ICourierRepository _courierRepository;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
-    public CourierRegisterCommandHandler(ICourierRepository courierRepository, IJwtTokenGenerator jwtTokenGenerator)
+    private readonly IHasher _hasher;
+    public CourierRegisterCommandHandler(ICourierRepository courierRepository, IJwtTokenGenerator jwtTokenGenerator, IHasher hasher)
     {
         _courierRepository = courierRepository;
         _jwtTokenGenerator = jwtTokenGenerator;
+        _hasher = hasher;
     }
 
     public async Task<CourierAuthenticationResult> Handle(CourierRegisterCommand command, CancellationToken cancellationToken)
@@ -26,12 +28,15 @@ public class CourierRegisterCommandHandler : IRequestHandler<CourierRegisterComm
             throw new ArgumentException("Administrator with given email is already registered!");
         }
 
+        var hasherResponse = _hasher.HashPassword(command.Password);
+
         // 2. Create Courier
         var courier = Courier.Create(
             command.FirstName,
             command.LastName,
             command.Email,
-            command.Password,
+            hasherResponse.hash,
+            hasherResponse.salt,
             command.DateBirth,
             command.Address
         );

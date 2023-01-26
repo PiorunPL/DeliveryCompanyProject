@@ -10,10 +10,12 @@ public class AdministratorRegisterCommandHandler : IRequestHandler<Administrator
 {
     private readonly IAdministratorRepository _administratorRepository;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
-    public AdministratorRegisterCommandHandler(IAdministratorRepository administratorRepository, IJwtTokenGenerator jwtTokenGenerator)
+    private readonly IHasher _hasher;
+    public AdministratorRegisterCommandHandler(IAdministratorRepository administratorRepository, IJwtTokenGenerator jwtTokenGenerator, IHasher hasher)
     {
         _administratorRepository = administratorRepository;
         _jwtTokenGenerator = jwtTokenGenerator;
+        _hasher = hasher;
     }
 
     public async Task<AdministratorAuthenticationResult> Handle(AdministratorRegisterCommand command, CancellationToken cancellationToken)
@@ -26,12 +28,15 @@ public class AdministratorRegisterCommandHandler : IRequestHandler<Administrator
             throw new ArgumentException("Administrator with given email is already registered!");
         }
 
+        var hasherResponse = _hasher.HashPassword(command.Password);
+        
         // 2. Create Administrator
         var administrator = Administrator.Create(
             command.FirstName,
             command.LastName,
             command.Email,
-            command.Password,
+            hasherResponse.hash,
+            hasherResponse.salt,
             command.DateBirth,
             command.Address
         );
