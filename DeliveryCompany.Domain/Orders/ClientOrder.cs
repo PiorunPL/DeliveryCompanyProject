@@ -16,6 +16,8 @@ public sealed class ClientOrder : Entity<ClientOrderId>
     public string Name { get; set; }
     public SizeId SizeId { get; set; }
     public ClientOrderStatus Status { get; set; }
+    public string? ImagePath { get; set; }
+    public List<PersonId> SharedToClients { get; set; } = new List<PersonId>();
     public List<CourierOrder> CourierOrders = new List<CourierOrder>();
 
     public ClientOrder(

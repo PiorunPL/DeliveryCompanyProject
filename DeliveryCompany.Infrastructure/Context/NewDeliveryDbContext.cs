@@ -13,6 +13,7 @@ public class NewDeliveryDbContext : DbContext
     public DbSet<CourierOrderDto> CourierOrders { get; set; }
     public DbSet<FacilityDto> Facilities { get; set; }
     public DbSet<SizeDto> Sizes { get; set; }
+    public DbSet<SharedOrderDto> SharedOrders { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -21,6 +22,9 @@ public class NewDeliveryDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<SharedOrderDto>()
+            .HasKey(share => new { share.ClientOrderDtoId, share.ClientId });
+            
         modelBuilder.Entity<CourierOrderDto>()
             .HasOne(p => p.FacilityDelivery)
             .WithMany(b => b.CourierOrderFacilityDeliveries)
@@ -33,6 +37,9 @@ public class NewDeliveryDbContext : DbContext
         modelBuilder.Entity<ClientDto>()
             .HasKey(dto => dto.ClientId)
             .HasName("PRIMARY");
+        modelBuilder.Entity<ClientDto>()
+            .HasMany(c => c.ClientOrders)
+            .WithOne(o => o.Client);
 
         modelBuilder.Entity<ClientOrderDto>()
             .HasKey(dto => dto.OrderId)
@@ -53,5 +60,7 @@ public class NewDeliveryDbContext : DbContext
         modelBuilder.Entity<SizeDto>()
             .HasKey(dto => dto.SizeId)
             .HasName("PRIMARY");
+        
+        
     }
 }

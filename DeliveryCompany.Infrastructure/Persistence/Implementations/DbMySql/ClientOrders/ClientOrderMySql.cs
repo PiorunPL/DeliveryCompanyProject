@@ -114,7 +114,8 @@ public class ClientOrderMySql : IClientOrders
             DateSent = clientOrder.DateOfExpectedSent,
             SizeId = clientOrder.SizeId.Value.ToString(),
             Name = clientOrder.Name,
-            Status = clientOrder.Status.ToString()
+            Status = clientOrder.Status.ToString(),
+            PathToImage = clientOrder.ImagePath
         };
         return dto;
     }
@@ -131,6 +132,9 @@ public class ClientOrderMySql : IClientOrders
             dto.Name,
             new SizeId(Guid.Parse(dto.SizeId)),
             Enum.Parse<ClientOrderStatus>(dto.Status));
+
+        clientOrder.ImagePath = dto.PathToImage;
+        
         return clientOrder;
     }
 }

@@ -59,6 +59,7 @@ public static class DependencyInjection
         
         services.AddScoped<IClientOrders, ClientOrderMySql>(); 
         services.AddScoped<ICourierOrders, CourierOrderMySql>();
+        services.AddScoped<ISharedOrders, SharedOrderMySql>();
 
         return services;
     }

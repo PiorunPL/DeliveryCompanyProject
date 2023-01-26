@@ -3,6 +3,7 @@ using System;
 using DeliveryCompany.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeliveryCompany.Infrastructure.Persistence.NewMigrations
 {
     [DbContext(typeof(NewDeliveryDbContext))]
-    partial class NewDeliveryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230126004345_001 - Added Shared List and Image Path")]
+    partial class _001AddedSharedListandImagePath
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,9 +76,6 @@ namespace DeliveryCompany.Infrastructure.Persistence.NewMigrations
                     b.Property<string>("ClientId")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("ClientOrderDtoOrderId")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -94,8 +94,6 @@ namespace DeliveryCompany.Infrastructure.Persistence.NewMigrations
 
                     b.HasKey("ClientId")
                         .HasName("PRIMARY");
-
-                    b.HasIndex("ClientOrderDtoOrderId");
 
                     b.ToTable("Clients");
                 });
@@ -125,9 +123,6 @@ namespace DeliveryCompany.Infrastructure.Persistence.NewMigrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("PathToImage")
                         .HasColumnType("longtext");
 
                     b.Property<string>("SizeId")
@@ -243,21 +238,6 @@ namespace DeliveryCompany.Infrastructure.Persistence.NewMigrations
                     b.ToTable("Facilities");
                 });
 
-            modelBuilder.Entity("DeliveryCompany.Infrastructure.Persistence.Entities.SharedOrderDto", b =>
-                {
-                    b.Property<string>("ClientOrderDtoId")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("ClientId")
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("ClientOrderDtoId", "ClientId");
-
-                    b.HasIndex("ClientId");
-
-                    b.ToTable("SharedOrders");
-                });
-
             modelBuilder.Entity("DeliveryCompany.Infrastructure.Persistence.Entities.SizeDto", b =>
                 {
                     b.Property<string>("SizeId")
@@ -289,13 +269,6 @@ namespace DeliveryCompany.Infrastructure.Persistence.NewMigrations
                         .HasForeignKey("FacilitiesFacilityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("DeliveryCompany.Infrastructure.Persistence.Entities.ClientDto", b =>
-                {
-                    b.HasOne("DeliveryCompany.Infrastructure.Persistence.Entities.ClientOrderDto", null)
-                        .WithMany("SharedToClients")
-                        .HasForeignKey("ClientOrderDtoOrderId");
                 });
 
             modelBuilder.Entity("DeliveryCompany.Infrastructure.Persistence.Entities.ClientOrderDto", b =>
@@ -346,25 +319,6 @@ namespace DeliveryCompany.Infrastructure.Persistence.NewMigrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("DeliveryCompany.Infrastructure.Persistence.Entities.SharedOrderDto", b =>
-                {
-                    b.HasOne("DeliveryCompany.Infrastructure.Persistence.Entities.ClientDto", "ClientDto")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DeliveryCompany.Infrastructure.Persistence.Entities.ClientOrderDto", "ClientOrderDto")
-                        .WithMany("SharedToClientsId")
-                        .HasForeignKey("ClientOrderDtoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ClientDto");
-
-                    b.Navigation("ClientOrderDto");
-                });
-
             modelBuilder.Entity("DeliveryCompany.Infrastructure.Persistence.Entities.ClientDto", b =>
                 {
                     b.Navigation("ClientOrders");
@@ -373,10 +327,6 @@ namespace DeliveryCompany.Infrastructure.Persistence.NewMigrations
             modelBuilder.Entity("DeliveryCompany.Infrastructure.Persistence.Entities.ClientOrderDto", b =>
                 {
                     b.Navigation("CourierOrders");
-
-                    b.Navigation("SharedToClients");
-
-                    b.Navigation("SharedToClientsId");
                 });
 
             modelBuilder.Entity("DeliveryCompany.Infrastructure.Persistence.Entities.CourierDto", b =>

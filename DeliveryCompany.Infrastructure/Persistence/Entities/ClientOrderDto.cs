@@ -22,6 +22,11 @@ public partial class ClientOrderDto
     public string SizeId { get; set; } = null!;
 
     public string Status { get; set; } = null!;
+    
+    public string? PathToImage { get; set; }
+    public virtual ICollection<SharedOrderDto> SharedToClientsId { get; set; } = new List<SharedOrderDto>();
+
+    public virtual ICollection<ClientDto> SharedToClients { get; } = new List<ClientDto>();
 
     public virtual ClientDto Client { get; set; } = null!;
 
