@@ -21,13 +21,13 @@ public class ClientManageController : ControllerBase
     }
 
     [HttpPost("change-password")]
-    public async Task<IActionResult> ChangePassword(string password)
+    public async Task<IActionResult> ChangePassword(PasswordRequest request)
     {
         Guid clientId = CommonMethods.GetPersonsGuid(this.HttpContext);
 
         try
         {
-            await Task.Run(() => _clientManage.changePassword(clientId, password));
+            await Task.Run(() => _clientManage.changePassword(clientId, request.password));
         }
         catch (ArgumentException e)
         {
@@ -62,4 +62,6 @@ public class ClientManageController : ControllerBase
 
         return Ok();
     }
+
+    public record PasswordRequest(string password);
 }

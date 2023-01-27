@@ -36,6 +36,7 @@ public class ClientMySqlRepository : IClientRepository
         if (dto is not null)
             _dbContext.Remove(dto);
         _dbContext.Add(MapToDto(client));
+        _dbContext.SaveChanges();
     }
 
     public Client? GetClientByEmail(string email)
