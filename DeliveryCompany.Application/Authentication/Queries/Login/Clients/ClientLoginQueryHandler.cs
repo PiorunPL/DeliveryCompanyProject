@@ -23,9 +23,12 @@ public class ClientLoginQueryHandler : IRequestHandler<ClientLoginQuery, ClientA
     public async Task<ClientAuthenticationResult> Handle(ClientLoginQuery query, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        
+
         if (_clientRepository.GetClientByEmail(query.Email) is not Client client)
             throw new ArgumentException("User with given email does not exist!");
+
+        if (!ValidateData(query.Email, query.Password))
+            throw new ArgumentException("Data is not valid");
 
         if (!_hasher.PasswordVerifier(query.Password, client.Salt, client.PasswordHash))
             throw new ArgumentException("Wrong password!");
@@ -33,5 +36,15 @@ public class ClientLoginQueryHandler : IRequestHandler<ClientLoginQuery, ClientA
         var token = _jwtTokenGenerator.GenerateToken(client);
 
         return new ClientAuthenticationResult(client, token);
+    }
+
+    private bool ValidateData(string email, string password)
+    {
+        if (!Validator.ValidateEmail(email))
+            return false;
+        if (!Validator.ValidatePassword(password))
+            return false;
+        
+        return true;
     }
 }

@@ -1,7 +1,6 @@
-// using DeliveryCompany.Application.Common.Interfaces.Authentication;
-
 using MediatR;
 using DeliveryCompany.Application.Authentication.Common;
+using DeliveryCompany.Application.Common;
 using DeliveryCompany.Application.Interfaces.InServices.Authentication;
 using DeliveryCompany.Application.Interfaces.InServices.Persistence;
 using DeliveryCompany.Domain.Clients;
@@ -31,12 +30,13 @@ public class ClientRegisterCommandHandler : IRequestHandler<ClientRegisterComman
 
         if (_clientRepository.GetClientByEmail(command.Email) is not null)
             throw new ArgumentException("User with given email is already registered!");
-        
-        //TODO: Validation email, Validation firstName, Validation lastName
-        
+
+        if (!ValidateData(command.Email, command.FirstName, command.LastName, command.Password))
+            throw new ArgumentException("Data was not validated");
         
         //TODO: VERIFY PASSWORD: Entropy and dictionaryAttack
-        
+        if (EntropyCalcuator.GetEntropy(command.Password) < 40)
+            throw new ArgumentException("Password is weak!");
         
         var hasherResponse = _hasher.HashPassword(command.Password);
 
@@ -59,8 +59,19 @@ public class ClientRegisterCommandHandler : IRequestHandler<ClientRegisterComman
             token);
     }
 
-    // private bool validateData(string email, string firstName, string lastName)
-    // {
-    //     
-    // }
+    private bool ValidateData(string email, string firstName, string lastName, string password)
+    {
+        if (!Validator.ValidateEmail(email))
+            return false;
+        if (!Validator.ValidateName(firstName))
+            return false;
+        if (!Validator.ValidateName(lastName))
+            return false;
+        if (!Validator.ValidatePassword(password))
+            return false;
+
+        return true;
+    }
+
+    
 }

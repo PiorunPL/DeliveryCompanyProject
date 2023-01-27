@@ -16,12 +16,28 @@ public class ClientMySqlRepository : IClientRepository
         _dbContext = dbContext;
     }
 
+    public Client? GetClientById(Guid id)
+    {
+        ClientDto? dto = _dbContext.Clients.SingleOrDefault(dto => dto.ClientId.Equals(id.ToString()));
+        if (dto is null)
+            return null;
+        return MapFromDto(dto);
+    }
+
     public void Add(Client client)
     {
         _dbContext.Clients.Add(MapToDto(client));
         _dbContext.SaveChanges();
     }
-    
+
+    public void Update(Client client)
+    {
+        ClientDto? dto = _dbContext.Clients.SingleOrDefault(dto => dto.Email.Equals(client.Email));
+        if (dto is not null)
+            _dbContext.Remove(dto);
+        _dbContext.Add(MapToDto(client));
+    }
+
     public Client? GetClientByEmail(string email)
     {
         ClientDto? dto = _dbContext.Clients.SingleOrDefault(dto => dto.Email.Equals(email));

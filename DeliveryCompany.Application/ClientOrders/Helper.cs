@@ -10,8 +10,6 @@ public class Helper{
     {
         ClientOrder order = GetOrder(orderId, repository);
 
-        //TODO: Log Check If Order belongs to client
-        //Check if order is connected with given client
         PersonId clientId = new PersonId(ClientId);
         if (!order.ClientId.Equals(clientId))
             throw new UnauthorizedAccessException("User with given ID have no permission to cancel that Client Order");
@@ -24,8 +22,6 @@ public class Helper{
         ClientOrderId orderId = new ClientOrderId(OrderId);
         ClientOrder? order = repository.GetClientOrderById(orderId);
 
-        //TODO: Log Check Order exist
-        //Check if Order with given exist
         if (order is null)
             throw new ArgumentException("Order with given ID does not exist");
         return order;

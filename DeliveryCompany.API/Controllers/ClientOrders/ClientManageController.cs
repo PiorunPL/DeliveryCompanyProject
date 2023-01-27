@@ -1,10 +1,7 @@
-using System.Security.Claims;
 using DeliveryCompany.API.Common;
 using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Clients;
 using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Clients.Requests;
 using DeliveryCompany.Application.Interfaces.OutServices.ClientOrders.Clients.Results;
-using DeliveryCompany.Contracts.ClientOrders;
-using DeliveryCompany.Contracts.ClientOrders.Clients;
 using DeliveryCompany.Contracts.ClientOrders.Clients.Requests;
 using DeliveryCompany.Contracts.ClientOrders.Clients.Responses;
 using MapsterMapper;

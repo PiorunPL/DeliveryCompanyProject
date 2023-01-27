@@ -4,6 +4,7 @@ using DeliveryCompany.API.Common.MappingMapster;
 using ClientOrders = DeliveryCompany.Application.ClientOrders;
 using CourierOrders = DeliveryCompany.Application.CourierOrders;
 using Couriers = DeliveryCompany.Application.Couriers;
+using Clients = DeliveryCompany.Application.Clients;
 using Facilities = DeliveryCompany.Application.Facilities;
 using Sizes = DeliveryCompany.Application.Sizes;
 
@@ -11,6 +12,7 @@ using Sizes = DeliveryCompany.Application.Sizes;
 using IClientOrders = DeliveryCompany.Application.Interfaces.OutServices.ClientOrders;
 using ICourierOrders = DeliveryCompany.Application.Interfaces.OutServices.CourierOrders;
 using ICouriers = DeliveryCompany.Application.Interfaces.OutServices.Couriers;
+using IClients = DeliveryCompany.Application.Interfaces.OutServices.Clients;
 using IFacilities = DeliveryCompany.Application.Interfaces.OutServices.Facilities;
 using ISizes = DeliveryCompany.Application.Interfaces.OutServices.Sizes;
 
@@ -28,6 +30,7 @@ public static class DependencyInjection
         services.AddCouriersManagement();
         services.AddFacilitiesManagement();
         services.AddSizesManagement();
+        services.AddClientManagement();
 
         return services;
     }
@@ -36,6 +39,12 @@ public static class DependencyInjection
     {
         services.AddScoped<IClientOrders.Clients.IClientManage, ClientOrders.ClientManage>();
         services.AddScoped<IClientOrders.Administrators.IAdministratorManage, ClientOrders.AdministratorManage>();
+        return services;
+    }
+    
+    private static IServiceCollection AddClientManagement(this IServiceCollection services)
+    {
+        services.AddScoped<IClients.Clients.IClientManage, Clients.ClientManage>();
         return services;
     }
 
