@@ -26,6 +26,11 @@ public class ClientOrderListRepository : IClientOrderRepository
         return _clientOrders.Where(co => co.ClientId.Equals(id)).ToList();
     }
 
+    public List<ClientOrder> GetAllClientOrdersSharedByClientId(PersonId id)
+    {
+        throw new NotImplementedException();
+    }
+
     public List<ClientOrder> GetAllClientOrdersWithGivenStatus(ClientOrderStatus status)
     {
         return _clientOrders.Where(co => co.Status.Equals(status)).ToList();

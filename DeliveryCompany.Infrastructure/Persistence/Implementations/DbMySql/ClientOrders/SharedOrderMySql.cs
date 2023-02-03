@@ -42,6 +42,15 @@ public class SharedOrderMySql : ISharedOrders
         return mappedList;
     }
 
+    public List<ClientOrderId> GetByClientId(PersonId clientId)
+    {
+        List<SharedOrderDto> listDto = _dbContext.SharedOrders
+            .Where(dto => dto.ClientId.Equals(clientId.Value.ToString())).ToList();
+
+        List<ClientOrderId> mappedList = MapFromDtosToClientOrders(listDto);
+        return mappedList;
+    }
+
     private List<SharedOrderDto> MapToDto(ClientOrder clientOrder)
     {
         List<SharedOrderDto> sharedOrderDtos = new List<SharedOrderDto>();
@@ -66,6 +75,20 @@ public class SharedOrderMySql : ISharedOrders
             if (Guid.TryParse(dto.ClientId, out var personGuid))
             {
                 personIds.Add(new PersonId(personGuid));
+            }
+        }
+
+        return personIds;
+    }
+    
+    private List<ClientOrderId> MapFromDtosToClientOrders(List<SharedOrderDto> sharedOrderDtos)
+    {
+        List<ClientOrderId> personIds = new List<ClientOrderId>();
+        foreach (var dto in sharedOrderDtos)
+        {
+            if (Guid.TryParse(dto.ClientOrderDtoId, out var orderGuid))
+            {
+                personIds.Add(new ClientOrderId(orderGuid));
             }
         }
 

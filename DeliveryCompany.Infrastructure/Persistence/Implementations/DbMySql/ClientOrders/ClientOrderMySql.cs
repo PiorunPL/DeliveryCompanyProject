@@ -47,6 +47,7 @@ public class ClientOrderMySql : IClientOrders
         dto.DateDelivered = clientOrder.DateOfExpectedDelivery;
         dto.DateSent = clientOrder.DateOfExpectedSent;
         dto.Status = clientOrder.Status.ToString();
+        dto.PathToImage = clientOrder.ImagePath;
         _dbContext.ClientOrders.Update(dto);
         _dbContext.SaveChanges();
     }

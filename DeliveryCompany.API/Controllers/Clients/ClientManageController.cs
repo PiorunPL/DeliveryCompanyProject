@@ -44,11 +44,11 @@ public class ClientManageController : ControllerBase
     
     [AllowAnonymous]
     [HttpPost("restore-password")]
-    public async Task<IActionResult> CreateNewOrder(string email, string password, string secretCode)
+    public async Task<IActionResult> CreateNewOrder(PasswordRecoverRequest request)
     {
         try
         {
-            await Task.Run(() => _clientManage.restorePassword(email, password, secretCode));
+            await Task.Run(() => _clientManage.restorePassword(request.email, request.password, request.secretCode));
         }
         catch (ArgumentException e)
         {
@@ -64,4 +64,6 @@ public class ClientManageController : ControllerBase
     }
 
     public record PasswordRequest(string password);
+
+    public record PasswordRecoverRequest(string email, string password, string secretCode);
 }

@@ -56,6 +56,8 @@ public class ClientMySqlRepository : IClientRepository
         dto.Salt = client.Salt;
         dto.Firstname = client.FirstName;
         dto.Lastname = client.LastName;
+        dto.HashedCode = client.HashedCode;
+        dto.CodeSalt = client.CodeSalt;
         return dto;
     }
 
@@ -67,7 +69,9 @@ public class ClientMySqlRepository : IClientRepository
             dto.Lastname,
             dto.Email,
             dto.Password,
-            dto.Salt);
+            dto.Salt,
+            dto.HashedCode,
+            dto.CodeSalt);
 
         return client;
     }

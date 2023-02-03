@@ -18,7 +18,7 @@ public class ClientManage : IClientManage
         _hasher = hasher;
     }
 
-    public void changePassword(Guid clientId ,string password)
+    public void changePassword(Guid clientId, string password)
     {
         if (!Validator.ValidatePassword(password))
             throw new ArgumentException("Data is not valid!");
@@ -33,18 +33,38 @@ public class ClientManage : IClientManage
         var hashResult = _hasher.HashPassword(password);
         client.PasswordHash = hashResult.hash;
         client.Salt = hashResult.salt;
-        
+
         _clientRepository.Update(client);
     }
 
     public void restorePassword(string email, string password, string secretCode)
     {
-        if (!Validator.ValidatePassword(password))
+ 
+        if (!ValidateData(email,password,secretCode))
             throw new ArgumentException("Data is not valid!");
 
         if (EntropyCalcuator.GetEntropy(password) < 40)
             throw new ArgumentException("Password is weak!");
-            
-        //TODO: Finish implementation   
+
+        Client? client = _clientRepository.GetClientByEmail(email);
+        if (client is null)
+            throw new ArgumentException("Client with given email does not exist");
+
+        var hashResult = _hasher.HashPassword(password);
+        client.PasswordHash = hashResult.hash;
+        client.Salt = hashResult.salt;
+
+        _clientRepository.Update(client);
+    }
+
+    private bool ValidateData(string email, string password, string secretCode)
+    {
+        if (!Validator.ValidateEmail(email))
+            return false;
+        if (!Validator.ValidatePassword(password))
+            return false;
+        if (!Validator.ValidateSecretCode(secretCode))
+            return false;
+        return true;
     }
 }

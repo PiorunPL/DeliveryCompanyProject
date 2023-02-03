@@ -5,15 +5,21 @@ namespace DeliveryCompany.Domain.Clients;
 
 public sealed class Client : Person
 {
+    public string HashedCode { get; set; }
+    public string CodeSalt { get; set; }
     public Client(
         PersonId personId,
         string firstName,
         string lastName,
         string email,
         string passwordHash,
-        string salt) : base(personId, firstName, lastName, email, passwordHash, salt)
+        string salt,
+        string hashedCode,
+        string codeSalt) : base(personId, firstName, lastName, email, passwordHash, salt)
     { 
         LogClientCreated();
+        HashedCode = hashedCode;
+        CodeSalt = codeSalt;
     }
 
     public static Client Create(
@@ -21,7 +27,9 @@ public sealed class Client : Person
         string lastName,
         string email,
         string password,
-        string salt)
+        string salt,
+        string hashedCode,
+        string codeSalt)
     {
         return new(
             PersonId.CreateUnique(),
@@ -29,7 +37,9 @@ public sealed class Client : Person
             lastName,
             email,
             password, 
-            salt
+            salt,
+            hashedCode,
+            codeSalt
         );
     }
 

@@ -25,9 +25,9 @@ public class UserAuthenticationController : ControllerBase
     public async Task<IActionResult> Register(ClientRegisterRequest request)
     {
         var command = _mapper.Map<ClientRegisterCommand>(request);
-        ClientAuthenticationResult authResult = await _mediator.Send(command);
+        ClientRegisterResult authResult = await _mediator.Send(command);
 
-        return Ok(_mapper.Map<ClientAuthenticationResponse>(authResult));
+        return Ok(_mapper.Map<ClientRegisterResponse>(authResult));
     }
 
     [HttpPost("login")]

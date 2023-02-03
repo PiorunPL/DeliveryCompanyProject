@@ -52,14 +52,37 @@ public class ClientOrderRepository : IClientOrderRepository
     public List<ClientOrder> GetAllClientOrdersByClientId(PersonId id)
     {
         List<ClientOrder> clientOrders = _clientOrders.GetByClientId(id);
-        
+
         foreach (ClientOrder order in clientOrders)
         {
             List<CourierOrder> courierOrders = _courierOrders.GetByClientOrderId(order.Id);
             order.CourierOrders.AddRange(courierOrders);
-            
+
             List<PersonId> personIds = _sharedOrders.GetByClientOrderId(order.Id);
             order.SharedToClients.AddRange(personIds);
+        }
+
+        return clientOrders;
+    }
+
+    public List<ClientOrder> GetAllClientOrdersSharedByClientId(PersonId id)
+    {
+        var clientOrderIds = _sharedOrders.GetByClientId(id);
+        List<ClientOrder> clientOrders = new List<ClientOrder>();
+
+        foreach (var orderId in clientOrderIds)
+        {
+            ClientOrder? order = _clientOrders.GetByOrderId(orderId);
+            if (order is not null)
+            {
+                List<CourierOrder> courierOrders = _courierOrders.GetByClientOrderId(order.Id);
+                order.CourierOrders.AddRange(courierOrders);
+
+                List<PersonId> personIds = _sharedOrders.GetByClientOrderId(order.Id);
+                order.SharedToClients.AddRange(personIds);
+
+                clientOrders.Add(order);
+            }
         }
 
         return clientOrders;
@@ -72,7 +95,7 @@ public class ClientOrderRepository : IClientOrderRepository
         {
             List<CourierOrder> courierOrders = _courierOrders.GetByClientOrderId(order.Id);
             order.CourierOrders.AddRange(courierOrders);
-            
+
             List<PersonId> personIds = _sharedOrders.GetByClientOrderId(order.Id);
             order.SharedToClients.AddRange(personIds);
         }
@@ -87,7 +110,7 @@ public class ClientOrderRepository : IClientOrderRepository
         {
             List<CourierOrder> courierOrders = _courierOrders.GetByClientOrderId(order.Id);
             order.CourierOrders.AddRange(courierOrders);
-            
+
             List<PersonId> personIds = _sharedOrders.GetByClientOrderId(order.Id);
             order.SharedToClients.AddRange(personIds);
         }
@@ -101,18 +124,18 @@ public class ClientOrderRepository : IClientOrderRepository
 
         if (courierOrder is null || clientOrderId is null)
             return null;
-        
+
         ClientOrder? clientOrder = GetClientOrderById(clientOrderId);
 
         if (clientOrder is null)
             return null;
-        
+
         List<CourierOrder> courierOrders = _courierOrders.GetByClientOrderId(clientOrderId);
         clientOrder.CourierOrders.AddRange(courierOrders);
 
         List<PersonId> personIds = _sharedOrders.GetByClientOrderId(clientOrderId);
         clientOrder.SharedToClients.AddRange(personIds);
-        
+
         return clientOrder;
     }
 }

@@ -10,6 +10,7 @@ public interface IClientOrderRepository
     public void Update(ClientOrder order);
     public ClientOrder? GetClientOrderById(ClientOrderId id);
     public List<ClientOrder> GetAllClientOrdersByClientId(PersonId id);
+    public List<ClientOrder> GetAllClientOrdersSharedByClientId(PersonId id);
     public List<ClientOrder> GetAllClientOrdersWithGivenStatus(ClientOrderStatus status);
     public List<ClientOrder> GetAllClientOrders();
     public ClientOrder? GetByCourierOrderId(CourierOrderId id);

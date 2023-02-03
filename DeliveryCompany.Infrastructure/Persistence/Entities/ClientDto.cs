@@ -17,8 +17,9 @@ public partial class ClientDto
     /// Saved as Hash
     /// </summary>
     public string Password { get; set; } = null!;
-
     public string Salt { get; set; } = null!;
+    public string HashedCode { get; set; } = null!;
+    public string CodeSalt { get; set; } = null!;
 
     public virtual ICollection<ClientOrderDto> ClientOrders { get; } = new List<ClientOrderDto>();
 }

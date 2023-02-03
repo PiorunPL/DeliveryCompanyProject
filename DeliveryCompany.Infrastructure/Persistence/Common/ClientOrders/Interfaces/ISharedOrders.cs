@@ -8,4 +8,5 @@ public interface ISharedOrders
 {
     public void Update(ClientOrder clientOrder);
     public List<PersonId> GetByClientOrderId(ClientOrderId clientOrderId);
+    public List<ClientOrderId> GetByClientId(PersonId clientId);
 }

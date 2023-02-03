@@ -8,5 +8,5 @@ public record ClientRegisterCommand(
     string LastName,
     string Email,
     string Password
-) : IRequest<ClientAuthenticationResult>;
+) : IRequest<ClientRegisterResult>;
 

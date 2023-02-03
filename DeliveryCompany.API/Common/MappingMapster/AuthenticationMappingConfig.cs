@@ -22,6 +22,11 @@ public class AuthenticationMappingConfig : IRegister
         config.NewConfig<ClientAuthenticationResult, ClientAuthenticationResponse>()
             .Map(dest => dest, src => src.Client)
             .Map(dest => dest.Id, src => src.Client.Id.Value);
+        
+        config.NewConfig<ClientRegisterResult, ClientRegisterResponse>()
+            .Map(dest => dest, src => src.Client)
+            .Map(dest => dest.Id, src => src.Client.Id.Value)
+            .Map(dest => dest.SecretCode, src => src .SecretCode);
 
         // ADMINISTRATOR
         config.NewConfig<WorkerRegisterRequest, AdministratorRegisterCommand>();
