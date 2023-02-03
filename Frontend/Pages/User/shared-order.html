@@ -46,7 +46,7 @@
 
     <main class="col-lg-8 mx-auto">
         <div class="my-3">
-            <h1>List of your orders</h1>
+            <h1>List of orders shared to you!</h1>
         </div>
         <table class="table table-striped">
             <thead>
@@ -82,7 +82,7 @@
 
     var loadData = function () {        
         $.ajax({
-            url: 'https://localhost:7264/manageClientOrder/client/get-all',
+            url: 'https://localhost:7264/manageClientOrder/client/get-all-shared',
             type: "GET",
             headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
             success: function (result) {
@@ -113,7 +113,7 @@
     function checkOrder(id) {
         let str = 'working id: ' + id;
         localStorage.setItem('currentOrder', id)
-        window.location.assign("./client-order-details.html")
+        window.location.assign("./client-order-shared-details.html")
         alert(str);
     }
 </script>

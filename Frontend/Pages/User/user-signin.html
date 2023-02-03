@@ -66,6 +66,9 @@
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label text-light">Password</label>
                             <input name="password" type="password" class="form-control" id="exampleInputPassword1">
+                            <div class="form-text text-light">
+                                <a href="./forgot-password.html">Forgot password</a>
+                            </div>
                         </div>
                         <a type="submit" id="SubmitButtonLogin" class="btn btn-primary my-4">Submit</a>
                     </form>
@@ -95,6 +98,9 @@
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label text-light">Password</label>
                             <input name="password" type="password" class="form-control" id="exampleInputPassword1">
+                            <div id="emailHelp" class="form-text text-light">
+                                Possible characters: <br> - uppercase and lowercase letters <br> - digits <br> - special characters: ! @ # $ % ^ & * 
+                            </div>
                         </div>
                         <a type="submit" id="SubmitButtonRegister" class="btn btn-primary my-4">Submit</a>
                     </form>
@@ -136,6 +142,7 @@
                     }
                     else {
                         console.log("No success")
+                        console.log(res.json())
                         alert("Sign up failed!")
                         throw new Error();
                     }
@@ -146,6 +153,7 @@
                     localStorage.setItem('userLastName', data.lastName)
                     localStorage.setItem('userEmail', data.email)
                     localStorage.setItem('token', data.token)
+                    alert("Your secret code: " + data.secretCode + "\nEntropy of your password is: " + data.entropy)
                     window.location.assign("./user-main.html")
                 })
                 // .catch(error => console.log("ERROR!"))

@@ -70,6 +70,11 @@
                             <div class=" text-light">Check available sizes</div>
                         </button>
                     </div>
+                    <div class="">
+                        <button onclick="changePassword()" class=" bg-primary rounded-5 my-4 py-3 mx-4 px-5">
+                            <div class=" text-light">Change Your Password</div>
+                        </button>
+                    </div>
                 </div>
 
 
@@ -79,8 +84,11 @@
             <div class="col-md-4">
                 <h2>Your Orders!</h2>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit provident, facere temporibus natus officia optio!</p>
-                <button onclick="logout()" class="align-self-center bg-primary rounded-5 my-4 py-3 mx-4 px-5">
+                <button onclick="checkOrders()" class="align-self-center bg-primary rounded-5 my-4 py-3 mx-4 px-5">
                     <div class=" text-light">Orders</div>
+                </button>
+                <button onclick="checkOrdersSharedToMe()" class="align-self-center bg-primary rounded-5 my-4 py-3 mx-4 px-5">
+                    <div class=" text-light">Orders shared to me</div>
                 </button>
 
             </div>
@@ -107,6 +115,18 @@
 
     function createNewOrder() {
         window.location.assign("./create-order.html");
+    }
+
+    function checkOrders() {
+        window.location.assign("./list-of-orders.html");
+    }
+
+    function checkOrdersSharedToMe() {
+        window.location.assign("./shared-order.html")
+    }
+
+    function changePassword() {
+        window.location.assign("./change-password.html")
     }
 </script>
 

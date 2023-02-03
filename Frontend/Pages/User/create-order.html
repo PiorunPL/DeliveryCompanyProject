@@ -57,6 +57,13 @@
                 <div class="mb-3">
                     <label for="addressOfDelivery" class="form-label">Delivery Address</label>
                     <input name="addressDelivery" type="text" class="form-control" id="addressOfDelivery">
+                    <div class="form-text">
+                        Address should be provided matching this pattern:<br>
+                         - City PostalCode Street HouseNumber(/FlatNumber)<br><br>
+                        Examples:<br>
+                        1.  Sosnowiec 41-200 1Maja 46/10<br>
+                        2.  DabrowaGornicza 41-234 HubalaDobrzanskiego 43
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="sizeId" class="form-label">SizeID</label>
@@ -73,6 +80,9 @@
                 <div class="mb-3">
                     <label for="name" class="form-label">Name of order</label>
                     <input name="name" type="text" class="form-control" id="name">
+                    <div class="form-text">
+                        Allowed only alphanumerical characters
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
